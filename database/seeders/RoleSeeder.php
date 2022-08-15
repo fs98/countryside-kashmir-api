@@ -22,7 +22,7 @@ class RoleSeeder extends Seeder
             'Client'
         ];
 
-        foreach ($roles as $key => $role) {
+        foreach ($roles as $role) {
             Role::create(['name' => $role]);
         }
     }
