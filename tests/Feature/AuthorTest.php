@@ -89,4 +89,39 @@ class AuthorTest extends TestCase
                 ]
             );
     }
+
+    /**
+     * Test update function.
+     *
+     * @return void
+     */
+    public function test_user_can_be_updated()
+    {
+        $author = Author::factory()->create([
+            'name' => 'Aubrey'
+        ]);
+
+        $response = $this->put('/api/authors/' . $author->id, [
+            'name' => 'Aubrey Farrell'
+        ]);
+
+        $response->assertStatus(200)->assertJsonStructure(
+            [
+                'success',
+                'data' => [
+                    'name',
+                    'updated_at',
+                    'created_at',
+                    'id'
+                ],
+                'message'
+            ]
+        );
+
+        $this->assertDatabaseHas('authors', [
+            'name' => 'Aubrey Farrell',
+        ])->assertDatabaseMissing('authors', [
+            'name' => 'Aubrey',
+        ]);
+    }
 }
