@@ -159,4 +159,21 @@ class AuthorTest extends TestCase
             'name' => 'Aubrey',
         ]);
     }
+
+    /**
+     * Test data is validated.
+     *
+     * @return void
+     */
+    public function test_new_author_data_is_validated()
+    {
+        $response = $this->post('/api/authors', [
+            'name' => ''
+        ]);
+
+        $response->assertStatus(302)
+            ->assertSessionHasErrors([
+                'name'
+            ]);
+    }
 }
