@@ -124,4 +124,39 @@ class AuthorTest extends TestCase
             'name' => 'Aubrey',
         ]);
     }
+
+    /**
+     * Test destroy function.
+     *
+     * @return void
+     */
+    public function test_user_can_be_deleted()
+    {
+        $author = Author::factory()->create([
+            'name' => 'Aubrey'
+        ]);
+
+        $this->assertDatabaseHas('authors', [
+            'name' => 'Aubrey',
+        ]);
+
+        $response = $this->delete('/api/authors/' . $author->id);
+
+        $response->assertStatus(200)->assertJsonStructure(
+            [
+                'success',
+                'data' => [
+                    'id',
+                    'name',
+                    'updated_at',
+                    'created_at'
+                ],
+                'message'
+            ]
+        );
+
+        $this->assertDatabaseMissing('authors', [
+            'name' => 'Aubrey',
+        ]);
+    }
 }
