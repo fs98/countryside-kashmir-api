@@ -45,7 +45,7 @@ class AuthorController extends BaseController
      */
     public function show(Author $author)
     {
-        //
+        return new AuthorResource($author);
     }
 
     /**
