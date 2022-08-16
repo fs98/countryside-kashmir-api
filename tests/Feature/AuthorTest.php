@@ -176,4 +176,25 @@ class AuthorTest extends TestCase
                 'name'
             ]);
     }
+
+    /**
+     * Test data is validated for unique author name.
+     *
+     * @return void
+     */
+    public function test_author_with_the_same_name_cannot_be_added()
+    {
+        Author::factory()->create([
+            'name' => 'Aubrey Farrell'
+        ]);
+
+        $response = $this->post('/api/authors', [
+            'name' => 'Aubrey Farrell'
+        ]);
+
+        $response->assertStatus(302)
+            ->assertSessionHasErrors([
+                'name'
+            ]);
+    }
 }
