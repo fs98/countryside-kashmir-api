@@ -57,7 +57,13 @@ class AuthorController extends BaseController
      */
     public function update(UpdateAuthorRequest $request, Author $author)
     {
-        //
+        $author->update($request->all());
+
+        if ($author) {
+            return $this->sendResponse($author, 'Author successfully updated!');
+        }
+
+        return $this->sendError($author, 'There has been a mistake!', 503);
     }
 
     /**
