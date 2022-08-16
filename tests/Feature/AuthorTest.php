@@ -36,4 +36,33 @@ class AuthorTest extends TestCase
                 ]
             );
     }
+
+    /**
+     * Test store function.
+     *
+     * @return void
+     */
+    public function test_new_user_can_be_added()
+    {
+        $response = $this->post('/api/authors', [
+            'name' => 'Aubrey Farrell'
+        ]);
+
+        $response->assertStatus(200)->assertJsonStructure(
+            [
+                'success',
+                'data' => [
+                    'name',
+                    'updated_at',
+                    'created_at',
+                    'id'
+                ],
+                'message'
+            ]
+        );
+
+        $this->assertDatabaseHas('authors', [
+            'name' => 'Aubrey Farrell',
+        ]);
+    }
 }
