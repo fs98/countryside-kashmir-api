@@ -74,6 +74,10 @@ class AuthorController extends BaseController
      */
     public function destroy(Author $author)
     {
-        //
+        if ($author->delete()) {
+            return $this->sendResponse($author, 'Author successfully deleted!');
+        }
+
+        return $this->sendError($author, 'There has been a mistake!', 503);
     }
 }
