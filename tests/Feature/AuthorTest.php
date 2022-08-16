@@ -65,4 +65,28 @@ class AuthorTest extends TestCase
             'name' => 'Aubrey Farrell',
         ]);
     }
+
+    /**
+     * Test show function.
+     *
+     * @return void
+     */
+    public function test_author_can_be_retrieved_by_id()
+    {
+        $author = Author::factory()->create();
+
+        $response = $this->get('/api/authors/' . $author->id);
+
+        $response->assertStatus(200)
+            ->assertJsonStructure(
+                [
+                    'data' => [
+                        'id',
+                        'name',
+                        'created_at',
+                        'updated_at'
+                    ]
+                ]
+            );
+    }
 }
