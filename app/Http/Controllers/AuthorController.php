@@ -28,7 +28,13 @@ class AuthorController extends BaseController
      */
     public function store(StoreAuthorRequest $request)
     {
-        //
+        $author = Author::create($request->all());
+
+        if ($author) {
+            return $this->sendResponse($author, 'Author successfully stored!');
+        }
+
+        return $this->sendError($author, 'There has been a mistake!', 503);
     }
 
     /**
