@@ -18,7 +18,7 @@ class AuthorPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->hasRole('Admin');
     }
 
     /**
@@ -30,7 +30,7 @@ class AuthorPolicy
      */
     public function view(User $user, Author $author)
     {
-        //
+        return $user->hasRole('Admin');
     }
 
     /**
@@ -41,7 +41,7 @@ class AuthorPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->hasRole('Admin');
     }
 
     /**
@@ -53,7 +53,7 @@ class AuthorPolicy
      */
     public function update(User $user, Author $author)
     {
-        //
+        return $user->hasRole('Admin');
     }
 
     /**
@@ -65,7 +65,7 @@ class AuthorPolicy
      */
     public function delete(User $user, Author $author)
     {
-        //
+        return $user->hasRole('Admin');
     }
 
     /**
@@ -77,7 +77,7 @@ class AuthorPolicy
      */
     public function restore(User $user, Author $author)
     {
-        //
+        return $user->hasRole('Admin');
     }
 
     /**
@@ -89,6 +89,6 @@ class AuthorPolicy
      */
     public function forceDelete(User $user, Author $author)
     {
-        //
+        return $user->hasRole('Admin');
     }
 }
