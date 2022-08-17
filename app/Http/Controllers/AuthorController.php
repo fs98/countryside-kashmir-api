@@ -10,6 +10,16 @@ use App\Models\Author;
 class AuthorController extends BaseController
 {
     /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Author::class, 'author');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
