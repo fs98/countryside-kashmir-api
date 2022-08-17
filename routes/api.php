@@ -19,6 +19,8 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResources([
-    'authors' => AuthorController::class,
-]);
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::apiResources([
+        'authors' => AuthorController::class,
+    ]);
+});
