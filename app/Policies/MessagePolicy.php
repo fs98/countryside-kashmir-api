@@ -18,7 +18,10 @@ class MessagePolicy
      */
     public function viewAny(User $user)
     {
-        return $user->hasRole('Admin');
+        return $user->hasAnyRole([
+            'Admin',
+            'Client'
+        ]);
     }
 
     /**
@@ -45,11 +48,7 @@ class MessagePolicy
      */
     public function create(User $user)
     {
-        return $user->hasAnyRole([
-            'Super Admin',
-            'Admin',
-            'Customer',
-        ]);
+        return $user->hasRole('Client');
     }
 
     /**
@@ -93,7 +92,7 @@ class MessagePolicy
      */
     public function restore(User $user, Message $message)
     {
-        //
+        return false;
     }
 
     /**
@@ -105,6 +104,6 @@ class MessagePolicy
      */
     public function forceDelete(User $user, Message $message)
     {
-        //
+        return false;
     }
 }
