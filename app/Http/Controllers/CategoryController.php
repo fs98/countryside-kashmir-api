@@ -38,7 +38,13 @@ class CategoryController extends BaseController
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        $category = Category::create($request->all());
+
+        if ($category) {
+            return $this->sendResponse($category, 'Category successfully stored!');
+        }
+
+        return $this->sendError($category, 'There has been a mistake!', 503);
     }
 
     /**
