@@ -26,7 +26,14 @@ class MessageController extends BaseController
      */
     public function index()
     {
-        $messages = Message::with('user')->get();
+        $user = auth()->user();
+
+        if ($user->hasRole('Client')) {
+            $messages = $user->messages()->get();
+        } else {
+            $messages = Message::with('user')->get();
+        }
+
         return MessageResource::collection($messages);
     }
 
