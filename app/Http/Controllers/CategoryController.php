@@ -84,6 +84,10 @@ class CategoryController extends BaseController
      */
     public function destroy(Category $category)
     {
-        //
+        if ($category->delete()) {
+            return $this->sendResponse($category, 'Category successfully deleted!');
+        }
+
+        return $this->sendError($category, 'There has been a mistake!', 503);
     }
 }
