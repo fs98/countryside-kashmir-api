@@ -49,7 +49,7 @@ class MessageController extends Controller
      */
     public function show(Message $message)
     {
-        return new MessageResource($message);
+        return new MessageResource($message->load('user'));
     }
 
     /**
