@@ -71,7 +71,11 @@ class MessageController extends BaseController
      */
     public function update(UpdateMessageRequest $request, Message $message)
     {
-        //
+        if ($message->update($request->all())) {
+            return $this->sendResponse($message, 'Message successfully updated!');
+        }
+
+        return $this->sendError($message, 'There has been a mistake!', 503);
     }
 
     /**
