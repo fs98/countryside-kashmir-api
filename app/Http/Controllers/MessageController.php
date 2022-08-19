@@ -7,7 +7,7 @@ use App\Http\Requests\UpdateMessageRequest;
 use App\Http\Resources\MessageResource;
 use App\Models\Message;
 
-class MessageController extends Controller
+class MessageController extends BaseController
 {
     /**
      * Create the controller instance.
