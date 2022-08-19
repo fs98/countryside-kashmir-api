@@ -45,7 +45,10 @@ class MessageController extends BaseController
      */
     public function store(StoreMessageRequest $request)
     {
-        //
+        $message = auth()->user()->messages()->create($request->all());
+
+        return $message ? $this->sendResponse($message, 'Message successfully stored!')
+            : $this->sendError($message, 'There has been a mistake!', 503);
     }
 
     /**
