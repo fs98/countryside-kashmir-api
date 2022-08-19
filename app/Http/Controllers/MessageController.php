@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMessageRequest;
 use App\Http\Requests\UpdateMessageRequest;
+use App\Http\Resources\MessageResource;
 use App\Models\Message;
 
 class MessageController extends Controller
@@ -25,7 +26,8 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
+        $messages = Message::all();
+        return MessageResource::collection($messages);
     }
 
     /**
