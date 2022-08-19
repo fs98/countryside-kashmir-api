@@ -26,7 +26,7 @@ class Message extends Model
     ];
 
     /**
-     * Get the post that owns the comment.
+     * Get the user that owns the message.
      */
     public function user()
     {
