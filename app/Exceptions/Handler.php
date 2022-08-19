@@ -2,7 +2,13 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -46,5 +52,69 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    /**
+     * Custom function for handling exceptions.
+     *
+     * @return void
+     */
+    public function render($request, Throwable $e)
+    {
+        if ($request->is('api*')) {
+
+            if ($e instanceof AccessDeniedException) {
+
+                $response = [
+                    'success' => false,
+                    'error' => $e->getMessage(),
+                ];
+
+                return response()->json($response, 403);
+            }
+
+            if ($e instanceof AuthorizationException) {
+
+                $response = [
+                    'success' => false,
+                    'error' => $e->getMessage(),
+                ];
+
+                return response()->json($response, 403);
+            }
+
+            if ($e instanceof ModelNotFoundException || $e instanceof NotFoundHttpException) {
+
+                $response = [
+                    'success' => false,
+                    'error'    => "Resource not found!",
+                ];
+
+                return response()->json($response, 404);
+            }
+
+            if ($e instanceof AuthenticationException) {
+
+                $response = [
+                    'success' => false,
+                    'error'    => $e->getMessage(),
+                ];
+
+                return response()->json($response, 401);
+            }
+
+            if ($e instanceof ThrottleRequestsException) {
+
+                $response = [
+                    'success' => false,
+                    'error'    => $e->getMessage(),
+                ];
+
+                return response()->json($response, 429);
+            }
+
+            return response(['success' => false, 'message' => 'Something went wrong.'], 500);
+        }
+        parent::render($request, $e);
     }
 }
