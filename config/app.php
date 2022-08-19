@@ -71,7 +71,7 @@ return [
     |
     */
 
-    'timezone' => 'Europe/Sarajevo',
+    'timezone' => env('APP_TIMEZONE', 'UTC'),
 
     /*
     |--------------------------------------------------------------------------
