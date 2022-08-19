@@ -79,6 +79,10 @@ class MessageController extends BaseController
      */
     public function destroy(Message $message)
     {
-        //
+        if ($message->delete()) {
+            return $this->sendResponse($message, 'Message successfully deleted!');
+        }
+
+        return $this->sendError($message, 'There has been a mistake!', 503);
     }
 }
