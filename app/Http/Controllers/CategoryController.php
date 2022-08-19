@@ -67,7 +67,13 @@ class CategoryController extends BaseController
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $category->update($request->all());
+
+        if ($category) {
+            return $this->sendResponse($category, 'Category successfully updated!');
+        }
+
+        return $this->sendError($category, 'There has been a mistake!', 503);
     }
 
     /**
