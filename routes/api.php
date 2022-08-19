@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MessageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\Mime\MessageConverter;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,16 +18,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::apiResources([
-        'authors' => AuthorController::class,
-    ]);
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
 
     Route::apiResources([
+        'authors' => AuthorController::class,
         'categories' => CategoryController::class,
+        'messages' => MessageController::class
     ]);
 });
