@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MessageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,5 +28,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::apiResources([
         'categories' => CategoryController::class,
+    ]);
+
+    Route::apiResources([
+        'messages' => MessageController::class,
     ]);
 });
