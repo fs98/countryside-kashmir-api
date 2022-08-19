@@ -26,7 +26,7 @@ class MessageController extends Controller
      */
     public function index()
     {
-        $messages = Message::all();
+        $messages = Message::with('user')->get();
         return MessageResource::collection($messages);
     }
 
@@ -49,7 +49,7 @@ class MessageController extends Controller
      */
     public function show(Message $message)
     {
-        //
+        return new MessageResource($message);
     }
 
     /**
