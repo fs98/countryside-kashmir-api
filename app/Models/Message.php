@@ -24,4 +24,12 @@ class Message extends Model
         'content',
         'user_id'
     ];
+
+    /**
+     * Get the post that owns the comment.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
