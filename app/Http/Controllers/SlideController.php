@@ -39,14 +39,15 @@ class SlideController extends BaseController
      */
     public function store(StoreSlideRequest $request)
     {
+        $requestData = $request->all();
+
+        // Store image
         $path = Storage::disk('public')->putFile('slides', $request->file('image'));
 
-        $slide = Slide::create([
-            'image' => $path,
-            'order' => $request->order,
-            'title' => $request->title,
-            'subtitle' => $request->subtitle,
-        ]);
+        // Override image value
+        $requestData['image'] = $path;
+
+        $slide = Slide::create($requestData);
 
         if ($slide) {
             return $this->sendResponse($slide, 'Slide successfully stored!');
@@ -75,10 +76,8 @@ class SlideController extends BaseController
      */
     public function update(UpdateSlideRequest $request, Slide $slide)
     {
-        // Probably needs refactoring
-        $request->order ? $slide->order = $request->order : $slide->order;
-        $request->title ? $slide->title = $request->title : $slide->title;
-        $request->subtitle ? $slide->subtitle = $request->subtitle : $slide->subtitle;
+        // So we can override the request image value
+        $requestData = $request->all();
 
         if ($request->hasFile('image')) {
 
@@ -87,12 +86,12 @@ class SlideController extends BaseController
 
             // Save new photo
             $path = Storage::disk('public')->putFile('slides', $request->file('image'));
-            $slide->image = $path;
+
+            // Override image value
+            $requestData['image'] = $path;
         }
 
-        $slide->update();
-
-        if ($slide) {
+        if ($slide->update($requestData)) {
             return $this->sendResponse($slide, 'Slide successfully updated!');
         }
 
