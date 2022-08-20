@@ -23,14 +23,31 @@ class Slide extends Model
     ];
 
     /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = ['image'];
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $appends = [
+        'image_url',
+    ];
+
+
+    /**
      * Get the slide's image url.
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
-    protected function image(): Attribute
+    protected function imageUrl(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => asset('storage/' . $value),
+            get: fn () => asset('storage/' . $this->image),
         );
     }
 }
