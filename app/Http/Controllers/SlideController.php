@@ -7,7 +7,7 @@ use App\Http\Requests\UpdateSlideRequest;
 use App\Http\Resources\SlideResource;
 use App\Models\Slide;
 
-class SlideController extends Controller
+class SlideController extends BaseController
 {
     /**
      * Create the controller instance.
@@ -49,7 +49,7 @@ class SlideController extends Controller
      */
     public function show(Slide $slide)
     {
-        //
+        return new SlideResource($slide);
     }
 
     /**
