@@ -72,6 +72,10 @@ class SlideController extends BaseController
      */
     public function destroy(Slide $slide)
     {
-        //
+        if ($slide->delete()) {
+            return $this->sendResponse($slide, 'Slide successfully deleted!');
+        }
+
+        return $this->sendError($slide, 'There has been a mistake!', 503);
     }
 }
