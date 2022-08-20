@@ -6,6 +6,7 @@ use App\Http\Requests\StoreSlideRequest;
 use App\Http\Requests\UpdateSlideRequest;
 use App\Http\Resources\SlideResource;
 use App\Models\Slide;
+use Illuminate\Support\Facades\Storage;
 
 class SlideController extends BaseController
 {
@@ -38,7 +39,20 @@ class SlideController extends BaseController
      */
     public function store(StoreSlideRequest $request)
     {
-        //
+        $path = Storage::disk('public')->putFile('slides', $request->file('image'));
+
+        $slide = Slide::create([
+            'image' => $path,
+            'order' => $request->order,
+            'title' => $request->title,
+            'subtitle' => $request->subtitle,
+        ]);
+
+        if ($slide) {
+            return $this->sendResponse($slide, 'Slide successfully stored!');
+        }
+
+        return $this->sendError($slide, 'There has been a mistake!', 503);
     }
 
     /**
@@ -61,7 +75,28 @@ class SlideController extends BaseController
      */
     public function update(UpdateSlideRequest $request, Slide $slide)
     {
-        //
+        // Probably needs refactoring
+        $request->order ? $slide->order = $request->order : $slide->order;
+        $request->title ? $slide->title = $request->title : $slide->title;
+        $request->subtitle ? $slide->subtitle = $request->subtitle : $slide->subtitle;
+
+        if ($request->hasFile('image')) {
+
+            // Delete old photo
+            Storage::disk('public')->delete($slide->image);
+
+            // Save new photo
+            $path = Storage::disk('public')->putFile('slides', $request->file('image'));
+            $slide->image = $path;
+        }
+
+        $slide->update();
+
+        if ($slide) {
+            return $this->sendResponse($slide, 'Slide successfully updated!');
+        }
+
+        return $this->sendError($slide, 'There has been a mistake!', 503);
     }
 
     /**
