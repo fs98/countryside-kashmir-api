@@ -15,7 +15,7 @@ class Slide extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'url',
+        'image',
         'order',
         'title',
         'subtitle'
