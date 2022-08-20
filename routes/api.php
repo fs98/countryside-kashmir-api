@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Guest\MessageController as GuestMessageController;
 use App\Http\Controllers\MessageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,4 +30,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
         'categories' => CategoryController::class,
         'messages' => MessageController::class
     ]);
+});
+
+
+Route::prefix('guest')->group(function () {
+    Route::apiResource('messages', GuestMessageController::class)->only(['store']);
 });
