@@ -18,7 +18,7 @@ class SlidePolicy
      */
     public function viewAny(User $user)
     {
-        return $user->hasRole('Client');
+        return $user->hasRole('Admin');
     }
 
     /**
@@ -30,7 +30,7 @@ class SlidePolicy
      */
     public function view(User $user, Slide $slide)
     {
-        return $user->hasRole('Client');
+        return $user->hasRole('Admin');
     }
 
     /**
@@ -41,7 +41,7 @@ class SlidePolicy
      */
     public function create(User $user)
     {
-        return $user->hasRole('Client');
+        return $user->hasRole('Admin');
     }
 
     /**
@@ -53,7 +53,7 @@ class SlidePolicy
      */
     public function update(User $user, Slide $slide)
     {
-        return $user->hasRole('Client');
+        return $user->hasRole('Admin');
     }
 
     /**
@@ -65,7 +65,7 @@ class SlidePolicy
      */
     public function delete(User $user, Slide $slide)
     {
-        return $user->hasRole('Client');
+        return $user->hasRole('Admin');
     }
 
     /**
@@ -77,7 +77,7 @@ class SlidePolicy
      */
     public function restore(User $user, Slide $slide)
     {
-        return $user->hasRole('Client');
+        return $user->hasRole('Admin');
     }
 
     /**
@@ -89,6 +89,6 @@ class SlidePolicy
      */
     public function forceDelete(User $user, Slide $slide)
     {
-        return $user->hasRole('Client');
+        return $user->hasRole('Admin');
     }
 }
