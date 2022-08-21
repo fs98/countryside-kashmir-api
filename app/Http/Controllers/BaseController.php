@@ -60,4 +60,22 @@ class BaseController extends Controller
 
         return $requestData;
     }
+
+    /**
+     * Update image.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updateImage($request, $currentImage, $destination)
+    {
+        // Upload new image
+        if ($request->hasFile('image')) {
+            $requestData = $this->uploadImage($request,  $destination);
+        }
+
+        // Delete old image
+        Storage::disk('public')->delete($currentImage);
+
+        return $requestData;
+    }
 }
