@@ -50,4 +50,20 @@ class User extends Authenticatable
     {
         return $this->hasMany(Message::class);
     }
+
+    /**
+     * Get the destinations for the user.
+     */
+    public function destinations()
+    {
+        return $this->hasMany(Destination::class);
+    }
+
+    /**
+     * Get the destinations images for the user.
+     */
+    public function destinationImages()
+    {
+        return $this->hasMany(DestinationImage::class);
+    }
 }
