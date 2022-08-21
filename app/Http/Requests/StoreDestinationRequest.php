@@ -26,7 +26,7 @@ class StoreDestinationRequest extends FormRequest
         return [
             'name' => 'required|string|unique:destinations|max:32',
             'description' => 'required|string',
-            'image' => 'required',
+            'image' => 'required|image|mimes:jpg,png,jpeg|max:5000',
             'image_alt' => 'required|string|max:64',
             'keywords' => 'required|string|max:255',
             'author_id' => 'required|exists:authors,id'
