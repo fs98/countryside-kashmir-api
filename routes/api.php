@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\Guest\MessageController as GuestMessageController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\SlideController;
@@ -30,7 +31,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
         'authors' => AuthorController::class,
         'categories' => CategoryController::class,
         'messages' => MessageController::class,
-        'slides' => SlideController::class
+        'slides' => SlideController::class,
+        'destinations' => DestinationController::class,
     ]);
 });
 
