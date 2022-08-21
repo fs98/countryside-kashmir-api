@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BaseController extends Controller
 {
@@ -40,5 +41,23 @@ class BaseController extends Controller
         }
 
         return response()->json($response, $code);
+    }
+
+    /**
+     * Upload new image.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function uploadImage($request, $destination)
+    {
+        $requestData = $request->all();
+
+        // Store image
+        $path = Storage::disk('public')->putFile($destination, $request->file('image'));
+
+        // Override image value
+        $requestData['image'] = $path;
+
+        return $requestData;
     }
 }
