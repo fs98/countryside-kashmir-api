@@ -22,6 +22,16 @@ class DestinationImage extends Model
     ];
 
     /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'destination_id',
+        'user_id'
+    ];
+
+    /**
      * Get the destination that owns the image.
      */
     public function destination()
