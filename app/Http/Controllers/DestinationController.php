@@ -51,7 +51,7 @@ class DestinationController extends BaseController
         $destination = auth()->user()->destinations()->create($requestData);
 
         if ($destination) {
-            return $this->sendResponse($destination, 'Slide successfully stored!');
+            return $this->sendResponse($destination, 'Destination successfully stored!');
         }
 
         return $this->sendError($destination, 'There has been a mistake!', 503);
@@ -77,7 +77,26 @@ class DestinationController extends BaseController
      */
     public function update(UpdateDestinationRequest $request, Destination $destination)
     {
-        //
+        // So we can override the request image value
+        $requestData = $request->all();
+
+        if ($request->hasFile('image')) {
+
+            // Delete old photo
+            Storage::disk('public')->delete($destination->image);
+
+            // Save new photo
+            $path = Storage::disk('public')->putFile('destinations', $request->file('image'));
+
+            // Override image value
+            $requestData['image'] = $path;
+        }
+
+        if ($destination->update($requestData)) {
+            return $this->sendResponse($destination, 'Destination successfully updated!');
+        }
+
+        return $this->sendError($destination, 'There has been a mistake!', 503);
     }
 
     /**
