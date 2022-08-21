@@ -67,12 +67,32 @@ class DestinationImageController extends BaseController
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateDestinationImageRequest  $request
+     * @param  \App\Models\Destination  $destination
      * @param  \App\Models\DestinationImage  $destinationImage
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateDestinationImageRequest $request, DestinationImage $destinationImage)
+    public function update(UpdateDestinationImageRequest $request, Destination $destination, DestinationImage $image)
     {
-        //
+        // So we can override the request image value
+        $requestData = $request->all();
+
+        if ($request->hasFile('image')) {
+
+            // Delete old photo
+            Storage::disk('public')->delete($image->image);
+
+            // Save new photo
+            $path = Storage::disk('public')->putFile('destinations/images', $request->file('image'));
+
+            // Override image value
+            $requestData['image'] = $path;
+        }
+
+        if ($image->update($requestData)) {
+            return $this->sendResponse($image, 'Destination image successfully updated!');
+        }
+
+        return $this->sendError($image, 'There has been a mistake!', 503);
     }
 
     /**
