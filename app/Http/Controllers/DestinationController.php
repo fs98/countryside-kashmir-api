@@ -40,7 +40,21 @@ class DestinationController extends BaseController
      */
     public function store(StoreDestinationRequest $request)
     {
-        //
+        $requestData = $request->all();
+
+        // Store image
+        $path = Storage::disk('public')->putFile('destinations', $request->file('image'));
+
+        // Override image value
+        $requestData['image'] = $path;
+
+        $destination = auth()->user()->destinations()->create($requestData);
+
+        if ($destination) {
+            return $this->sendResponse($destination, 'Slide successfully stored!');
+        }
+
+        return $this->sendError($destination, 'There has been a mistake!', 503);
     }
 
     /**
