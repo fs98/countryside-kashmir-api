@@ -22,10 +22,28 @@ class DestinationImage extends Model
     ];
 
     /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'destination_id',
+        'user_id'
+    ];
+
+    /**
      * Get the destination that owns the image.
      */
     public function destination()
     {
         return $this->belongsTo(Destination::class);
+    }
+
+    /**
+     * Get the user that owns the image.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
