@@ -35,22 +35,15 @@ class DestinationImageController extends BaseController
      */
     public function store(StoreDestinationImageRequest $request, Destination $destination)
     {
-        $requestData = $request->all();
+        $requestData = $this->uploadImage($request, 'destinations/images');
+
         $requestData['destination_id'] = $destination->id;
-
-        // Store image
-        $path = Storage::disk('public')->putFile('destinations/images', $request->file('image'));
-
-        // Override image value
-        $requestData['image'] = $path;
 
         $destinationImage = auth()->user()->destinationImages()->create($requestData);
 
-        if ($destinationImage) {
-            return $this->sendResponse($destinationImage, 'Destination image successfully stored!');
-        }
-
-        return $this->sendError($destinationImage, 'There has been a mistake!', 503);
+        return $destinationImage
+            ? $this->sendResponse($destinationImage->load('destination'), 'Destination image successfully stored!')
+            : $this->sendError($destinationImage, 'There has been a mistake!', 503);
     }
 
     /**
