@@ -6,6 +6,7 @@ use App\Http\Requests\StoreDestinationRequest;
 use App\Http\Requests\UpdateDestinationRequest;
 use App\Http\Resources\DestinationResource;
 use App\Models\Destination;
+use Illuminate\Support\Facades\Storage;
 
 class DestinationController extends BaseController
 {
@@ -73,6 +74,14 @@ class DestinationController extends BaseController
      */
     public function destroy(Destination $destination)
     {
-        //
+        if ($destination->delete()) {
+
+            // Delete old photo
+            Storage::disk('public')->delete($destination->image);
+
+            return $this->sendResponse($destination, 'Slide successfully deleted!');
+        }
+
+        return $this->sendError($destination, 'There has been a mistake!', 503);
     }
 }
