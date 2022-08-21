@@ -68,7 +68,10 @@ class DestinationController extends BaseController
      */
     public function show(Destination $destination)
     {
-        return new DestinationResource($destination);
+        return new DestinationResource($destination->load([
+            'user',
+            'author'
+        ]));
     }
 
     /**
