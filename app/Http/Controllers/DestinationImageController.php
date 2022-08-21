@@ -8,7 +8,7 @@ use App\Http\Resources\DestinationImageResource;
 use App\Models\Destination;
 use App\Models\DestinationImage;
 
-class DestinationImageController extends Controller
+class DestinationImageController extends BaseController
 {
     /**
      * Display a listing of the resource.
