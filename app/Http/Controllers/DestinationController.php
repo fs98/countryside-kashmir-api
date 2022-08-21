@@ -27,7 +27,10 @@ class DestinationController extends BaseController
      */
     public function index()
     {
-        $destinations = Destination::all();
+        $destinations = Destination::with([
+            'user',
+            'author'
+        ])->get();
 
         return DestinationResource::collection($destinations);
     }
