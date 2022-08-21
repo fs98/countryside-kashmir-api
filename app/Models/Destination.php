@@ -42,6 +42,14 @@ class Destination extends Model
     }
 
     /**
+     * Get the images for the destination.
+     */
+    public function destinationImages()
+    {
+        return $this->hasMany(DestinationImage::class);
+    }
+
+    /**
      * Get the destinations's description name.
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
