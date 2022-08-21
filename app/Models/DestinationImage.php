@@ -20,4 +20,12 @@ class DestinationImage extends Model
         'destination_id',
         'user_id',
     ];
+
+    /**
+     * Get the destination that owns the image.
+     */
+    public function destination()
+    {
+        return $this->belongsTo(Destination::class);
+    }
 }
