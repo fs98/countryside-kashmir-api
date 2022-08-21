@@ -38,4 +38,12 @@ class DestinationImage extends Model
     {
         return $this->belongsTo(Destination::class);
     }
+
+    /**
+     * Get the user that owns the image.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
