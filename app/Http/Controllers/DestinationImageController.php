@@ -39,9 +39,9 @@ class DestinationImageController extends Controller
      * @param  \App\Models\DestinationImage  $destinationImage
      * @return \Illuminate\Http\Response
      */
-    public function show(DestinationImage $destinationImage)
+    public function show(Destination $destination, DestinationImage $image)
     {
-        //
+        return new DestinationImageResource($image);
     }
 
     /**
