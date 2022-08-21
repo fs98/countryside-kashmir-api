@@ -26,6 +26,14 @@ class Destination extends Model
     ];
 
     /**
+     * Get the user that created the destination.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
      * Get the destinations's description name.
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
