@@ -13,7 +13,7 @@ class StoreDestinationRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,12 @@ class StoreDestinationRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|string|unique:destinations|max:32',
+            'description' => 'required|string',
+            'image' => 'required',
+            'image_alt' => 'required|string|max:64',
+            'keywords' => 'required|string|max:255',
+            'author_id' => 'required|exists:authors,id'
         ];
     }
 }
