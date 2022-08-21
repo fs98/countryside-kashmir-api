@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDestinationImageRequest;
 use App\Http\Requests\UpdateDestinationImageRequest;
+use App\Http\Resources\DestinationImageResource;
+use App\Models\Destination;
 use App\Models\DestinationImage;
 
 class DestinationImageController extends Controller
@@ -13,9 +15,11 @@ class DestinationImageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Destination $destination)
     {
-        //
+        $destinationImages = $destination->destinationImages()->get();
+
+        return DestinationImageResource::collection($destinationImages);
     }
 
     /**
