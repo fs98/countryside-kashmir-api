@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateDestinationImageRequest;
 use App\Http\Resources\DestinationImageResource;
 use App\Models\Destination;
 use App\Models\DestinationImage;
+use Illuminate\Support\Facades\Storage;
 
 class DestinationImageController extends BaseController
 {
@@ -62,8 +63,16 @@ class DestinationImageController extends BaseController
      * @param  \App\Models\DestinationImage  $destinationImage
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DestinationImage $destinationImage)
+    public function destroy(Destination $destination, DestinationImage $image)
     {
-        //
+        if ($image->delete()) {
+
+            // Delete old photo
+            Storage::disk('public')->delete($image->image);
+
+            return $this->sendResponse($image, 'Destination image successfully deleted!');
+        }
+
+        return $this->sendError($image, 'There has been a mistake!', 503);
     }
 }
