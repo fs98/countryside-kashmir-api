@@ -43,13 +43,7 @@ class DestinationController extends BaseController
      */
     public function store(StoreDestinationRequest $request)
     {
-        $requestData = $request->all();
-
-        // Store image
-        $path = Storage::disk('public')->putFile('destinations', $request->file('image'));
-
-        // Override image value
-        $requestData['image'] = $path;
+        $requestData = $this->uploadImage($request, 'destinations');
 
         $destination = auth()->user()->destinations()->create($requestData);
 
