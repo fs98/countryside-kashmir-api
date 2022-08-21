@@ -92,6 +92,10 @@ class SlideController extends BaseController
     public function destroy(Slide $slide)
     {
         if ($slide->delete()) {
+
+            // Delete photo
+            Storage::disk('public')->delete($slide->image);
+
             return $this->sendResponse($slide, 'Slide successfully deleted!');
         }
 
