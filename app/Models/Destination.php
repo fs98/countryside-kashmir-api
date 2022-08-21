@@ -20,7 +20,7 @@ class Destination extends Model
         'image',
         'image_alt',
         'keywords',
-        'author_id',
-        'user_id'
+        'user_id',
+        'author_id'
     ];
 }
