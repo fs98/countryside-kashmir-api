@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDestinationRequest;
 use App\Http\Requests\UpdateDestinationRequest;
+use App\Http\Resources\DestinationResource;
 use App\Models\Destination;
 
 class DestinationController extends Controller
@@ -25,7 +26,9 @@ class DestinationController extends Controller
      */
     public function index()
     {
-        //
+        $destinations = Destination::all();
+
+        return DestinationResource::collection($destinations);
     }
 
     /**
@@ -47,7 +50,7 @@ class DestinationController extends Controller
      */
     public function show(Destination $destination)
     {
-        //
+        return new DestinationResource($destination);
     }
 
     /**
