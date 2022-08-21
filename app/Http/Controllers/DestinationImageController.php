@@ -62,7 +62,7 @@ class DestinationImageController extends BaseController
      */
     public function show(Destination $destination, DestinationImage $image)
     {
-        return new DestinationImageResource($image);
+        return new DestinationImageResource($image->load('destination'));
     }
 
     /**
