@@ -7,7 +7,7 @@ use App\Http\Requests\UpdateDestinationRequest;
 use App\Http\Resources\DestinationResource;
 use App\Models\Destination;
 
-class DestinationController extends Controller
+class DestinationController extends BaseController
 {
     /**
      * Create the controller instance.
