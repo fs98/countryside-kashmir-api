@@ -14,6 +14,7 @@ class DestinationImageController extends BaseController
     /**
      * Display a listing of the resource.
      *
+     * @param  \App\Models\Destination  $destination
      * @return \Illuminate\Http\Response
      */
     public function index(Destination $destination)
@@ -37,6 +38,7 @@ class DestinationImageController extends BaseController
     /**
      * Display the specified resource.
      *
+     * @param  \App\Models\Destination  $destination
      * @param  \App\Models\DestinationImage  $destinationImage
      * @return \Illuminate\Http\Response
      */
@@ -60,6 +62,7 @@ class DestinationImageController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
+     * @param  \App\Models\Destination  $destination
      * @param  \App\Models\DestinationImage  $destinationImage
      * @return \Illuminate\Http\Response
      */
