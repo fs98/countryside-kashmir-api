@@ -34,6 +34,14 @@ class Destination extends Model
     }
 
     /**
+     * Get the author that owns the destination.
+     */
+    public function author()
+    {
+        return $this->belongsTo(Author::class);
+    }
+
+    /**
      * Get the destinations's description name.
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
