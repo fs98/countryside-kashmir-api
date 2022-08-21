@@ -68,20 +68,12 @@ class DestinationImageController extends BaseController
      */
     public function update(UpdateDestinationImageRequest $request, Destination $destination, DestinationImage $image)
     {
-        // So we can override the request image value
-        $requestData = $request->all();
+        $requestData = $this->updateImage($request, $image->image, 'destinations/images');
 
-        if ($request->hasFile('image')) {
-
-            // Delete old photo
-            Storage::disk('public')->delete($image->image);
-
-            // Save new photo
-            $path = Storage::disk('public')->putFile('destinations/images', $request->file('image'));
-
-            // Override image value
-            $requestData['image'] = $path;
-        }
+        /** 
+         * Define the type of requestData to avoid error
+         * @var array $requestData 
+         * */
 
         if ($image->update($requestData)) {
             return $this->sendResponse($image, 'Destination image successfully updated!');
