@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,4 +24,16 @@ class Destination extends Model
         'user_id',
         'author_id'
     ];
+
+    /**
+     * Get the destinations's description name.
+     *
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function description(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => json_decode($value),
+        );
+    }
 }
