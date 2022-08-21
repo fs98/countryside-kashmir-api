@@ -30,7 +30,7 @@ class Slide extends Model
     protected $hidden = ['image'];
 
     /**
-     * The attributes that are mass assignable.
+     * The accessors to append to the model's array form.
      *
      * @var array<int, string>
      */
