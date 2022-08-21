@@ -35,22 +35,15 @@ class DestinationImageController extends BaseController
      */
     public function store(StoreDestinationImageRequest $request, Destination $destination)
     {
-        $requestData = $request->all();
+        $requestData = $this->uploadImage($request, 'destinations/images');
+
         $requestData['destination_id'] = $destination->id;
-
-        // Store image
-        $path = Storage::disk('public')->putFile('destinations/images', $request->file('image'));
-
-        // Override image value
-        $requestData['image'] = $path;
 
         $destinationImage = auth()->user()->destinationImages()->create($requestData);
 
-        if ($destinationImage) {
-            return $this->sendResponse($destinationImage, 'Destination image successfully stored!');
-        }
-
-        return $this->sendError($destinationImage, 'There has been a mistake!', 503);
+        return $destinationImage
+            ? $this->sendResponse($destinationImage->load('destination'), 'Destination image successfully stored!')
+            : $this->sendError($destinationImage, 'There has been a mistake!', 503);
     }
 
     /**
@@ -75,20 +68,12 @@ class DestinationImageController extends BaseController
      */
     public function update(UpdateDestinationImageRequest $request, Destination $destination, DestinationImage $image)
     {
-        // So we can override the request image value
-        $requestData = $request->all();
+        $requestData = $this->updateImage($request, $image->image, 'destinations/images');
 
-        if ($request->hasFile('image')) {
-
-            // Delete old photo
-            Storage::disk('public')->delete($image->image);
-
-            // Save new photo
-            $path = Storage::disk('public')->putFile('destinations/images', $request->file('image'));
-
-            // Override image value
-            $requestData['image'] = $path;
-        }
+        /** 
+         * Define the type of requestData to avoid error
+         * @var array $requestData 
+         * */
 
         if ($image->update($requestData)) {
             return $this->sendResponse($image, 'Destination image successfully updated!');

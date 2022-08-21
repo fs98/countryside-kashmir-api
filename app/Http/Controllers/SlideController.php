@@ -39,13 +39,7 @@ class SlideController extends BaseController
      */
     public function store(StoreSlideRequest $request)
     {
-        $requestData = $request->all();
-
-        // Store image
-        $path = Storage::disk('public')->putFile('slides', $request->file('image'));
-
-        // Override image value
-        $requestData['image'] = $path;
+        $requestData = $this->uploadImage($request, 'slides');
 
         $slide = Slide::create($requestData);
 
@@ -76,21 +70,12 @@ class SlideController extends BaseController
      */
     public function update(UpdateSlideRequest $request, Slide $slide)
     {
-        // So we can override the request image value
-        $requestData = $request->all();
+        $requestData = $this->updateImage($request, $slide->image, 'slides');
 
-        if ($request->hasFile('image')) {
-
-            // Delete old photo
-            Storage::disk('public')->delete($slide->image);
-
-            // Save new photo
-            $path = Storage::disk('public')->putFile('slides', $request->file('image'));
-
-            // Override image value
-            $requestData['image'] = $path;
-        }
-
+        /** 
+         * Define the type of requestData to avoid error
+         * @var array $requestData 
+         * */
         if ($slide->update($requestData)) {
             return $this->sendResponse($slide, 'Slide successfully updated!');
         }
@@ -107,6 +92,10 @@ class SlideController extends BaseController
     public function destroy(Slide $slide)
     {
         if ($slide->delete()) {
+
+            // Delete photo
+            Storage::disk('public')->delete($slide->image);
+
             return $this->sendResponse($slide, 'Slide successfully deleted!');
         }
 

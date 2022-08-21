@@ -43,13 +43,7 @@ class DestinationController extends BaseController
      */
     public function store(StoreDestinationRequest $request)
     {
-        $requestData = $request->all();
-
-        // Store image
-        $path = Storage::disk('public')->putFile('destinations', $request->file('image'));
-
-        // Override image value
-        $requestData['image'] = $path;
+        $requestData = $this->uploadImage($request, 'destinations');
 
         $destination = auth()->user()->destinations()->create($requestData);
 
@@ -83,21 +77,12 @@ class DestinationController extends BaseController
      */
     public function update(UpdateDestinationRequest $request, Destination $destination)
     {
-        // So we can override the request image value
-        $requestData = $request->all();
+        $requestData = $this->updateImage($request, $destination->image, 'destinations');
 
-        if ($request->hasFile('image')) {
-
-            // Delete old photo
-            Storage::disk('public')->delete($destination->image);
-
-            // Save new photo
-            $path = Storage::disk('public')->putFile('destinations', $request->file('image'));
-
-            // Override image value
-            $requestData['image'] = $path;
-        }
-
+        /** 
+         * Define the type of requestData to avoid error
+         * @var array $requestData 
+         * */
         if ($destination->update($requestData)) {
             return $this->sendResponse($destination, 'Destination successfully updated!');
         }
