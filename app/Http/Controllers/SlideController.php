@@ -39,13 +39,7 @@ class SlideController extends BaseController
      */
     public function store(StoreSlideRequest $request)
     {
-        $requestData = $request->all();
-
-        // Store image
-        $path = Storage::disk('public')->putFile('slides', $request->file('image'));
-
-        // Override image value
-        $requestData['image'] = $path;
+        $requestData = $this->uploadImage($request, 'slides');
 
         $slide = Slide::create($requestData);
 
