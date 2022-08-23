@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreActivityRequest;
 use App\Http\Requests\UpdateActivityRequest;
+use App\Http\Resources\ActivityResource;
 use App\Models\Activity;
 
 class ActivityController extends Controller
@@ -25,7 +26,12 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        //
+        $activities = Activity::with([
+            'user',
+            'author'
+        ])->get();
+
+        return ActivityResource::collection($activities);
     }
 
     /**
