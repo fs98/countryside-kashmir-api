@@ -40,9 +40,17 @@ class ActivityImageController extends BaseController
      * @param  \App\Http\Requests\StoreActivityImageRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreActivityImageRequest $request)
+    public function store(StoreActivityImageRequest $request, Activity $activity)
     {
-        //
+        $requestData = $this->uploadImage($request, 'activities/images');
+
+        $requestData['activity_id'] = $activity->id;
+
+        $activityImage = auth()->user()->activityImages()->create($requestData);
+
+        return $activityImage
+            ? $this->sendResponse($activityImage->load('activity'), 'Activity image successfully stored!')
+            : $this->sendError($activityImage, 'There has been a mistake!', 503);
     }
 
     /**
