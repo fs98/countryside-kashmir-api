@@ -66,4 +66,20 @@ class User extends Authenticatable
     {
         return $this->hasMany(DestinationImage::class);
     }
+
+    /**
+     * Get the activities for the user.
+     */
+    public function activities()
+    {
+        return $this->hasMany(Activity::class);
+    }
+
+    /**
+     * Get the destinations images for the user.
+     */
+    public function activityImages()
+    {
+        return $this->hasMany(ActivityImage::class);
+    }
 }

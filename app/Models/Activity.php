@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Destination extends Model
+class Activity extends Model
 {
     use HasFactory;
 
@@ -54,13 +54,13 @@ class Destination extends Model
     /**
      * Get the images for the destination.
      */
-    public function destinationImages()
+    public function activityImages()
     {
-        return $this->hasMany(DestinationImage::class);
+        return $this->hasMany(ActivityImage::class);
     }
 
     /**
-     * Get the destinations's description.
+     * Get the activity's description.
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */

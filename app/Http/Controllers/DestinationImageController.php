@@ -12,6 +12,16 @@ use Illuminate\Support\Facades\Storage;
 class DestinationImageController extends BaseController
 {
     /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(DestinationImage::class, 'image');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @param  \App\Models\Destination  $destination
