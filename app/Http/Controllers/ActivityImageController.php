@@ -23,6 +23,7 @@ class ActivityImageController extends BaseController
     /**
      * Display a listing of the resource.
      *
+     * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
     public function index(Activity $activity)
@@ -38,6 +39,7 @@ class ActivityImageController extends BaseController
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreActivityImageRequest  $request
+     * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
     public function store(StoreActivityImageRequest $request, Activity $activity)
@@ -55,7 +57,8 @@ class ActivityImageController extends BaseController
 
     /**
      * Display the specified resource.
-     *
+     * 
+     * @param  \App\Models\Activity  $activity
      * @param  \App\Models\ActivityImage  $activityImage
      * @return \Illuminate\Http\Response
      */
