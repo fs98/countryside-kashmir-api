@@ -60,7 +60,7 @@ class Destination extends Model
     }
 
     /**
-     * Get the destinations's description name.
+     * Get the destinations's description.
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
