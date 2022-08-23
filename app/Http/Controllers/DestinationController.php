@@ -103,7 +103,7 @@ class DestinationController extends BaseController
             // Delete old photo
             Storage::disk('public')->delete($destination->image);
 
-            return $this->sendResponse($destination, 'Slide successfully deleted!');
+            return $this->sendResponse($destination, 'Destination successfully deleted!');
         }
 
         return $this->sendError($destination, 'There has been a mistake!', 503);
