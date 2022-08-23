@@ -9,6 +9,16 @@ use App\Models\ActivityImage;
 class ActivityImageController extends Controller
 {
     /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(ActivityImage::class, 'activityImage');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
