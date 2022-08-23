@@ -59,62 +59,62 @@ class Handler extends ExceptionHandler
      *
      * @return void
      */
-    public function render($request, Throwable $e)
-    {
-        if ($request->is('api*')) {
+    // public function render($request, Throwable $e)
+    // {
+    //     if ($request->is('api*')) {
 
-            if ($e instanceof AccessDeniedException) {
+    //         if ($e instanceof AccessDeniedException) {
 
-                $response = [
-                    'success' => false,
-                    'error' => $e->getMessage(),
-                ];
+    //             $response = [
+    //                 'success' => false,
+    //                 'error' => $e->getMessage(),
+    //             ];
 
-                return response()->json($response, 403);
-            }
+    //             return response()->json($response, 403);
+    //         }
 
-            if ($e instanceof AuthorizationException) {
+    //         if ($e instanceof AuthorizationException) {
 
-                $response = [
-                    'success' => false,
-                    'error' => $e->getMessage(),
-                ];
+    //             $response = [
+    //                 'success' => false,
+    //                 'error' => $e->getMessage(),
+    //             ];
 
-                return response()->json($response, 403);
-            }
+    //             return response()->json($response, 403);
+    //         }
 
-            if ($e instanceof ModelNotFoundException || $e instanceof NotFoundHttpException) {
+    //         if ($e instanceof ModelNotFoundException || $e instanceof NotFoundHttpException) {
 
-                $response = [
-                    'success' => false,
-                    'error'    => "Resource not found!",
-                ];
+    //             $response = [
+    //                 'success' => false,
+    //                 'error'    => "Resource not found!",
+    //             ];
 
-                return response()->json($response, 404);
-            }
+    //             return response()->json($response, 404);
+    //         }
 
-            if ($e instanceof AuthenticationException) {
+    //         if ($e instanceof AuthenticationException) {
 
-                $response = [
-                    'success' => false,
-                    'error'    => $e->getMessage(),
-                ];
+    //             $response = [
+    //                 'success' => false,
+    //                 'error'    => $e->getMessage(),
+    //             ];
 
-                return response()->json($response, 401);
-            }
+    //             return response()->json($response, 401);
+    //         }
 
-            if ($e instanceof ThrottleRequestsException) {
+    //         if ($e instanceof ThrottleRequestsException) {
 
-                $response = [
-                    'success' => false,
-                    'error'    => $e->getMessage(),
-                ];
+    //             $response = [
+    //                 'success' => false,
+    //                 'error'    => $e->getMessage(),
+    //             ];
 
-                return response()->json($response, 429);
-            }
+    //             return response()->json($response, 429);
+    //         }
 
-            return response(['success' => false, 'message' => 'Something went wrong.'], 500);
-        }
-        parent::render($request, $e);
-    }
+    //         return response(['success' => false, 'message' => 'Something went wrong.'], 500);
+    //     }
+    //     parent::render($request, $e);
+    // }
 }
