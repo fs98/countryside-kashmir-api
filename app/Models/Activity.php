@@ -42,6 +42,14 @@ class Activity extends Model
     }
 
     /**
+     * Get the images for the destination.
+     */
+    public function activityImages()
+    {
+        return $this->hasMany(ActivityImage::class);
+    }
+
+    /**
      * Get the activity's description.
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
