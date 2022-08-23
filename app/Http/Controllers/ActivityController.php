@@ -76,7 +76,17 @@ class ActivityController extends BaseController
      */
     public function update(UpdateActivityRequest $request, Activity $activity)
     {
-        //
+        $requestData = $this->updateImage($request, $activity->image, 'activities');
+
+        /** 
+         * Define the type of requestData to avoid error
+         * @var array $requestData 
+         * */
+        if ($activity->update($requestData)) {
+            return $this->sendResponse($activity, 'Activity successfully updated!');
+        }
+
+        return $this->sendError($activity, 'There has been a mistake!', 503);
     }
 
     /**
