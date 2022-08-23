@@ -20,4 +20,12 @@ class ActivityImage extends Model
         'activity_id',
         'user_id',
     ];
+
+    /**
+     * Get the destination that owns the image.
+     */
+    public function activity()
+    {
+        return $this->belongsTo(Activity::class);
+    }
 }
