@@ -22,6 +22,16 @@ class ActivityImage extends Model
     ];
 
     /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'activity_id',
+        'user_id'
+    ];
+
+    /**
      * Get the destination that owns the image.
      */
     public function activity()
