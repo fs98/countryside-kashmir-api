@@ -42,7 +42,15 @@ class ActivityController extends BaseController
      */
     public function store(StoreActivityRequest $request)
     {
-        //
+        $requestData = $this->uploadImage($request, 'activities');
+
+        $activity = auth()->user()->activities()->create($requestData);
+
+        if ($activity) {
+            return $this->sendResponse($activity, 'Activity successfully stored!');
+        }
+
+        return $this->sendError($activity, 'There has been a mistake!', 503);
     }
 
     /**
@@ -79,6 +87,5 @@ class ActivityController extends BaseController
      */
     public function destroy(Activity $activity)
     {
-        //
     }
 }
