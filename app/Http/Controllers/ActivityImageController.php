@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateActivityImageRequest;
 use App\Http\Resources\ActivityImageResource;
 use App\Models\Activity;
 use App\Models\ActivityImage;
+use Illuminate\Support\Facades\Storage;
 
 class ActivityImageController extends BaseController
 {
@@ -94,11 +95,19 @@ class ActivityImageController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ActivityImage  $activityImage
+     * @param  \App\Models\ActivityImage  $image
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ActivityImage $activityImage)
+    public function destroy(Activity $activity, ActivityImage $image)
     {
-        //
+        if ($image->delete()) {
+
+            // Delete old photo
+            Storage::disk('public')->delete($image->image);
+
+            return $this->sendResponse($image, 'Activity image successfully deleted!');
+        }
+
+        return $this->sendError($image, 'There has been a mistake!', 503);
     }
 }
