@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DestinationController;
@@ -34,6 +35,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         'slides' => SlideController::class,
         'destinations' => DestinationController::class,
         'destinations.images' => DestinationImageController::class,
+        'activities' => ActivityController::class
     ]);
 });
 
