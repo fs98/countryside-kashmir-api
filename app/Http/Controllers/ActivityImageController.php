@@ -8,7 +8,7 @@ use App\Http\Resources\ActivityImageResource;
 use App\Models\Activity;
 use App\Models\ActivityImage;
 
-class ActivityImageController extends Controller
+class ActivityImageController extends BaseController
 {
     /**
      * Create the controller instance.
