@@ -31,4 +31,12 @@ class Activity extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Get the author that owns the destination.
+     */
+    public function author()
+    {
+        return $this->belongsTo(Author::class);
+    }
 }
