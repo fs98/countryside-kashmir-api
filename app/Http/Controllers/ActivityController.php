@@ -6,6 +6,7 @@ use App\Http\Requests\StoreActivityRequest;
 use App\Http\Requests\UpdateActivityRequest;
 use App\Http\Resources\ActivityResource;
 use App\Models\Activity;
+use Illuminate\Support\Facades\Storage;
 
 class ActivityController extends BaseController
 {
@@ -97,5 +98,14 @@ class ActivityController extends BaseController
      */
     public function destroy(Activity $activity)
     {
+        if ($activity->delete()) {
+
+            // Delete old photo
+            Storage::disk('public')->delete($activity->image);
+
+            return $this->sendResponse($activity, 'Activity successfully deleted!');
+        }
+
+        return $this->sendError($activity, 'There has been a mistake!', 503);
     }
 }
