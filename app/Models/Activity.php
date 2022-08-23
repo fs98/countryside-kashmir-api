@@ -23,4 +23,12 @@ class Activity extends Model
         'user_id',
         'author_id'
     ];
+
+    /**
+     * Get the user that created the destination.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
