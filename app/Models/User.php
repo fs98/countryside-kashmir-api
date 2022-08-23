@@ -60,6 +60,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the destinations images for the user.
+     */
+    public function destinationImages()
+    {
+        return $this->hasMany(DestinationImage::class);
+    }
+
+    /**
      * Get the activities for the user.
      */
     public function activities()
@@ -70,8 +78,8 @@ class User extends Authenticatable
     /**
      * Get the destinations images for the user.
      */
-    public function destinationImages()
+    public function activityImages()
     {
-        return $this->hasMany(DestinationImage::class);
+        return $this->hasMany(ActivityImage::class);
     }
 }
