@@ -17,7 +17,7 @@ class ActivityImageController extends Controller
      */
     public function __construct()
     {
-        $this->authorizeResource(ActivityImage::class, 'activityImage');
+        $this->authorizeResource(ActivityImage::class, 'image');
     }
 
     /**
@@ -51,7 +51,7 @@ class ActivityImageController extends Controller
      * @param  \App\Models\ActivityImage  $activityImage
      * @return \Illuminate\Http\Response
      */
-    public function show(ActivityImage $activityImage)
+    public function show(Activity $activity, ActivityImage $image)
     {
         //
     }
