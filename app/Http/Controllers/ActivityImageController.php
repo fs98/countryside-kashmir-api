@@ -59,7 +59,7 @@ class ActivityImageController extends BaseController
      * Display the specified resource.
      * 
      * @param  \App\Models\Activity  $activity
-     * @param  \App\Models\ActivityImage  $activityImage
+     * @param  \App\Models\ActivityImage  $image
      * @return \Illuminate\Http\Response
      */
     public function show(Activity $activity, ActivityImage $image)
