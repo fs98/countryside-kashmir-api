@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreActivityImageRequest;
 use App\Http\Requests\UpdateActivityImageRequest;
+use App\Http\Resources\ActivityImageResource;
+use App\Models\Activity;
 use App\Models\ActivityImage;
 
 class ActivityImageController extends Controller
@@ -23,9 +25,13 @@ class ActivityImageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Activity $activity)
     {
-        //
+        $activityImages = $activity->activityImages()
+            ->with('activity')
+            ->get();
+
+        return ActivityImageResource::collection($activityImages);
     }
 
     /**
