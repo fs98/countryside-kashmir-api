@@ -71,12 +71,24 @@ class ActivityImageController extends BaseController
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateActivityImageRequest  $request
-     * @param  \App\Models\ActivityImage  $activityImage
+     * @param  \App\Models\Activity  $activity
+     * @param  \App\Models\ActivityImage  $image
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateActivityImageRequest $request, ActivityImage $activityImage)
+    public function update(UpdateActivityImageRequest $request, Activity $activity, ActivityImage $image)
     {
-        //
+        $requestData = $this->updateImage($request, $image->image, 'activities/images');
+
+        /** 
+         * Define the type of requestData to avoid error
+         * @var array $requestData 
+         * */
+
+        if ($image->update($requestData)) {
+            return $this->sendResponse($image, 'Activity image successfully updated!');
+        }
+
+        return $this->sendError($image, 'There has been a mistake!', 503);
     }
 
     /**
