@@ -43,7 +43,7 @@ class BlogController extends BaseController
      */
     public function show(Blog $blog)
     {
-        //
+        return new BlogResource($blog);
     }
 
     /**
