@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ActivityImageController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\DestinationImageController;
@@ -37,7 +38,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
         'destinations' => DestinationController::class,
         'destinations.images' => DestinationImageController::class,
         'activities' => ActivityController::class,
-        'activities.images' => ActivityImageController::class
+        'activities.images' => ActivityImageController::class,
+        'blogs' => BlogController::class
     ]);
 });
 
