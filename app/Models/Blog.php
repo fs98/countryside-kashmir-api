@@ -27,6 +27,16 @@ class Blog extends Model
     ];
 
     /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'user_id',
+        'author_id'
+    ];
+
+    /**
      * Get the user that created the blog.
      */
     public function user()
