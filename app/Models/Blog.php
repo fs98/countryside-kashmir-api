@@ -24,4 +24,12 @@ class Blog extends Model
         'author_id',
         'published_at'
     ];
+
+    /**
+     * Get the user that created the blog.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
