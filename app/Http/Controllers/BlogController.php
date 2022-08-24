@@ -64,7 +64,17 @@ class BlogController extends BaseController
      */
     public function update(UpdateBlogRequest $request, Blog $blog)
     {
-        //
+        $requestData = $this->updateImage($request, $blog->image, 'blogs');
+
+        /** 
+         * Define the type of requestData to avoid error
+         * @var array $requestData 
+         * */
+        if ($blog->update($requestData)) {
+            return $this->sendResponse($blog->load('user'), 'Blog successfully updated!');
+        }
+
+        return $this->sendError($blog, 'There has been a mistake!', 503);
     }
 
     /**
