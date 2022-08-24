@@ -32,7 +32,16 @@ class BlogController extends BaseController
      */
     public function store(StoreBlogRequest $request)
     {
-        //
+
+        $requestData = $this->uploadImage($request, 'blogs');
+
+        $blog = auth()->user()->blogs()->create($requestData);
+
+        if ($blog) {
+            return $this->sendResponse($blog->load('user'), 'Blog successfully stored!');
+        }
+
+        return $this->sendError($blog, 'There has been a mistake!', 503);
     }
 
     /**
