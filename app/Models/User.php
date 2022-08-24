@@ -82,4 +82,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(ActivityImage::class);
     }
+
+    /**
+     * Get the blogs for the user.
+     */
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class);
+    }
 }
