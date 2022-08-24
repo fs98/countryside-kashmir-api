@@ -6,6 +6,7 @@ use App\Http\Requests\StoreBlogRequest;
 use App\Http\Requests\UpdateBlogRequest;
 use App\Http\Resources\BlogResource;
 use App\Models\Blog;
+use Illuminate\Support\Facades\Storage;
 
 class BlogController extends BaseController
 {
@@ -85,6 +86,14 @@ class BlogController extends BaseController
      */
     public function destroy(Blog $blog)
     {
-        //
+        if ($blog->delete()) {
+
+            // Delete old photo
+            Storage::disk('public')->delete($blog->image);
+
+            return $this->sendResponse($blog, 'Blog successfully deleted!');
+        }
+
+        return $this->sendError($blog, 'There has been a mistake!', 503);
     }
 }
