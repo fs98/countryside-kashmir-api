@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBlogRequest;
 use App\Http\Requests\UpdateBlogRequest;
+use App\Http\Resources\BlogResource;
 use App\Models\Blog;
 
 class BlogController extends BaseController
@@ -15,7 +16,12 @@ class BlogController extends BaseController
      */
     public function index()
     {
-        //
+        $blogs = Blog::with([
+            'user',
+            'author'
+        ])->get();
+
+        return BlogResource::collection($blogs);
     }
 
     /**
