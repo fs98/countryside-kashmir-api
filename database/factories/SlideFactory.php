@@ -17,7 +17,7 @@ class SlideFactory extends Factory
     public function definition()
     {
         return [
-            'url' => fake()->imageUrl(),
+            'image' => fake()->imageUrl(),
             'order' => fake()->numberBetween(0, 10),
             'title' => fake()->realText(64),
             'subtitle' => fake()->realText(32)

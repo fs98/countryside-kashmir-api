@@ -4,6 +4,7 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ActivityImageController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\DestinationImageController;
@@ -45,6 +46,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         'blogs' => BlogController::class,
         'packages' => PackageController::class,
         'packages.images' => PackageImageController::class,
+        'bookings' => BookingController::class
     ]);
 });
 

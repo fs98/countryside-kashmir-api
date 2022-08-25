@@ -15,7 +15,19 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::factory()->create();
-        $user->assignRole('Super Admin');
+        $superadmin = User::factory()->create([
+            'email' => 'superadmin@countrysidekashmir.com',
+        ]);
+        $superadmin->assignRole('Super Admin');
+
+        $superadmin = User::factory()->create([
+            'email' => 'admin@countrysidekashmir.com',
+        ]);
+        $superadmin->assignRole('Admin');
+
+        $superadmin = User::factory()->create([
+            'email' => 'client@countrysidekashmir.com',
+        ]);
+        $superadmin->assignRole('Client');
     }
 }

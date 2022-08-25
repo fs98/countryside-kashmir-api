@@ -52,6 +52,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the bookings for the user.
+     */
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
+    /**
      * Get the destinations for the user.
      */
     public function destinations()
