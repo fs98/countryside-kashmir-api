@@ -17,6 +17,7 @@ class Slide extends Model
      */
     protected $fillable = [
         'image',
+        'image_alt',
         'order',
         'title',
         'subtitle'
