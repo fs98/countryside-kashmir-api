@@ -7,6 +7,7 @@ use App\Http\Requests\UpdatePackageImageRequest;
 use App\Http\Resources\PackageImageResource;
 use App\Models\Package;
 use App\Models\PackageImage;
+use Illuminate\Support\Facades\Storage;
 
 class PackageImageController extends BaseController
 {
@@ -95,11 +96,20 @@ class PackageImageController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\PackageImage  $packageImage
+     * @param  \App\Models\Package  $package
+     * @param  \App\Models\PackageImage  $image
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PackageImage $packageImage)
+    public function destroy(Package $package, PackageImage $image)
     {
-        //
+        if ($image->delete()) {
+
+            // Delete old photo
+            Storage::disk('public')->delete($image->image);
+
+            return $this->sendResponse($image, 'Package image successfully deleted!');
+        }
+
+        return $this->sendError($image, 'There has been a mistake!', 503);
     }
 }
