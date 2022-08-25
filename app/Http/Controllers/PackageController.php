@@ -68,7 +68,17 @@ class PackageController extends BaseController
      */
     public function update(UpdatePackageRequest $request, Package $package)
     {
-        //
+        $requestData = $this->updateImage($request, $package->image, 'packages');
+
+        /** 
+         * Define the type of requestData to avoid error
+         * @var array $requestData 
+         * */
+        if ($package->update($requestData)) {
+            return $this->sendResponse($package, 'Package successfully updated!');
+        }
+
+        return $this->sendError($package, 'There has been a mistake!', 503);
     }
 
     /**
