@@ -65,6 +65,14 @@ class Package extends Model
     }
 
     /**
+     * The destinations that belong to the package.
+     */
+    public function destinations()
+    {
+        return $this->belongsToMany(Destination::class);
+    }
+
+    /**
      * Get the destinations's description.
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
