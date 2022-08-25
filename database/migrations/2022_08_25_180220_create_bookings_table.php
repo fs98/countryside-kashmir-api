@@ -30,7 +30,7 @@ return new class extends Migration
             $table->timestamp('arrival_date');
 
             $table->smallInteger('days', false, true);
-            $table->smallInteger('night', false, true);
+            $table->smallInteger('nights', false, true);
 
             $table->foreignId('package_id')
                 ->nullable()
