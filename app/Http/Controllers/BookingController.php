@@ -7,7 +7,7 @@ use App\Http\Requests\UpdateBookingRequest;
 use App\Http\Resources\BookingResource;
 use App\Models\Booking;
 
-class BookingController extends Controller
+class BookingController extends BaseController
 {
     /**
      * Create the controller instance.
