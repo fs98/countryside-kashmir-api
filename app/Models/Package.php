@@ -43,6 +43,15 @@ class Package extends Model
     ];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array<int, string>
+     */
+    protected $appends = [
+        'image_url',
+    ];
+
+    /**
      * Get the category that owns the package.
      */
     public function category()
