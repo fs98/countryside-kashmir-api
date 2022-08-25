@@ -29,7 +29,8 @@ class PackageImage extends Model
      */
     protected $hidden = [
         'package_id',
-        'user_id'
+        'user_id',
+        'image'
     ];
 
     /**
