@@ -6,6 +6,7 @@ use App\Http\Requests\StorePackageRequest;
 use App\Http\Requests\UpdatePackageRequest;
 use App\Http\Resources\PackageResource;
 use App\Models\Package;
+use Illuminate\Support\Facades\Storage;
 
 class PackageController extends BaseController
 {
@@ -89,6 +90,14 @@ class PackageController extends BaseController
      */
     public function destroy(Package $package)
     {
-        //
+        if ($package->delete()) {
+
+            // Delete old photo
+            Storage::disk('public')->delete($package->image);
+
+            return $this->sendResponse($package, 'Package successfully deleted!');
+        }
+
+        return $this->sendError($package, 'There has been a mistake!', 503);
     }
 }
