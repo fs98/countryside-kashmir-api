@@ -11,6 +11,16 @@ use Illuminate\Support\Facades\Storage;
 class PackageController extends BaseController
 {
     /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Package::class, 'package');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
