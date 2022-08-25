@@ -52,9 +52,9 @@ class PackageImageController extends BaseController
      * @param  \App\Models\PackageImage  $packageImage
      * @return \Illuminate\Http\Response
      */
-    public function show(PackageImage $packageImage)
+    public function show(Package $package, PackageImage $image)
     {
-        //
+        return new PackageImageResource($image->load('package'));
     }
 
     /**
