@@ -37,7 +37,8 @@ class Package extends Model
     protected $hidden = [
         'category_id',
         'user_id',
-        'author_id'
+        'author_id',
+        'pivot'
     ];
 
     /**
