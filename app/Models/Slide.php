@@ -38,7 +38,6 @@ class Slide extends Model
         'image_url',
     ];
 
-
     /**
      * Get the slide's image url.
      *

@@ -11,6 +11,16 @@ use Illuminate\Support\Facades\Storage;
 class BlogController extends BaseController
 {
     /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Blog::class, 'blog');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

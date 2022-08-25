@@ -32,7 +32,17 @@ class Activity extends Model
      */
     protected $hidden = [
         'user_id',
-        'author_id'
+        'author_id',
+        'image'
+    ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array<int, string>
+     */
+    protected $appends = [
+        'image_url',
     ];
 
     /**
@@ -68,6 +78,18 @@ class Activity extends Model
     {
         return Attribute::make(
             get: fn ($value) => json_decode($value),
+        );
+    }
+
+    /**
+     * Get the slide's image url.
+     *
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function imageUrl(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => asset('storage/' . $this->image),
         );
     }
 }

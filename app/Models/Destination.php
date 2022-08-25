@@ -33,7 +33,17 @@ class Destination extends Model
     protected $hidden = [
         'user_id',
         'author_id',
-        'pivot'
+        'pivot',
+        'image'
+    ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array<int, string>
+     */
+    protected $appends = [
+        'image_url',
     ];
 
     /**
@@ -77,6 +87,18 @@ class Destination extends Model
     {
         return Attribute::make(
             get: fn ($value) => json_decode($value),
+        );
+    }
+
+    /**
+     * Get the slide's image url.
+     *
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function imageUrl(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => asset('storage/' . $this->image),
         );
     }
 }

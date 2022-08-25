@@ -26,8 +26,8 @@ class UpdateSlideRequest extends FormRequest
         return [
             'image' => 'image|mimes:jpg,png,jpeg|max:5000',
             'order' => 'numeric|min:1',
-            'title' => 'nullable|max:64',
-            'subtitle' => 'nullable|max:32',
+            'title' => 'nullable|string|max:64',
+            'subtitle' => 'nullable|string|max:32',
         ];
     }
 }
