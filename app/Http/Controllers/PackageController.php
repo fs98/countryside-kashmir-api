@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePackageRequest;
 use App\Http\Requests\UpdatePackageRequest;
+use App\Http\Resources\PackageResource;
 use App\Models\Package;
 
 class PackageController extends BaseController
@@ -15,7 +16,13 @@ class PackageController extends BaseController
      */
     public function index()
     {
-        //
+        $packages = Package::with([
+            'category',
+            'user',
+            'author'
+        ])->get();
+
+        return PackageResource::collection($packages);
     }
 
     /**
