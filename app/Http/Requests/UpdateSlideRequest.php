@@ -25,6 +25,7 @@ class UpdateSlideRequest extends FormRequest
     {
         return [
             'image' => 'image|mimes:jpg,png,jpeg|max:5000',
+            'image_alt' => 'string|max:64',
             'order' => 'numeric|min:1',
             'title' => 'nullable|string|max:64',
             'subtitle' => 'nullable|string|max:32',
