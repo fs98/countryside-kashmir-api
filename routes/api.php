@@ -11,6 +11,7 @@ use App\Http\Controllers\Guest\MessageController as GuestMessageController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\SlideController;
+use App\Models\PackageImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -41,7 +42,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
         'activities' => ActivityController::class,
         'activities.images' => ActivityImageController::class,
         'blogs' => BlogController::class,
-        'packages' => PackageController::class
+        'packages' => PackageController::class,
+        'packages.image' => PackageImage::class,
     ]);
 });
 
