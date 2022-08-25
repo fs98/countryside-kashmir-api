@@ -98,4 +98,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Package::class);
     }
+
+    /**
+     * Get the destinations images for the user.
+     */
+    public function packageImages()
+    {
+        return $this->hasMany(PackageImage::class);
+    }
 }
