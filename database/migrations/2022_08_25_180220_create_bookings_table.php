@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name', 32);
+            $table->string('name', 64);
             $table->string('email', 128);
             $table->string('phone_number', 128);
             $table->string('address', 128);
