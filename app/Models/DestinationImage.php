@@ -29,7 +29,8 @@ class DestinationImage extends Model
      */
     protected $hidden = [
         'destination_id',
-        'user_id'
+        'user_id',
+        'image'
     ];
 
     /**
