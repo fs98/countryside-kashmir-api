@@ -22,7 +22,7 @@ class BlogFactory extends Factory
             'title' => ucfirst(fake()->word()),
             'content' => json_encode(fake()->paragraphs(3, false)),
             'image' => fake()->imageUrl(),
-            'image_alt' => fake()->sentence($nbWords = 6, $variableNbWords = true),
+            'image_alt' => fake()->sentence($nbWords = 3, $variableNbWords = true),
             'keywords' => fake()->words($nb = 3, $asText = true),
             'user_id' => User::role(['Super Admin', 'Admin'])->pluck('id')->random(),
             'author_id' => Author::pluck('id')->random(),
