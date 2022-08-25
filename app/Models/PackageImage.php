@@ -38,4 +38,12 @@ class PackageImage extends Model
     {
         return $this->belongsTo(Package::class);
     }
+
+    /**
+     * Get the user that owns the image.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
