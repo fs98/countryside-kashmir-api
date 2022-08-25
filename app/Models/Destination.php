@@ -32,7 +32,8 @@ class Destination extends Model
      */
     protected $hidden = [
         'user_id',
-        'author_id'
+        'author_id',
+        'pivot'
     ];
 
     /**
