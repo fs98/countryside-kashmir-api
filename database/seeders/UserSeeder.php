@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $superadmin = User::factory()->create([
+        $superadmin = User::create([
             'name' => 'Super Admin',
             'email' => 'superadmin@countrysidekashmir.com',
             'email_verified_at' => now(),
@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
         ]);
         $superadmin->assignRole('Super Admin');
 
-        $superadmin = User::factory()->create([
+        $superadmin = User::create([
             'name' => 'Admin',
             'email' => 'admin@countrysidekashmir.com',
             'email_verified_at' => now(),
@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
         ]);
         $superadmin->assignRole('Admin');
 
-        $superadmin = User::factory()->create([
+        $superadmin = User::create([
             'name' => 'Client',
             'email' => 'client@countrysidekashmir.com',
             'email_verified_at' => now(),
