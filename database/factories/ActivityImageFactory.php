@@ -20,7 +20,7 @@ class ActivityImageFactory extends Factory
     {
         return [
             'image' => fake()->imageUrl(),
-            'image_alt' => fake()->sentence($nbWords = 4, $variableNbWords = true),
+            'image_alt' => fake()->sentence($nbWords = 3, $variableNbWords = true),
             'activity_id' => Activity::pluck('id')->random(),
             'user_id' => User::role(['Super Admin', 'Admin'])->pluck('id')->random(),
         ];
