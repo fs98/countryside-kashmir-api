@@ -74,6 +74,14 @@ class Package extends Model
     }
 
     /**
+     * Get the images for the package.
+     */
+    public function packageImages()
+    {
+        return $this->hasMany(PackageImage::class);
+    }
+
+    /**
      * Get the destinations's description.
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
