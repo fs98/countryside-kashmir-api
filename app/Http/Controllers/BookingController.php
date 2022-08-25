@@ -86,6 +86,10 @@ class BookingController extends BaseController
      */
     public function destroy(Booking $booking)
     {
-        //
+        if ($booking->delete()) {
+            return $this->sendResponse($booking, 'Booking successfully deleted!');
+        }
+
+        return $this->sendError($booking, 'There has been a mistake!', 503);
     }
 }
