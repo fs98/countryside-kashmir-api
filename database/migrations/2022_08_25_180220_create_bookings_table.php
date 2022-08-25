@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('name', 64);
-            $table->string('email', 128);
+            $table->string('email', 128)->nullable();
             $table->string('phone_number', 128);
             $table->string('address', 128);
             $table->string('city', 128);
