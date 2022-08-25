@@ -20,4 +20,14 @@ class PackageImage extends Model
         'package_id',
         'user_id',
     ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'package_id',
+        'user_id'
+    ];
 }
