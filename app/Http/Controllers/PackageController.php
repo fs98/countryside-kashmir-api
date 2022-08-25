@@ -56,6 +56,7 @@ class PackageController extends BaseController
     {
         return new PackageResource($package->load([
             'category',
+            'destinations',
             'user',
             'author'
         ]));
