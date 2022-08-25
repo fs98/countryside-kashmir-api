@@ -71,7 +71,11 @@ class BookingController extends BaseController
      */
     public function update(UpdateBookingRequest $request, Booking $booking)
     {
-        //
+        if ($booking->update($request->all())) {
+            return $this->sendResponse($booking, 'Booking successfully updated!');
+        }
+
+        return $this->sendError($booking, 'There has been a mistake!', 503);
     }
 
     /**
