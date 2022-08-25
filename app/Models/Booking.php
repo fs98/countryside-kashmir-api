@@ -30,4 +30,12 @@ class Booking extends Model
         'package_id',
         'user_id'
     ];
+
+    /**
+     * Get the user that created the booking.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
