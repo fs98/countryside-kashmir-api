@@ -90,4 +90,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Blog::class);
     }
+
+    /**
+     * Get the packages for the user.
+     */
+    public function packages()
+    {
+        return $this->hasMany(Package::class);
+    }
 }
