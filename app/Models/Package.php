@@ -38,7 +38,8 @@ class Package extends Model
         'category_id',
         'user_id',
         'author_id',
-        'pivot'
+        'pivot',
+        'image'
     ];
 
     /**
