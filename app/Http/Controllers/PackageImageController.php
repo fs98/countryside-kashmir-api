@@ -39,16 +39,27 @@ class PackageImageController extends BaseController
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StorePackageImageRequest  $request
+     * @param  \App\Models\Package  $package
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePackageImageRequest $request)
+    public function store(StorePackageImageRequest $request, Package $package)
     {
-        //
+        $requestData = $this->uploadImage($request, 'packages/images');
+
+        $requestData['package_id'] = $package->id;
+
+        $packageImage = auth()->user()->packageImages()->create($requestData);
+
+        return $packageImage
+            ? $this->sendResponse($packageImage->load('package'), 'Package image successfully stored!')
+            : $this->sendError($packageImage, 'There has been a mistake!', 503);
     }
+
 
     /**
      * Display the specified resource.
-     *
+     * 
+     * @param  \App\Models\Package  $package
      * @param  \App\Models\PackageImage  $packageImage
      * @return \Illuminate\Http\Response
      */
