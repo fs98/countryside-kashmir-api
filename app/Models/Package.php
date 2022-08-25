@@ -35,4 +35,12 @@ class Package extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Get the author that owns the package.
+     */
+    public function author()
+    {
+        return $this->belongsTo(Author::class);
+    }
 }
