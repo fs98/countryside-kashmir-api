@@ -92,4 +92,16 @@ class Package extends Model
             get: fn ($value) => json_decode($value),
         );
     }
+
+    /**
+     * Get the slide's image url.
+     *
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function imageUrl(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => asset('storage/' . $this->image),
+        );
+    }
 }
