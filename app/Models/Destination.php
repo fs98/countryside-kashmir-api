@@ -38,6 +38,15 @@ class Destination extends Model
     ];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array<int, string>
+     */
+    protected $appends = [
+        'image_url',
+    ];
+
+    /**
      * Get the user that created the destination.
      */
     public function user()
