@@ -18,6 +18,7 @@ class PackageController extends BaseController
     public function index()
     {
         $packages = Package::with([
+            'destinations',
             'category',
             'user',
             'author'
