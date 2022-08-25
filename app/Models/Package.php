@@ -30,6 +30,17 @@ class Package extends Model
     ];
 
     /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'category_id',
+        'user_id',
+        'author_id'
+    ];
+
+    /**
      * Get the category that owns the package.
      */
     public function category()
