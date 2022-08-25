@@ -6,7 +6,7 @@ use App\Http\Requests\StorePackageRequest;
 use App\Http\Requests\UpdatePackageRequest;
 use App\Models\Package;
 
-class PackageController extends Controller
+class PackageController extends BaseController
 {
     /**
      * Display a listing of the resource.
