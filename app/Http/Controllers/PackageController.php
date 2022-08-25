@@ -33,7 +33,15 @@ class PackageController extends BaseController
      */
     public function store(StorePackageRequest $request)
     {
-        //
+        $requestData = $this->uploadImage($request, 'packages');
+
+        $package = auth()->user()->packages()->create($requestData);
+
+        if ($package) {
+            return $this->sendResponse($package, 'Package successfully stored!');
+        }
+
+        return $this->sendError($package, 'There has been a mistake!', 503);
     }
 
     /**
