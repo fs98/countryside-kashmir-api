@@ -44,7 +44,11 @@ class PackageController extends BaseController
      */
     public function show(Package $package)
     {
-        //
+        return new PackageResource($package->load([
+            'category',
+            'user',
+            'author'
+        ]));
     }
 
     /**
