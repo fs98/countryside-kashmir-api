@@ -13,7 +13,7 @@ class UpdatePackageImageRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class UpdatePackageImageRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'image' => 'image|mimes:jpg,png,jpeg|max:5000',
+            'image_alt' => 'string|max:64',
         ];
     }
 }
