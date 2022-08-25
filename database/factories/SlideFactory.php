@@ -18,6 +18,7 @@ class SlideFactory extends Factory
     {
         return [
             'image' => fake()->imageUrl(),
+            'image_alt' => fake()->sentence($nbWords = 3, $variableNbWords = true),
             'order' => fake()->numberBetween(0, 10),
             'title' => fake()->realText(64),
             'subtitle' => fake()->realText(32)
