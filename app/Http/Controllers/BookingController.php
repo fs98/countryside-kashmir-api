@@ -45,7 +45,10 @@ class BookingController extends BaseController
      */
     public function store(StoreBookingRequest $request)
     {
-        //
+        $booking = auth()->user()->bookings()->create($request->all());
+
+        return $booking ? $this->sendResponse($booking, 'Booking successfully stored!')
+            : $this->sendError($booking, 'There has been a mistake!', 503);
     }
 
     /**
