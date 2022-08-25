@@ -72,12 +72,24 @@ class PackageImageController extends BaseController
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdatePackageImageRequest  $request
-     * @param  \App\Models\PackageImage  $packageImage
+     * @param  \App\Models\Package  $package
+     * @param  \App\Models\PackageImage  $image
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePackageImageRequest $request, PackageImage $packageImage)
+    public function update(UpdatePackageImageRequest $request, Package $package, PackageImage $image)
     {
-        //
+        $requestData = $this->updateImage($request, $image->image, 'packages/images');
+
+        /** 
+         * Define the type of requestData to avoid error
+         * @var array $requestData 
+         * */
+
+        if ($image->update($requestData)) {
+            return $this->sendResponse($image, 'Package image successfully updated!');
+        }
+
+        return $this->sendError($image, 'There has been a mistake!', 503);
     }
 
     /**
