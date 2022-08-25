@@ -28,7 +28,8 @@ class ActivityImage extends Model
      */
     protected $hidden = [
         'activity_id',
-        'user_id'
+        'user_id',
+        'image'
     ];
 
     /**
