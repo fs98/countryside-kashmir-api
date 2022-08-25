@@ -38,4 +38,16 @@ class ActivityImage extends Model
     {
         return $this->belongsTo(Activity::class);
     }
+
+    /**
+     * Get the slide's image url.
+     *
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function imageUrl(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => asset('storage/' . $this->image),
+        );
+    }
 }
