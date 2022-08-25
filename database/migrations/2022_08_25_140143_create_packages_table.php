@@ -19,7 +19,8 @@ return new class extends Migration
             $table->json('description');
             $table->string('image', 128);
             $table->string('image_alt', 64);
-            $table->smallInteger('duration', false, true);
+            $table->smallInteger('days', false, true);
+            $table->smallInteger('nights', false, true);
             $table->smallInteger('price', false, true);
             $table->foreignId('category_id')
                 ->constrained()
