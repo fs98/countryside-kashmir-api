@@ -29,6 +29,14 @@ class Package extends Model
     ];
 
     /**
+     * Get the category that owns the package.
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    /**
      * Get the user that created the package.
      */
     public function user()
