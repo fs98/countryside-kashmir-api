@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePackageImageRequest;
 use App\Http\Requests\UpdatePackageImageRequest;
+use App\Http\Resources\PackageImageResource;
+use App\Models\Package;
 use App\Models\PackageImage;
 
 class PackageImageController extends BaseController
@@ -21,11 +23,16 @@ class PackageImageController extends BaseController
     /**
      * Display a listing of the resource.
      *
+     * @param  \App\Models\Package  $package
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Package $package)
     {
-        //
+        $packageImages = $package->packageImages()
+            ->with('package')
+            ->get();
+
+        return PackageImageResource::collection($packageImages);
     }
 
     /**
