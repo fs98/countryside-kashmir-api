@@ -43,7 +43,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         'activities.images' => ActivityImageController::class,
         'blogs' => BlogController::class,
         'packages' => PackageController::class,
-        'packages.image' => PackageImage::class,
+        'packages.images' => PackageImage::class,
     ]);
 });
 
