@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Destination extends Model
+class Package extends Model
 {
     use HasFactory;
 
@@ -20,24 +20,37 @@ class Destination extends Model
         'description',
         'image',
         'image_alt',
+        'duration',
+        'price',
+        'category_id',
+        'persons',
         'keywords',
         'user_id',
         'author_id'
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
+     * The attributes that should be hidden for serialization.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $hidden = [
+        'category_id',
         'user_id',
         'author_id',
         'pivot'
     ];
 
     /**
-     * Get the user that created the destination.
+     * Get the category that owns the package.
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    /**
+     * Get the user that created the package.
      */
     public function user()
     {
@@ -45,7 +58,7 @@ class Destination extends Model
     }
 
     /**
-     * Get the author that owns the destination.
+     * Get the author that owns the package.
      */
     public function author()
     {
@@ -53,19 +66,19 @@ class Destination extends Model
     }
 
     /**
-     * Get the images for the destination.
+     * The destinations that belong to the package.
      */
-    public function destinationImages()
+    public function destinations()
     {
-        return $this->hasMany(DestinationImage::class);
+        return $this->belongsToMany(Destination::class);
     }
 
     /**
-     * The packages that belong to the destination.
+     * Get the images for the package.
      */
-    public function packages()
+    public function packageImages()
     {
-        return $this->belongsToMany(Package::class);
+        return $this->hasMany(PackageImage::class);
     }
 
     /**

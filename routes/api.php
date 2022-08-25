@@ -9,7 +9,10 @@ use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\DestinationImageController;
 use App\Http\Controllers\Guest\MessageController as GuestMessageController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\PackageController;
+use App\Http\Controllers\PackageImageController;
 use App\Http\Controllers\SlideController;
+use App\Models\PackageImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,7 +42,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
         'destinations.images' => DestinationImageController::class,
         'activities' => ActivityController::class,
         'activities.images' => ActivityImageController::class,
-        'blogs' => BlogController::class
+        'blogs' => BlogController::class,
+        'packages' => PackageController::class,
+        'packages.images' => PackageImageController::class,
     ]);
 });
 
