@@ -34,6 +34,15 @@ class PackageImage extends Model
     ];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array<int, string>
+     */
+    protected $appends = [
+        'image_url',
+    ];
+
+    /**
      * Get the package that owns the image.
      */
     public function package()
