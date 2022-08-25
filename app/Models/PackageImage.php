@@ -30,4 +30,12 @@ class PackageImage extends Model
         'package_id',
         'user_id'
     ];
+
+    /**
+     * Get the package that owns the image.
+     */
+    public function package()
+    {
+        return $this->belongsTo(Package::class);
+    }
 }
