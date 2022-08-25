@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Destination;
 use App\Models\Package;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -15,6 +16,10 @@ class PackageSeeder extends Seeder
      */
     public function run()
     {
-        Package::factory(3)->create();
+        $destinations = Destination::all();
+
+        Package::factory(3)
+            ->hasAttached($destinations)
+            ->create();
     }
 }
