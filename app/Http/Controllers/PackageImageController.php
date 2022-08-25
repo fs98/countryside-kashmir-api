@@ -6,7 +6,7 @@ use App\Http\Requests\StorePackageImageRequest;
 use App\Http\Requests\UpdatePackageImageRequest;
 use App\Models\PackageImage;
 
-class PackageImageController extends Controller
+class PackageImageController extends BaseController
 {
     /**
      * Display a listing of the resource.
