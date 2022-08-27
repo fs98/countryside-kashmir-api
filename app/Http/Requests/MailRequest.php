@@ -13,7 +13,9 @@ class MailRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->user()->hasRole('Admin');
+        return auth()->user()->hasAnyRole([
+            'Admin', 'Super Admin'
+        ]);
     }
 
     /**
