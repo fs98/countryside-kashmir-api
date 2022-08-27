@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SlideResource;
+use App\Models\Slide;
 use Illuminate\Http\Request;
 
 class SlideController extends Controller
@@ -14,7 +16,8 @@ class SlideController extends Controller
      */
     public function index()
     {
-        //
+        $slides = Slide::all();
+        return SlideResource::collection($slides);
     }
 
     /**
