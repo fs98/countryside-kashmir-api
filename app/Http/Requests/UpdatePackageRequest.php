@@ -42,22 +42,25 @@ class UpdatePackageRequest extends FormRequest
                 'max:64'
             ],
             'days' => [
-                'numeric'
+                'numeric',
+                'min:1'
             ],
             'nights' => [
-                'numeric'
+                'numeric',
+                'min:1'
             ],
             'price' => [
+                'nullable',
                 'numeric'
             ],
             'category_id' => [
                 'exists:categories,id'
             ],
             'persons' => [
-                'numeric'
+                'numeric',
+                'min:1'
             ],
             'keywords' => [
-
                 'string',
                 'max:255'
             ],
