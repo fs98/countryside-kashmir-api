@@ -15,6 +15,7 @@ use App\Http\Controllers\Guest\DestinationController as GuestDestinationControll
 use App\Http\Controllers\Guest\MessageController as GuestMessageController;
 use App\Http\Controllers\Guest\PackageController as GuestPackageController;
 use App\Http\Controllers\Guest\SlideController as GuestSlideController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PackageImageController;
@@ -53,6 +54,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
         'packages.images' => PackageImageController::class,
         'bookings' => BookingController::class
     ]);
+
+    Route::post('/mail/send', [MailController::class, 'sendMail'])->name('mail.send');
 });
 
 
