@@ -8,6 +8,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\DestinationImageController;
+use App\Http\Controllers\Guest\DestinationController as GuestDestinationController;
 use App\Http\Controllers\Guest\MessageController as GuestMessageController;
 use App\Http\Controllers\Guest\SlideController as GuestSlideController;
 use App\Http\Controllers\MessageController;
@@ -58,5 +59,8 @@ Route::prefix('guest')->group(function () {
     ]);
     Route::apiResource('slides', GuestSlideController::class)->only([
         'index'
+    ]);
+    Route::apiResource('destinations', GuestDestinationController::class)->only([
+        'index', 'show'
     ]);
 });
