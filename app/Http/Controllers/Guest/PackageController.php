@@ -44,7 +44,11 @@ class PackageController extends Controller
      */
     public function show(Package $package)
     {
-        //
+        return new PackageResource($package->load([
+            'category',
+            'destinations',
+            'packageImages'
+        ]));
     }
 
     /**
