@@ -24,7 +24,11 @@ class UpdateAuthorRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'string|unique:authors|max:64',
+            'name' => [
+                'string',
+                'unique:authors',
+                'max:64'
+            ],
         ];
     }
 }
