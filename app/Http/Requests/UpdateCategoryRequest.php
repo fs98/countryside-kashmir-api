@@ -24,7 +24,11 @@ class UpdateCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|unique:categories|max:32'
+            'name' => [
+                'string',
+                'unique:categories',
+                'max:32'
+            ]
         ];
     }
 }

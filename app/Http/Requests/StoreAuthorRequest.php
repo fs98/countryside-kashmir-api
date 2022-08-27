@@ -24,7 +24,12 @@ class StoreAuthorRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|unique:authors|max:64'
+            'name' => [
+                'required',
+                'string',
+                'unique:authors',
+                'max:64'
+            ]
         ];
     }
 }

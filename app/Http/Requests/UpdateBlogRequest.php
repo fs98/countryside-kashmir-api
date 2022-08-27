@@ -24,13 +24,34 @@ class UpdateBlogRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'string|max:64',
-            'content' => 'string',
-            'image' => 'image|mimes:jpg,png,jpeg|max:5000',
-            'image_alt' => 'string|max:64',
-            'keywords' => 'string|max:255',
-            'author_id' => 'exists:authors,id',
-            'published_at' => 'date|nullable'
+            'title' => [
+                'string',
+                'unique:blogs',
+                'max:64'
+            ],
+            'content' => [
+                'string'
+            ],
+            'image' => [
+                'image',
+                'mimes:jpg,png,jpeg',
+                'max:5000'
+            ],
+            'image_alt' => [
+                'string',
+                'max:64'
+            ],
+            'keywords' => [
+                'string',
+                'max:255'
+            ],
+            'author_id' => [
+                'exists:authors,id'
+            ],
+            'published_at' => [
+                'date',
+                'nullable'
+            ]
         ];
     }
 }

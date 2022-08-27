@@ -24,17 +24,59 @@ class StorePackageRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|unique:packages|max:32',
-            'description' => 'required|string',
-            'image' => 'required|image|mimes:jpg,png,jpeg|max:5000',
-            'image_alt' => 'required|string|max:64',
-            'days' => 'required|numeric',
-            'nights' => 'required|numeric',
-            'price' => 'numeric',
-            'category_id' => 'required|exists:categories,id',
-            'persons' => 'required|numeric',
-            'keywords' => 'required|string|max:255',
-            'author_id' => 'required|exists:authors,id'
+            'name' => [
+                'required',
+                'string',
+                'unique:packages',
+                'max:32'
+            ],
+            'description' => [
+                'required',
+                'string'
+            ],
+            'image' => [
+                'required',
+                'image',
+                'mimes:jpg,png,jpeg',
+                'max:5000'
+            ],
+            'image_alt' => [
+                'required',
+                'string',
+                'max:64'
+            ],
+            'days' => [
+                'required',
+                'numeric',
+                'min:1'
+            ],
+            'nights' => [
+                'required',
+                'numeric',
+                'min:1'
+            ],
+            'price' => [
+                'nullable',
+                'numeric'
+            ],
+            'category_id' => [
+                'required',
+                'exists:categories,id'
+            ],
+            'persons' => [
+                'required',
+                'numeric',
+                'min:1'
+            ],
+            'keywords' => [
+                'required',
+                'string',
+                'max:255'
+            ],
+            'author_id' => [
+                'required',
+                'exists:authors,id'
+            ]
         ];
     }
 }

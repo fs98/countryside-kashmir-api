@@ -24,19 +24,58 @@ class UpdateBookingRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'string|max:64',
-            'email' => 'nullable|email|max:128',
-            'phone_number' => 'string|max:128|',
-            'address' => 'string|max:128',
-            'city' => 'string|max:128',
-            'country' => 'string|max:128',
-            'persons' => 'numeric',
-            'adults' => 'numeric',
-            'children' => 'numeric',
-            'arrival_date' => 'date',
-            'days' => 'numeric',
-            'nights' => 'numeric',
-            'package_id' => 'exists:packages,id'
+            'name' => [
+                'string',
+                'max:64'
+            ],
+            'email' => [
+                'nullable',
+                'email',
+                'max:128'
+            ],
+            'phone_number' => [
+                'string',
+                'max:128'
+            ],
+            'address' => [
+                'string',
+                'max:128'
+            ],
+            'city' => [
+                'string',
+                'max:128'
+            ],
+            'country' => [
+                'string',
+                'max:128'
+            ],
+            'persons' => [
+                'numeric',
+                'min:1'
+            ],
+            'adults' => [
+                'numeric',
+                'min:1'
+            ],
+            'children' => [
+                'numeric',
+                'min:1'
+            ],
+            'arrival_date' => [
+                'date'
+            ],
+            'days' => [
+                'numeric',
+                'min:1'
+            ],
+            'nights' => [
+                'numeric',
+                'min:1'
+            ],
+            'package_id' => [
+                'nullable',
+                'exists:packages,id'
+            ]
         ];
     }
 }

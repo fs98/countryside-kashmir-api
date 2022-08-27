@@ -24,19 +24,69 @@ class StoreBookingRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:64',
-            'email' => 'nullable|email|max:128',
-            'phone_number' => 'required|string|max:128|',
-            'address' => 'required|string|max:128',
-            'city' => 'required|string|max:128',
-            'country' => 'required|string|max:128',
-            'persons' => 'required|numeric',
-            'adults' => 'required|numeric',
-            'children' => 'required|numeric',
-            'arrival_date' => 'required|date',
-            'days' => 'required|numeric',
-            'nights' => 'required|numeric',
-            'package_id' => 'exists:packages,id'
+            'name' => [
+                'required',
+                'string',
+                'max:64'
+            ],
+            'email' => [
+                'nullable',
+                'email',
+                'max:128'
+            ],
+            'phone_number' => [
+                'required',
+                'string',
+                'max:128'
+            ],
+            'address' => [
+                'required',
+                'string',
+                'max:128'
+            ],
+            'city' => [
+                'required',
+                'string',
+                'max:128'
+            ],
+            'country' => [
+                'required',
+                'string',
+                'max:128'
+            ],
+            'persons' => [
+                'required',
+                'numeric',
+                'min:1'
+            ],
+            'adults' => [
+                'required',
+                'numeric',
+                'min:1'
+            ],
+            'children' => [
+                'required',
+                'numeric',
+                'min:1'
+            ],
+            'arrival_date' => [
+                'required',
+                'date'
+            ],
+            'days' => [
+                'required',
+                'numeric',
+                'min:1'
+            ],
+            'nights' => [
+                'required',
+                'numeric',
+                'min:1'
+            ],
+            'package_id' => [
+                'nullable',
+                'exists:packages,id'
+            ]
         ];
     }
 }

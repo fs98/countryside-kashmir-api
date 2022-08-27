@@ -24,11 +24,31 @@ class StoreMessageRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required|string|max:32',
-            'last_name' => 'nullable|string|max:32',
-            'phone_number' => 'required|string|max:64|',
-            'email' => 'nullable|email|max:128',
-            'content' => 'nullable|string|max:255',
+            'first_name' => [
+                'required',
+                'string',
+                'max:32'
+            ],
+            'last_name' => [
+                'nullable',
+                'string',
+                'max:32'
+            ],
+            'phone_number' => [
+                'required',
+                'string',
+                'max:64'
+            ],
+            'email' => [
+                'nullable',
+                'email',
+                'max:128'
+            ],
+            'content' => [
+                'nullable',
+                'string',
+                'max:255'
+            ],
         ];
     }
 }

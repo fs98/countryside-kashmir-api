@@ -24,12 +24,30 @@ class UpdateDestinationRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'string|unique:destinations|max:32',
-            'description' => 'string',
-            'image' => 'image|mimes:jpg,png,jpeg|max:5000',
-            'image_alt' => 'string|max:64',
-            'keywords' => 'string|max:255',
-            'author_id' => 'exists:authors,id'
+            'name' => [
+                'string',
+                'unique:destinations',
+                'max:32'
+            ],
+            'description' => [
+                'string'
+            ],
+            'image' => [
+                'image',
+                'mimes:jpg,png,jpeg',
+                'max:5000'
+            ],
+            'image_alt' => [
+                'string',
+                'max:64'
+            ],
+            'keywords' => [
+                'string',
+                'max:255'
+            ],
+            'author_id' => [
+                'exists:authors,id'
+            ]
         ];
     }
 }
