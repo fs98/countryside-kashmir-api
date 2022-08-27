@@ -70,4 +70,7 @@ Route::prefix('guest')->group(function () {
     Route::apiResource('categories', GuestCategoryController::class)->only([
         'index', 'show'
     ]);
+    Route::apiResource('blogs', GuestCategoryController::class)->only([
+        'index', 'show'
+    ]);
 });
