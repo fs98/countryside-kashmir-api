@@ -8,6 +8,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\DestinationImageController;
+use App\Http\Controllers\Guest\CategoryController as GuestCategoryController;
 use App\Http\Controllers\Guest\DestinationController as GuestDestinationController;
 use App\Http\Controllers\Guest\MessageController as GuestMessageController;
 use App\Http\Controllers\Guest\PackageController as GuestPackageController;
@@ -64,6 +65,9 @@ Route::prefix('guest')->group(function () {
         'index', 'show'
     ]);
     Route::apiResource('packages', GuestPackageController::class)->only([
+        'index', 'show'
+    ]);
+    Route::apiResource('categories', GuestCategoryController::class)->only([
         'index', 'show'
     ]);
 });
