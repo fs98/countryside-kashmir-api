@@ -97,7 +97,7 @@ class Blog extends Model
         return Attribute::make(
             get: fn ($value) => $value,
             set: fn ($value) => [
-                'name' => $value,
+                'title' => $value,
                 'slug' => Str::slug($value),
             ],
         );
