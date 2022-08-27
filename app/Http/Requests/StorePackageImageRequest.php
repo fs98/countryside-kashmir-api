@@ -24,8 +24,17 @@ class StorePackageImageRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => 'required|image|mimes:jpg,png,jpeg|max:5000',
-            'image_alt' => 'required|string|max:64',
+            'image' => [
+                'required',
+                'image',
+                'mimes:jpg,png,jpeg',
+                'max:5000'
+            ],
+            'image_alt' => [
+                'required',
+                'string',
+                'max:64'
+            ],
         ];
     }
 }
