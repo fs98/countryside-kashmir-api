@@ -10,6 +10,7 @@ use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\DestinationImageController;
 use App\Http\Controllers\Guest\DestinationController as GuestDestinationController;
 use App\Http\Controllers\Guest\MessageController as GuestMessageController;
+use App\Http\Controllers\Guest\PackageController as GuestPackageController;
 use App\Http\Controllers\Guest\SlideController as GuestSlideController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PackageController;
@@ -60,6 +61,9 @@ Route::prefix('guest')->group(function () {
         'index'
     ]);
     Route::apiResource('destinations', GuestDestinationController::class)->only([
+        'index', 'show'
+    ]);
+    Route::apiResource('packages', GuestPackageController::class)->only([
         'index', 'show'
     ]);
 });
