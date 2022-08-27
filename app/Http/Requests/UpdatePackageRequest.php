@@ -24,17 +24,46 @@ class UpdatePackageRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'string|unique:packages|max:32',
-            'description' => 'string',
-            'image' => 'image|mimes:jpg,png,jpeg|max:5000',
-            'image_alt' => 'string|max:64',
-            'days' => 'numeric',
-            'nights' => 'numeric',
-            'price' => 'numeric',
-            'category_id' => 'exists:categories,id',
-            'persons' => 'numeric',
-            'keywords' => 'string|max:255',
-            'author_id' => 'exists:authors,id'
+            'name' => [
+                'string',
+                'unique:packages',
+                'max:32'
+            ],
+            'description' => [
+                'string'
+            ],
+            'image' => [
+                'image',
+                'mimes:jpg,png,jpeg',
+                'max:5000'
+            ],
+            'image_alt' => [
+                'string',
+                'max:64'
+            ],
+            'days' => [
+                'numeric'
+            ],
+            'nights' => [
+                'numeric'
+            ],
+            'price' => [
+                'numeric'
+            ],
+            'category_id' => [
+                'exists:categories,id'
+            ],
+            'persons' => [
+                'numeric'
+            ],
+            'keywords' => [
+
+                'string',
+                'max:255'
+            ],
+            'author_id' => [
+                'exists:authors,id'
+            ]
         ];
     }
 }
