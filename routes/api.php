@@ -9,6 +9,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\DestinationImageController;
 use App\Http\Controllers\Guest\MessageController as GuestMessageController;
+use App\Http\Controllers\Guest\SlideController as GuestSlideController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PackageImageController;
@@ -52,5 +53,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 
 Route::prefix('guest')->group(function () {
-    Route::apiResource('messages', GuestMessageController::class)->only(['store']);
+    Route::apiResource('messages', GuestMessageController::class)->only([
+        'store'
+    ]);
+    Route::apiResource('slides', GuestSlideController::class)->only([
+        'index'
+    ]);
 });
