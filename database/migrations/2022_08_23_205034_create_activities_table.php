@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
             $table->string('name', 32);
+            $table->string('slug', 64);
             $table->json('description');
             $table->string('image', 128);
             $table->string('image_alt', 64);
