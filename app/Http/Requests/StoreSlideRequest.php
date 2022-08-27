@@ -36,7 +36,7 @@ class StoreSlideRequest extends FormRequest
                 'max:64'
             ],
             'order' => [
-                'required',
+                'nullable',
                 'numeric',
                 'min:1'
             ],
