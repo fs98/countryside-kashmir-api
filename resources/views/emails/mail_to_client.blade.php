@@ -1,6 +1,6 @@
 @component('mail::message')
 
-{{ $content }}
+{{ $message }}
 
 Thanks,<br>
 {{ config('app.name') }}
