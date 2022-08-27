@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Destination extends Model
 {
@@ -99,6 +100,22 @@ class Destination extends Model
     {
         return Attribute::make(
             get: fn () => asset('storage/' . $this->image),
+        );
+    }
+
+    /**
+     * Interact with the blog's name and slug.
+     *
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function name(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $value,
+            set: fn ($value) => [
+                'name' => $value,
+                'slug' => Str::slug($value),
+            ],
         );
     }
 }
