@@ -24,12 +24,36 @@ class StoreActivityRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|unique:activities|max:32',
-            'description' => 'required|string',
-            'image' => 'required|image|mimes:jpg,png,jpeg|max:5000',
-            'image_alt' => 'required|string|max:64',
-            'keywords' => 'required|string|max:255',
-            'author_id' => 'required|exists:authors,id'
+            'name' => [
+                'required',
+                'string',
+                'unique:activities',
+                'max:32'
+            ],
+            'description' => [
+                'required',
+                'string'
+            ],
+            'image' => [
+                'required',
+                'image',
+                'mimes:jpg,png,jpeg',
+                'max:5000'
+            ],
+            'image_alt' => [
+                'required',
+                'string',
+                'max:64'
+            ],
+            'keywords' => [
+                'required',
+                'string',
+                'max:255'
+            ],
+            'author_id' => [
+                'required',
+                'exists:authors,id'
+            ]
         ];
     }
 }
