@@ -47,7 +47,8 @@ class StoreSlideRequest extends FormRequest
             ],
             'subtitle' => [
                 'nullable',
-                'string|max:32'
+                'string',
+                'max:32'
             ],
         ];
     }
