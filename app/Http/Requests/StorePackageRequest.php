@@ -48,12 +48,15 @@ class StorePackageRequest extends FormRequest
             'days' => [
                 'required',
                 'numeric',
+                'min:1'
             ],
             'nights' => [
                 'required',
-                'numeric'
+                'numeric',
+                'min:1'
             ],
             'price' => [
+                'nullable',
                 'numeric'
             ],
             'category_id' => [
@@ -62,7 +65,8 @@ class StorePackageRequest extends FormRequest
             ],
             'persons' => [
                 'required',
-                'numeric'
+                'numeric',
+                'min:1'
             ],
             'keywords' => [
                 'required',
