@@ -16,9 +16,10 @@ class MailToClient extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($subject, $message)
     {
-        //
+        $this->subject = $subject;
+        $this->message = $message;
     }
 
     /**
@@ -28,6 +29,8 @@ class MailToClient extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.mail_to_client');
+        return $this->markdown('emails.mail_to_client', [
+            'message' => $this->message
+        ])->subject($this->subject);
     }
 }
