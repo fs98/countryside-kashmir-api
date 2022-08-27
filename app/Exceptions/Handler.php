@@ -7,7 +7,8 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
-use Symfony\Component\Finder\Exception\AccessDeniedException;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
@@ -63,7 +64,7 @@ class Handler extends ExceptionHandler
     {
         if ($request->is('api*')) {
 
-            if ($e instanceof AccessDeniedException) {
+            if ($e instanceof AccessDeniedHttpException) {
 
                 $response = [
                     'success' => false,
@@ -111,6 +112,16 @@ class Handler extends ExceptionHandler
                 ];
 
                 return response()->json($response, 429);
+            }
+
+            if ($e instanceof ValidationException) {
+                $response = [
+                    'success' => false,
+                    'message' => 'Validation failed!',
+                    'errors' => $e->errors()
+                ];
+
+                return response()->json($response, 422);
             }
 
             return response(['success' => false, 'message' => 'Something went wrong.'], 500);

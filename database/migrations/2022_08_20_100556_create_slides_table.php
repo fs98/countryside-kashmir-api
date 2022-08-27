@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('image', 128);
             $table->string('image_alt', 64);
-            $table->integer('order')->nullable();
+            $table->smallInteger('order', false, true)->nullable();
             $table->string('title', 64)->nullable();
             $table->string('subtitle', 32)->nullable();
             $table->timestamps();

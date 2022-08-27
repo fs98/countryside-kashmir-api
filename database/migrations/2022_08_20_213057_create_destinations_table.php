@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('destinations', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 32);
+            $table->string('name', 32)->unique();
             $table->string('slug', 128);
             $table->json('description');
             $table->string('image', 128);
