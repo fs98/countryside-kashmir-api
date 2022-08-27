@@ -39,7 +39,9 @@ class DestinationController extends Controller
      */
     public function show(Destination $destination)
     {
-        return new DestinationResource($destination);
+        return new DestinationResource($destination->load([
+            'destinationImages'
+        ]));
     }
 
     /**
