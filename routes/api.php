@@ -8,6 +8,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\DestinationImageController;
+use App\Http\Controllers\Guest\BlogController as GuestBlogController;
 use App\Http\Controllers\Guest\CategoryController as GuestCategoryController;
 use App\Http\Controllers\Guest\DestinationController as GuestDestinationController;
 use App\Http\Controllers\Guest\MessageController as GuestMessageController;
@@ -70,7 +71,7 @@ Route::prefix('guest')->group(function () {
     Route::apiResource('categories', GuestCategoryController::class)->only([
         'index', 'show'
     ]);
-    Route::apiResource('blogs', GuestCategoryController::class)->only([
+    Route::apiResource('blogs', GuestBlogController::class)->only([
         'index', 'show'
     ]);
 });
