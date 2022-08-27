@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('image_alt', 64);
             $table->smallInteger('days', false, true);
             $table->smallInteger('nights', false, true);
-            $table->smallInteger('price', false, true);
+            $table->smallInteger('price', false, true)->nullable();
             $table->foreignId('category_id')
                 ->constrained()
                 ->cascadeOnUpdate()
