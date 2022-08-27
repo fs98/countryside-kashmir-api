@@ -39,7 +39,9 @@ class ActivityController extends Controller
      */
     public function show(Activity $activity)
     {
-        //
+        return new ActivityResource($activity->load([
+            'activityImages'
+        ]));
     }
 
     /**
