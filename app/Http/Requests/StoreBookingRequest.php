@@ -56,15 +56,18 @@ class StoreBookingRequest extends FormRequest
             ],
             'persons' => [
                 'required',
-                'numeric'
+                'numeric',
+                'min:1'
             ],
             'adults' => [
                 'required',
-                'numeric'
+                'numeric',
+                'min:1'
             ],
             'children' => [
                 'required',
-                'numeric'
+                'numeric',
+                'min:1'
             ],
             'arrival_date' => [
                 'required',
@@ -72,11 +75,13 @@ class StoreBookingRequest extends FormRequest
             ],
             'days' => [
                 'required',
-                'numeric'
+                'numeric',
+                'min:1'
             ],
             'nights' => [
                 'required',
-                'numeric'
+                'numeric',
+                'min:1'
             ],
             'package_id' => [
                 'nullable',
