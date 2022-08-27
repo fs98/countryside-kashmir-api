@@ -15,7 +15,6 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PackageImageController;
 use App\Http\Controllers\SlideController;
-use App\Models\PackageImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
