@@ -19,7 +19,6 @@ class PackageController extends Controller
         $packages = Package::with([
             'category',
             'destinations',
-            'packageImages'
         ])->get();
 
         return PackageResource::collection($packages);
