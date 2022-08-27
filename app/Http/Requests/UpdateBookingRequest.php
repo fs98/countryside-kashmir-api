@@ -51,23 +51,29 @@ class UpdateBookingRequest extends FormRequest
             ],
             'persons' => [
                 'numeric',
+                'min:1'
             ],
             'adults' => [
-                'numeric'
+                'numeric',
+                'min:1'
             ],
             'children' => [
-                'numeric'
+                'numeric',
+                'min:1'
             ],
             'arrival_date' => [
                 'date'
             ],
             'days' => [
-                'numeric'
+                'numeric',
+                'min:1'
             ],
             'nights' => [
-                'numeric'
+                'numeric',
+                'min:1'
             ],
             'package_id' => [
+                'nullable',
                 'exists:packages,id'
             ]
         ];
