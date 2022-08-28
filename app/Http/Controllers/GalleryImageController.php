@@ -6,6 +6,7 @@ use App\Http\Requests\StoreGalleryImageRequest;
 use App\Http\Requests\UpdateGalleryImageRequest;
 use App\Http\Resources\GalleryImageResource;
 use App\Models\GalleryImage;
+use Illuminate\Support\Facades\Storage;
 
 class GalleryImageController extends BaseController
 {
@@ -90,6 +91,14 @@ class GalleryImageController extends BaseController
      */
     public function destroy(GalleryImage $galleryImage)
     {
-        //
+        if ($galleryImage->delete()) {
+
+            // Delete photo
+            Storage::disk('public')->delete($galleryImage->image);
+
+            return $this->sendResponse($galleryImage, 'Image successfully deleted!');
+        }
+
+        return $this->sendError($galleryImage, 'There has been a mistake!', 503);
     }
 }
