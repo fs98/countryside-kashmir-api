@@ -49,7 +49,7 @@ class GalleryImageController extends Controller
      */
     public function show(GalleryImage $galleryImage)
     {
-        //
+        return new GalleryImageResource($galleryImage);
     }
 
     /**
