@@ -7,7 +7,7 @@ use App\Http\Requests\UpdateGalleryImageRequest;
 use App\Http\Resources\GalleryImageResource;
 use App\Models\GalleryImage;
 
-class GalleryImageController extends Controller
+class GalleryImageController extends BaseController
 {
     /**
      * Create the controller instance.
