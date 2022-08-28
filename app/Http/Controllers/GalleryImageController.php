@@ -9,6 +9,16 @@ use App\Models\GalleryImage;
 class GalleryImageController extends Controller
 {
     /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(GalleryImage::class, 'galleryImage');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
