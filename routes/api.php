@@ -8,6 +8,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\DestinationImageController;
+use App\Http\Controllers\GalleryImageController;
 use App\Http\Controllers\Guest\ActivityController as GuestActivityController;
 use App\Http\Controllers\Guest\BlogController as GuestBlogController;
 use App\Http\Controllers\Guest\CategoryController as GuestCategoryController;
@@ -52,7 +53,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
         'blogs' => BlogController::class,
         'packages' => PackageController::class,
         'packages.images' => PackageImageController::class,
-        'bookings' => BookingController::class
+        'bookings' => BookingController::class,
+        'gallery-images' => GalleryImageController::class,
     ]);
 
     Route::post('/mail/send', [MailController::class, 'sendMail'])->name('mail.send');
