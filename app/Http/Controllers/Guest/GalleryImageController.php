@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\GalleryImageResource;
 use App\Models\GalleryImage;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class GalleryImageController extends Controller
      */
     public function index()
     {
-        //
+        $galleryImages = GalleryImage::all();
+        return GalleryImageResource::collection($galleryImages);
     }
 
     /**
