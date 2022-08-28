@@ -13,6 +13,7 @@ use App\Http\Controllers\Guest\ActivityController as GuestActivityController;
 use App\Http\Controllers\Guest\BlogController as GuestBlogController;
 use App\Http\Controllers\Guest\CategoryController as GuestCategoryController;
 use App\Http\Controllers\Guest\DestinationController as GuestDestinationController;
+use App\Http\Controllers\Guest\GalleryImageController as GuestGalleryImageController;
 use App\Http\Controllers\Guest\MessageController as GuestMessageController;
 use App\Http\Controllers\Guest\PackageController as GuestPackageController;
 use App\Http\Controllers\Guest\SlideController as GuestSlideController;
@@ -81,6 +82,9 @@ Route::prefix('guest')->group(function () {
         'index', 'show'
     ]);
     Route::apiResource('activities', GuestActivityController::class)->only([
+        'index', 'show'
+    ]);
+    Route::apiResource('gallery-images', GuestGalleryImageController::class)->only([
         'index', 'show'
     ]);
 });
