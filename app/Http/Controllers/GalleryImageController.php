@@ -38,7 +38,15 @@ class GalleryImageController extends BaseController
      */
     public function store(StoreGalleryImageRequest $request)
     {
-        //
+        $requestData = $this->uploadImage($request, 'gallery');
+
+        $galleryImage = auth()->user()->galleryImages()->create($requestData);
+
+        if ($galleryImage) {
+            return $this->sendResponse($galleryImage, 'Image successfully stored!');
+        }
+
+        return $this->sendError($galleryImage, 'There has been a mistake!', 503);
     }
 
     /**
