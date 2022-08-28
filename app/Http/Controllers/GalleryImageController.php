@@ -16,7 +16,7 @@ class GalleryImageController extends Controller
      */
     public function __construct()
     {
-        $this->authorizeResource(GalleryImage::class, 'galleryImage');
+        $this->authorizeResource(GalleryImage::class);
     }
 
     /**
