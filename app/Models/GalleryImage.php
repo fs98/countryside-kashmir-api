@@ -22,6 +22,13 @@ class GalleryImage extends Model
     ];
 
     /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = ['image'];
+
+    /**
      * The accessors to append to the model's array form.
      *
      * @var array<int, string>
