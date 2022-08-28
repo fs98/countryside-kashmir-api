@@ -38,6 +38,14 @@ class GalleryImage extends Model
     ];
 
     /**
+     * Get the user that created the gallery image.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
      * Get the slide's image url.
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
