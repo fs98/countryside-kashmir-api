@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreGalleryImageRequest;
 use App\Http\Requests\UpdateGalleryImageRequest;
+use App\Http\Resources\GalleryImageResource;
 use App\Models\GalleryImage;
 
 class GalleryImageController extends Controller
@@ -25,7 +26,8 @@ class GalleryImageController extends Controller
      */
     public function index()
     {
-        //
+        $galleryImages = GalleryImage::all();
+        return GalleryImageResource::collection($galleryImages);
     }
 
     /**
