@@ -69,7 +69,17 @@ class GalleryImageController extends BaseController
      */
     public function update(UpdateGalleryImageRequest $request, GalleryImage $galleryImage)
     {
-        //
+        $requestData = $this->updateImage($request, $galleryImage->image, 'gallery');
+
+        /** 
+         * Define the type of requestData to avoid error
+         * @var array $requestData 
+         * */
+        if ($galleryImage->update($requestData)) {
+            return $this->sendResponse($galleryImage, 'Image successfully updated!');
+        }
+
+        return $this->sendError($galleryImage, 'There has been a mistake!', 503);
     }
 
     /**
