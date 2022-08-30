@@ -112,4 +112,15 @@ class GalleryImageController extends BaseController
     {
         //
     }
+
+    /**
+     * Restore the specified deleted resource.
+     *
+     * @param  \App\Models\GalleryImage  $galleryImage
+     * @return \Illuminate\Http\Response
+     */
+    public function forceDelete(GalleryImage $galleryImage)
+    {
+        //
+    }
 }
