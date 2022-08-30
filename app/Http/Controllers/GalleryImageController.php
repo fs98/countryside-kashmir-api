@@ -126,8 +126,18 @@ class GalleryImageController extends BaseController
      * @param  \App\Models\GalleryImage  $galleryImage
      * @return \Illuminate\Http\Response
      */
-    public function forceDelete(GalleryImage $galleryImage)
+    public function forceDelete($id)
     {
-        //
+        $galleryImage = GalleryImage::withTrashed()->find($id);
+
+        if ($galleryImage->forceDelete()) {
+
+            // Delete photo
+            Storage::disk('public')->delete($galleryImage->image);
+
+            return $this->sendResponse($galleryImage, 'Image successfully deleted!');
+        }
+
+        return $this->sendError($galleryImage, 'There has been a mistake!', 503);
     }
 }
