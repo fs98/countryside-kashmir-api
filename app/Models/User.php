@@ -114,4 +114,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(PackageImage::class);
     }
+
+    /**
+     * Get the gallery images for the user.
+     */
+    public function galleryImages()
+    {
+        return $this->hasMany(GalleryImage::class);
+    }
 }

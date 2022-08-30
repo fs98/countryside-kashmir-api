@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class MailRequest extends FormRequest
+class StoreGalleryImageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,9 +13,7 @@ class MailRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->user()->hasAnyRole([
-            'Admin', 'Super Admin'
-        ]);
+        return true;
     }
 
     /**
@@ -26,16 +24,17 @@ class MailRequest extends FormRequest
     public function rules()
     {
         return [
-            'receiver' => [
+            'image' => [
                 'required',
-                'email'
+                'image',
+                'mimes:jpg,png,jpeg',
+                'max:5000'
             ],
-            'subject' => [
-                'required'
+            'image_alt' => [
+                'required',
+                'string',
+                'max:64'
             ],
-            'message' => [
-                'required'
-            ]
         ];
     }
 }

@@ -9,6 +9,7 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
@@ -122,6 +123,16 @@ class Handler extends ExceptionHandler
                 ];
 
                 return response()->json($response, 422);
+            }
+
+            if ($e instanceof HttpException) {
+
+                $response = [
+                    'success' => false,
+                    'error'    => $e->getMessage(),
+                ];
+
+                return response()->json($response, $e->getStatusCode());
             }
 
             return response(['success' => false, 'message' => 'Something went wrong.'], 500);

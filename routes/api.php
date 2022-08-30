@@ -8,10 +8,12 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\DestinationImageController;
+use App\Http\Controllers\GalleryImageController;
 use App\Http\Controllers\Guest\ActivityController as GuestActivityController;
 use App\Http\Controllers\Guest\BlogController as GuestBlogController;
 use App\Http\Controllers\Guest\CategoryController as GuestCategoryController;
 use App\Http\Controllers\Guest\DestinationController as GuestDestinationController;
+use App\Http\Controllers\Guest\GalleryImageController as GuestGalleryImageController;
 use App\Http\Controllers\Guest\MessageController as GuestMessageController;
 use App\Http\Controllers\Guest\PackageController as GuestPackageController;
 use App\Http\Controllers\Guest\SlideController as GuestSlideController;
@@ -52,8 +54,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
         'blogs' => BlogController::class,
         'packages' => PackageController::class,
         'packages.images' => PackageImageController::class,
-        'bookings' => BookingController::class
+        'bookings' => BookingController::class,
+        'gallery-images' => GalleryImageController::class,
     ]);
+
+    // Additional Gallery Image Routes
+    Route::post('/gallery-images/restore/{gallery_image}', [GalleryImageController::class, 'restore'])->name('gallery-images.restore');
+    Route::delete('/gallery-images/force-delete/{gallery_image}', [GalleryImageController::class, 'forceDelete'])->name('gallery-images.force.delete');
 
     Route::post('/mail/send', [MailController::class, 'sendMail'])->name('mail.send');
 });
@@ -79,6 +86,9 @@ Route::prefix('guest')->group(function () {
         'index', 'show'
     ]);
     Route::apiResource('activities', GuestActivityController::class)->only([
+        'index', 'show'
+    ]);
+    Route::apiResource('gallery-images', GuestGalleryImageController::class)->only([
         'index', 'show'
     ]);
 });
