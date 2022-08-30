@@ -122,6 +122,8 @@ class GalleryImageController extends BaseController
      */
     public function restore($id)
     {
+        $this->authorize('restore');
+
         $galleryImage = GalleryImage::withTrashed()->find($id);
 
         if ($galleryImage->restore()) {
