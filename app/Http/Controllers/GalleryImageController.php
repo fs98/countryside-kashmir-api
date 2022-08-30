@@ -93,10 +93,6 @@ class GalleryImageController extends BaseController
     public function destroy(GalleryImage $galleryImage)
     {
         if ($galleryImage->delete()) {
-
-            // Delete photo
-            Storage::disk('public')->delete($galleryImage->image);
-
             return $this->sendResponse($galleryImage, 'Image successfully deleted!');
         }
 
