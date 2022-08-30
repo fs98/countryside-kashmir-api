@@ -58,6 +58,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
         'gallery-images' => GalleryImageController::class,
     ]);
 
+    // Additional Gallery Image Routes
+    Route::post('/gallery-images/restore/{gallery_image}', [GalleryImageController::class, 'restore'])->name('gallery-images.restore');
+    Route::delete('/gallery-images/force-delete/{gallery_image}', [GalleryImageController::class, 'forceDelete'])->name('gallery-images.force.delete');
+
     Route::post('/mail/send', [MailController::class, 'sendMail'])->name('mail.send');
 });
 
