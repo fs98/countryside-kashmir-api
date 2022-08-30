@@ -6,8 +6,8 @@ use App\Http\Requests\StoreGalleryImageRequest;
 use App\Http\Requests\UpdateGalleryImageRequest;
 use App\Http\Resources\GalleryImageResource;
 use App\Models\GalleryImage;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 class GalleryImageController extends BaseController
 {
@@ -26,9 +26,24 @@ class GalleryImageController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $galleryImages = GalleryImage::all();
+        // First get scope from url
+        $scope = $request->query('scope', null);
+
+        if ($scope === 'onlyTrashed') {
+
+            // Abort if non Super Admin user wants to query trashed items
+            if (!auth()->user()->hasRole('Super Admin')) {
+                abort(403, 'You don\'t have a permission to query trashed images!');
+            }
+
+            $galleryImages = GalleryImage::onlyTrashed()->get();
+        } else {
+
+            $galleryImages = GalleryImage::all();
+        }
+
         return GalleryImageResource::collection($galleryImages);
     }
 
