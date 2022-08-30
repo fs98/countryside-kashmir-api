@@ -77,7 +77,7 @@ class GalleryImagePolicy
      */
     public function restore(User $user, GalleryImage $galleryImage)
     {
-        return $user->hasRole('Admin');
+        return false;
     }
 
     /**
@@ -89,6 +89,6 @@ class GalleryImagePolicy
      */
     public function forceDelete(User $user, GalleryImage $galleryImage)
     {
-        return $user->hasRole('Admin');
+        return false;
     }
 }
