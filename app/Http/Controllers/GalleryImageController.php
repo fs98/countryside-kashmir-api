@@ -101,4 +101,15 @@ class GalleryImageController extends BaseController
 
         return $this->sendError($galleryImage, 'There has been a mistake!', 503);
     }
+
+    /**
+     * Restore the specified deleted resource.
+     *
+     * @param  \App\Models\GalleryImage  $galleryImage
+     * @return \Illuminate\Http\Response
+     */
+    public function restore(GalleryImage $galleryImage)
+    {
+        //
+    }
 }
