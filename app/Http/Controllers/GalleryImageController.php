@@ -6,6 +6,7 @@ use App\Http\Requests\StoreGalleryImageRequest;
 use App\Http\Requests\UpdateGalleryImageRequest;
 use App\Http\Resources\GalleryImageResource;
 use App\Models\GalleryImage;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Storage;
 
 class GalleryImageController extends BaseController
@@ -108,9 +109,15 @@ class GalleryImageController extends BaseController
      * @param  \App\Models\GalleryImage  $galleryImage
      * @return \Illuminate\Http\Response
      */
-    public function restore(GalleryImage $galleryImage)
+    public function restore($id)
     {
-        //
+        $galleryImage = GalleryImage::withTrashed()->find($id)->restore();
+
+        if ($galleryImage) {
+            return $this->sendResponse($galleryImage, 'Image successfully restored!');
+        }
+
+        return $this->sendError($galleryImage, 'There has been a mistake!', 503);
     }
 
     /**
