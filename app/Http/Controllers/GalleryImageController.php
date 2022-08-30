@@ -141,6 +141,8 @@ class GalleryImageController extends BaseController
      */
     public function forceDelete($id)
     {
+        $this->authorize('forceDeletes');
+
         $galleryImage = GalleryImage::withTrashed()->find($id);
 
         if ($galleryImage->forceDelete()) {
