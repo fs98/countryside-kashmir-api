@@ -30,7 +30,7 @@ class BlogController extends BaseController
         $blogs = Blog::with([
             'user',
             'author'
-        ])->get();
+        ])->paginate(10);
 
         return BlogResource::collection($blogs);
     }
