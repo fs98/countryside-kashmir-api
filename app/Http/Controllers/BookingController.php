@@ -29,9 +29,9 @@ class BookingController extends BaseController
         $user = auth()->user();
 
         if ($user->hasRole('Client')) {
-            $bookings = $user->bookings()->get();
+            $bookings = $user->bookings()->paginate(10);
         } else {
-            $bookings = Booking::with('user')->get();
+            $bookings = Booking::with('user')->paginate(10);
         }
 
         return BookingResource::collection($bookings);
