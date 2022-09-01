@@ -91,6 +91,10 @@ class GalleryImageController extends BaseController
      */
     public function update(UpdateGalleryImageRequest $request, GalleryImage $galleryImage)
     {
+        if (!auth()->user()->hasRole('Super Admin') && $galleryImage->trashed()) {
+            throw new ModelNotFoundException();
+        }
+
         $requestData = $this->uploadImage($request, 'gallery', $galleryImage->image);
 
         /** 
