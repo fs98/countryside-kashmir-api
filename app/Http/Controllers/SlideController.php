@@ -70,7 +70,7 @@ class SlideController extends BaseController
      */
     public function update(UpdateSlideRequest $request, Slide $slide)
     {
-        $requestData = $this->updateImage($request, $slide->image, 'slides');
+        $requestData = $this->uploadImage($request, 'slides', $slide->image);
 
         /** 
          * Define the type of requestData to avoid error
