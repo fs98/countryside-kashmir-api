@@ -137,11 +137,9 @@ class GalleryImageController extends BaseController
      * @param  \App\Models\GalleryImage  $galleryImage
      * @return \Illuminate\Http\Response
      */
-    public function forceDelete($id)
+    public function forceDelete(GalleryImage $galleryImage)
     {
         $this->authorize('forceDeletes');
-
-        $galleryImage = GalleryImage::withTrashed()->find($id);
 
         if ($galleryImage->forceDelete()) {
 
