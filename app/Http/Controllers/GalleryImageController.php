@@ -91,7 +91,7 @@ class GalleryImageController extends BaseController
      */
     public function update(UpdateGalleryImageRequest $request, GalleryImage $galleryImage)
     {
-        $requestData = $this->updateImage($request, $galleryImage->image, 'gallery');
+        $requestData = $this->uploadImage($request, 'gallery', $galleryImage->image);
 
         /** 
          * Define the type of requestData to avoid error
