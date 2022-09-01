@@ -77,7 +77,7 @@ class ActivityController extends BaseController
      */
     public function update(UpdateActivityRequest $request, Activity $activity)
     {
-        $requestData = $this->updateImage($request, $activity->image, 'activities');
+        $requestData = $this->uploadImage($request, 'activities', $activity->image);
 
         /** 
          * Define the type of requestData to avoid error
