@@ -39,10 +39,10 @@ class GalleryImageController extends BaseController
                 abort(403, 'You don\'t have a permission to query trashed images!');
             }
 
-            $galleryImages = GalleryImage::onlyTrashed()->get();
+            $galleryImages = GalleryImage::onlyTrashed()->paginate(10);
         } else {
 
-            $galleryImages = GalleryImage::all();
+            $galleryImages = GalleryImage::paginate(10);
         }
 
         return GalleryImageResource::collection($galleryImages);
