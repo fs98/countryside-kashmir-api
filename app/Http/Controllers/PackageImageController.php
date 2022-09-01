@@ -79,7 +79,7 @@ class PackageImageController extends BaseController
      */
     public function update(UpdatePackageImageRequest $request, Package $package, PackageImage $image)
     {
-        $requestData = $this->updateImage($request, $image->image, 'packages/images');
+        $requestData = $this->uploadImage($request, 'packages/images', $image->image);
 
         /** 
          * Define the type of requestData to avoid error

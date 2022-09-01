@@ -26,7 +26,7 @@ class AuthorController extends BaseController
      */
     public function index()
     {
-        $authors = Author::all();
+        $authors = Author::paginate(10);
         return AuthorResource::collection($authors);
     }
 

@@ -32,7 +32,7 @@ class PackageController extends BaseController
             'destinations',
             'user',
             'author'
-        ])->get();
+        ])->paginate(10);
 
         return PackageResource::collection($packages);
     }
@@ -81,7 +81,7 @@ class PackageController extends BaseController
      */
     public function update(UpdatePackageRequest $request, Package $package)
     {
-        $requestData = $this->updateImage($request, $package->image, 'packages');
+        $requestData = $this->uploadImage($request, 'packages', $package->image);
 
         /** 
          * Define the type of requestData to avoid error

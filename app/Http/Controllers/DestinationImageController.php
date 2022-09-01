@@ -78,7 +78,7 @@ class DestinationImageController extends BaseController
      */
     public function update(UpdateDestinationImageRequest $request, Destination $destination, DestinationImage $image)
     {
-        $requestData = $this->updateImage($request, $image->image, 'destinations/images');
+        $requestData = $this->uploadImage($request, 'destinations/images', $image->image);
 
         /** 
          * Define the type of requestData to avoid error

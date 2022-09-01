@@ -30,7 +30,7 @@ class DestinationController extends BaseController
         $destinations = Destination::with([
             'user',
             'author'
-        ])->get();
+        ])->paginate(10);
 
         return DestinationResource::collection($destinations);
     }
@@ -77,7 +77,7 @@ class DestinationController extends BaseController
      */
     public function update(UpdateDestinationRequest $request, Destination $destination)
     {
-        $requestData = $this->updateImage($request, $destination->image, 'destinations');
+        $requestData = $this->uploadImage($request, 'destinations', $destination->image);
 
         /** 
          * Define the type of requestData to avoid error

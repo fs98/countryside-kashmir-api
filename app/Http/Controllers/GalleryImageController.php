@@ -6,6 +6,7 @@ use App\Http\Requests\StoreGalleryImageRequest;
 use App\Http\Requests\UpdateGalleryImageRequest;
 use App\Http\Resources\GalleryImageResource;
 use App\Models\GalleryImage;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
@@ -38,10 +39,10 @@ class GalleryImageController extends BaseController
                 abort(403, 'You don\'t have a permission to query trashed images!');
             }
 
-            $galleryImages = GalleryImage::onlyTrashed()->get();
+            $galleryImages = GalleryImage::onlyTrashed()->paginate(10);
         } else {
 
-            $galleryImages = GalleryImage::all();
+            $galleryImages = GalleryImage::paginate(10);
         }
 
         return GalleryImageResource::collection($galleryImages);
@@ -74,6 +75,10 @@ class GalleryImageController extends BaseController
      */
     public function show(GalleryImage $galleryImage)
     {
+        if (!auth()->user()->hasRole('Super Admin') && $galleryImage->trashed()) {
+            throw new ModelNotFoundException();
+        }
+
         return new GalleryImageResource($galleryImage);
     }
 
@@ -86,7 +91,11 @@ class GalleryImageController extends BaseController
      */
     public function update(UpdateGalleryImageRequest $request, GalleryImage $galleryImage)
     {
-        $requestData = $this->updateImage($request, $galleryImage->image, 'gallery');
+        if (!auth()->user()->hasRole('Super Admin') && $galleryImage->trashed()) {
+            throw new ModelNotFoundException();
+        }
+
+        $requestData = $this->uploadImage($request, 'gallery', $galleryImage->image);
 
         /** 
          * Define the type of requestData to avoid error
@@ -120,11 +129,9 @@ class GalleryImageController extends BaseController
      * @param  \App\Models\GalleryImage  $galleryImage
      * @return \Illuminate\Http\Response
      */
-    public function restore($id)
+    public function restore(GalleryImage $galleryImage)
     {
         $this->authorize('restore');
-
-        $galleryImage = GalleryImage::withTrashed()->find($id);
 
         if ($galleryImage->restore()) {
             return $this->sendResponse($galleryImage, 'Image successfully restored!');
@@ -139,11 +146,9 @@ class GalleryImageController extends BaseController
      * @param  \App\Models\GalleryImage  $galleryImage
      * @return \Illuminate\Http\Response
      */
-    public function forceDelete($id)
+    public function forceDelete(GalleryImage $galleryImage)
     {
         $this->authorize('forceDeletes');
-
-        $galleryImage = GalleryImage::withTrashed()->find($id);
 
         if ($galleryImage->forceDelete()) {
 

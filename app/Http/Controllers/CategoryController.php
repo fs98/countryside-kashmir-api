@@ -26,7 +26,7 @@ class CategoryController extends BaseController
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::paginate(10);
         return CategoryResource::collection($categories);
     }
 
