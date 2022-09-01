@@ -120,11 +120,9 @@ class GalleryImageController extends BaseController
      * @param  \App\Models\GalleryImage  $galleryImage
      * @return \Illuminate\Http\Response
      */
-    public function restore($id)
+    public function restore(GalleryImage $galleryImage)
     {
         $this->authorize('restore');
-
-        $galleryImage = GalleryImage::withTrashed()->find($id);
 
         if ($galleryImage->restore()) {
             return $this->sendResponse($galleryImage, 'Image successfully restored!');
