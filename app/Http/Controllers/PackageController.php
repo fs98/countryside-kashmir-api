@@ -32,7 +32,7 @@ class PackageController extends BaseController
             'destinations',
             'user',
             'author'
-        ])->get();
+        ])->paginate(10);
 
         return PackageResource::collection($packages);
     }
