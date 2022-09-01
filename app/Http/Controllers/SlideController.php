@@ -27,7 +27,7 @@ class SlideController extends BaseController
      */
     public function index()
     {
-        $slides = Slide::all();
+        $slides = Slide::paginate(10);
         return SlideResource::collection($slides);
     }
 
