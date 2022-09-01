@@ -30,7 +30,7 @@ class DestinationController extends BaseController
         $destinations = Destination::with([
             'user',
             'author'
-        ])->get();
+        ])->paginate(10);
 
         return DestinationResource::collection($destinations);
     }
