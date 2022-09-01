@@ -48,7 +48,7 @@ class BaseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function uploadImage($request, $destination, $currentImage = null)
+    public function uploadImage(Request $request, string $destination, string $currentImage = null)
     {
         $requestData = $request->all();
 
