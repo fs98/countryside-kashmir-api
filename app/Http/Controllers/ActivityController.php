@@ -30,7 +30,7 @@ class ActivityController extends BaseController
         $activities = Activity::with([
             'user',
             'author'
-        ])->get();
+        ])->paginate(10);
 
         return ActivityResource::collection($activities);
     }
