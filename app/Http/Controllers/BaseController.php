@@ -48,33 +48,25 @@ class BaseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function uploadImage($request, $destination)
+    public function uploadImage($request, $destination, $currentImage = null)
     {
         $requestData = $request->all();
 
-        // Store image
-        $path = Storage::disk('public')->putFile($destination, $request->file('image'));
-
-        // Override image value
-        $requestData['image'] = $path;
-
-        return $requestData;
-    }
-
-    /**
-     * Update image.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function updateImage($request, $currentImage, $destination)
-    {
-        // Upload new image
+        // If request has image then store it and include image in request
         if ($request->hasFile('image')) {
-            $requestData = $this->uploadImage($request,  $destination);
-        }
 
-        // Delete old image
-        Storage::disk('public')->delete($currentImage);
+            // Store image
+            $path = Storage::disk('public')->putFile($destination, $request->file('image'));
+
+            // Override image value
+            $requestData['image'] = $path;
+
+            // Delete old image if we are updating
+            if ($request->isMethod('PUT')) {
+
+                Storage::disk('public')->delete($currentImage);
+            }
+        }
 
         return $requestData;
     }
