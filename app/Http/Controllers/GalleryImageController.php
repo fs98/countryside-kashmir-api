@@ -6,6 +6,7 @@ use App\Http\Requests\StoreGalleryImageRequest;
 use App\Http\Requests\UpdateGalleryImageRequest;
 use App\Http\Resources\GalleryImageResource;
 use App\Models\GalleryImage;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
@@ -74,6 +75,10 @@ class GalleryImageController extends BaseController
      */
     public function show(GalleryImage $galleryImage)
     {
+        if (!auth()->user()->hasRole('Super Admin') && $galleryImage->trashed()) {
+            throw new ModelNotFoundException();
+        }
+
         return new GalleryImageResource($galleryImage);
     }
 
