@@ -75,7 +75,7 @@ class BlogController extends BaseController
      */
     public function update(UpdateBlogRequest $request, Blog $blog)
     {
-        $requestData = $this->updateImage($request, $blog->image, 'blogs');
+        $requestData = $this->uploadImage($request, 'blogs', $blog->image);
 
         /** 
          * Define the type of requestData to avoid error
