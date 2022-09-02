@@ -75,10 +75,6 @@ class GalleryImageController extends BaseController
      */
     public function show(GalleryImage $galleryImage)
     {
-        if (!auth()->user()->hasRole('Super Admin') && $galleryImage->trashed()) {
-            throw new ModelNotFoundException();
-        }
-
         return new GalleryImageResource($galleryImage);
     }
 
