@@ -118,7 +118,7 @@ class GalleryImageController extends BaseController
     }
 
     /**
-     * Restore the specified deleted resource.
+     * Restore the specified removed resource.
      *
      * @param  \App\Models\GalleryImage  $galleryImage
      * @return \Illuminate\Http\Response
@@ -135,14 +135,14 @@ class GalleryImageController extends BaseController
     }
 
     /**
-     * Restore the specified deleted resource.
+     * Force delete the specified removed resource.
      *
      * @param  \App\Models\GalleryImage  $galleryImage
      * @return \Illuminate\Http\Response
      */
     public function forceDelete(GalleryImage $galleryImage)
     {
-        $this->authorize('forceDeletes');
+        $this->authorize('forceDelete');
 
         if ($galleryImage->forceDelete()) {
 
