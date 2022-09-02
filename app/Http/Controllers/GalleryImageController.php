@@ -9,6 +9,8 @@ use App\Models\GalleryImage;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+
 
 class GalleryImageController extends BaseController
 {
@@ -34,9 +36,9 @@ class GalleryImageController extends BaseController
 
         if ($scope === 'onlyTrashed') {
 
-            // Abort if non Super Admin user wants to query trashed items
+            // Throw exception if non Super Admin user wants to query trashed items
             if (!auth()->user()->hasRole('Super Admin')) {
-                abort(403, 'You don\'t have a permission to query trashed images!');
+                throw new AccessDeniedHttpException('This action is unauthorized.');
             }
 
             $galleryImages = GalleryImage::onlyTrashed()->paginate(10);
