@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreImageRequest;
 use App\Http\Requests\UpdateImageRequest;
-use App\Http\Resources\GalleryImageResource;
+use App\Http\Resources\ImageResource;
 use App\Models\GalleryImage;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -46,7 +46,7 @@ class GalleryImageController extends BaseController
             $galleryImages = GalleryImage::paginate(10);
         }
 
-        return GalleryImageResource::collection($galleryImages);
+        return ImageResource::collection($galleryImages);
     }
 
     /**
@@ -76,7 +76,7 @@ class GalleryImageController extends BaseController
      */
     public function show(GalleryImage $galleryImage)
     {
-        return new GalleryImageResource($galleryImage);
+        return new ImageResource($galleryImage);
     }
 
     /**
