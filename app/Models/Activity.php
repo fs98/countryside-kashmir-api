@@ -83,7 +83,7 @@ class Activity extends Model
     }
 
     /**
-     * Get the slide's image url.
+     * Get the activity's image url.
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
@@ -95,7 +95,7 @@ class Activity extends Model
     }
 
     /**
-     * Interact with the blog's name and slug.
+     * Interact with the activity's name and slug.
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
