@@ -6,7 +6,7 @@ use App\Http\Requests\StoreActivityImageRequest;
 use App\Http\Requests\UpdateActivityImageRequest;
 use App\Http\Resources\ActivityImageResource;
 use App\Models\Activity;
-use App\Models\ActivityImage;
+use App\Models\Image as ActivityImage;
 use Illuminate\Support\Facades\Storage;
 
 class ActivityImageController extends BaseController
@@ -30,7 +30,7 @@ class ActivityImageController extends BaseController
     public function index(Activity $activity)
     {
         $activityImages = $activity->activityImages()
-            ->with('activity')
+            ->with('imageable')
             ->get();
 
         return ActivityImageResource::collection($activityImages);
@@ -47,12 +47,16 @@ class ActivityImageController extends BaseController
     {
         $requestData = $this->uploadImage($request, 'activities/images');
 
-        $requestData['activity_id'] = $activity->id;
+        $requestData['user_id'] = auth()->user()->id;
 
-        $activityImage = auth()->user()->activityImages()->create($requestData);
+        /** 
+         * Define the type of requestData to avoid error
+         * @var array $requestData 
+         * */
+        $activityImage = $activity->activityImages()->create($requestData);
 
         return $activityImage
-            ? $this->sendResponse($activityImage->load('activity'), 'Activity image successfully stored!')
+            ? $this->sendResponse($activityImage->load('imageable'), 'Activity image successfully stored!')
             : $this->sendError($activityImage, 'There has been a mistake!', 503);
     }
 
@@ -65,7 +69,7 @@ class ActivityImageController extends BaseController
      */
     public function show(Activity $activity, ActivityImage $image)
     {
-        return new ActivityImageResource($image->load('activity'));
+        return new ActivityImageResource($image->load('imageable'));
     }
 
     /**
@@ -84,7 +88,6 @@ class ActivityImageController extends BaseController
          * Define the type of requestData to avoid error
          * @var array $requestData 
          * */
-
         if ($image->update($requestData)) {
             return $this->sendResponse($image, 'Activity image successfully updated!');
         }
