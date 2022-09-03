@@ -9,6 +9,8 @@ use App\Models\GalleryImage;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+
 
 class GalleryImageController extends BaseController
 {
@@ -34,9 +36,9 @@ class GalleryImageController extends BaseController
 
         if ($scope === 'onlyTrashed') {
 
-            // Abort if non Super Admin user wants to query trashed items
+            // Throw exception if non Super Admin user wants to query trashed items
             if (!auth()->user()->hasRole('Super Admin')) {
-                abort(403, 'You don\'t have a permission to query trashed images!');
+                throw new AccessDeniedHttpException('This action is unauthorized.');
             }
 
             $galleryImages = GalleryImage::onlyTrashed()->paginate(10);
@@ -75,10 +77,6 @@ class GalleryImageController extends BaseController
      */
     public function show(GalleryImage $galleryImage)
     {
-        if (!auth()->user()->hasRole('Super Admin') && $galleryImage->trashed()) {
-            throw new ModelNotFoundException();
-        }
-
         return new GalleryImageResource($galleryImage);
     }
 
@@ -91,10 +89,6 @@ class GalleryImageController extends BaseController
      */
     public function update(UpdateGalleryImageRequest $request, GalleryImage $galleryImage)
     {
-        if (!auth()->user()->hasRole('Super Admin') && $galleryImage->trashed()) {
-            throw new ModelNotFoundException();
-        }
-
         $requestData = $this->uploadImage($request, 'gallery', $galleryImage->image);
 
         /** 
@@ -124,7 +118,7 @@ class GalleryImageController extends BaseController
     }
 
     /**
-     * Restore the specified deleted resource.
+     * Restore the specified removed resource.
      *
      * @param  \App\Models\GalleryImage  $galleryImage
      * @return \Illuminate\Http\Response
@@ -141,14 +135,14 @@ class GalleryImageController extends BaseController
     }
 
     /**
-     * Restore the specified deleted resource.
+     * Force delete the specified removed resource.
      *
      * @param  \App\Models\GalleryImage  $galleryImage
      * @return \Illuminate\Http\Response
      */
     public function forceDelete(GalleryImage $galleryImage)
     {
-        $this->authorize('forceDeletes');
+        $this->authorize('forceDelete');
 
         if ($galleryImage->forceDelete()) {
 

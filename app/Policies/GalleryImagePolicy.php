@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\GalleryImage;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class GalleryImagePolicy
 {
@@ -30,6 +31,11 @@ class GalleryImagePolicy
      */
     public function view(User $user, GalleryImage $galleryImage)
     {
+        // If user doesn't have a Super Admin role and item is trashed
+        if (!auth()->user()->hasRole('Super Admin') && $galleryImage->trashed()) {
+            throw new ModelNotFoundException();
+        }
+
         return $user->hasRole('Admin');
     }
 
@@ -53,6 +59,11 @@ class GalleryImagePolicy
      */
     public function update(User $user, GalleryImage $galleryImage)
     {
+        // If user doesn't have a Super Admin role and item is trashed
+        if (!auth()->user()->hasRole('Super Admin') && $galleryImage->trashed()) {
+            throw new ModelNotFoundException();
+        }
+
         return $user->hasRole('Admin');
     }
 
