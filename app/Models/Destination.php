@@ -66,7 +66,7 @@ class Destination extends Model
     /**
      * Get the images for the destination.
      */
-    public function images()
+    public function destinationImages()
     {
         return $this->morphMany('App\Models\Image', 'imageable');
     }
