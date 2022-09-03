@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePackageImageRequest;
-use App\Http\Requests\UpdatePackageImageRequest;
+use App\Http\Requests\StoreImageRequest;
+use App\Http\Requests\UpdateImageRequest;
 use App\Http\Resources\PackageImageResource;
 use App\Models\Package;
 use App\Models\Image as PackageImage;
@@ -39,11 +39,11 @@ class PackageImageController extends BaseController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StorePackageImageRequest  $request
+     * @param  \App\Http\Requests\StoreImageRequest  $request
      * @param  \App\Models\Package  $package
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePackageImageRequest $request, Package $package)
+    public function store(StoreImageRequest $request, Package $package)
     {
         $requestData = $this->uploadImage($request, 'packages/images');
 
@@ -78,12 +78,12 @@ class PackageImageController extends BaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdatePackageImageRequest  $request
+     * @param  \App\Http\Requests\UpdateImageRequest  $request
      * @param  \App\Models\Package  $package
      * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePackageImageRequest $request, Package $package, PackageImage $image)
+    public function update(UpdateImageRequest $request, Package $package, PackageImage $image)
     {
         $requestData = $this->uploadImage($request, 'packages/images', $image->image);
 
