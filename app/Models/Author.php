@@ -17,4 +17,12 @@ class Author extends Model
     protected $fillable = [
         'name',
     ];
+
+    /**
+     * Get the activities for the author.
+     */
+    public function activities()
+    {
+        return $this->hasMany(Activity::class);
+    }
 }
