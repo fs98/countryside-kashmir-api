@@ -6,7 +6,7 @@ use App\Http\Requests\StorePackageImageRequest;
 use App\Http\Requests\UpdatePackageImageRequest;
 use App\Http\Resources\PackageImageResource;
 use App\Models\Package;
-use App\Models\PackageImage;
+use App\Models\Image as PackageImage;
 use Illuminate\Support\Facades\Storage;
 
 class PackageImageController extends BaseController
@@ -30,7 +30,7 @@ class PackageImageController extends BaseController
     public function index(Package $package)
     {
         $packageImages = $package->packageImages()
-            ->with('package')
+            ->with('imageable')
             ->get();
 
         return PackageImageResource::collection($packageImages);
@@ -47,13 +47,19 @@ class PackageImageController extends BaseController
     {
         $requestData = $this->uploadImage($request, 'packages/images');
 
-        $requestData['package_id'] = $package->id;
+        $requestData['user_id'] = auth()->user()->id;
 
-        $packageImage = auth()->user()->packageImages()->create($requestData);
+        /** 
+         * Define the type of requestData to avoid error
+         * @var array $requestData 
+         * */
+        $packageImage = $package->packageImages()->create($requestData);
 
-        return $packageImage
-            ? $this->sendResponse($packageImage->load('package'), 'Package image successfully stored!')
-            : $this->sendError($packageImage, 'There has been a mistake!', 503);
+        if ($packageImage) {
+            $this->sendResponse($packageImage->load('imageable'), 'Package image successfully stored!');
+        }
+
+        return $this->sendError($packageImage, 'There has been a mistake!', 503);
     }
 
 
@@ -66,7 +72,7 @@ class PackageImageController extends BaseController
      */
     public function show(Package $package, PackageImage $image)
     {
-        return new PackageImageResource($image->load('package'));
+        return new PackageImageResource($image->load('imageable'));
     }
 
     /**
@@ -85,7 +91,6 @@ class PackageImageController extends BaseController
          * Define the type of requestData to avoid error
          * @var array $requestData 
          * */
-
         if ($image->update($requestData)) {
             return $this->sendResponse($image, 'Package image successfully updated!');
         }
