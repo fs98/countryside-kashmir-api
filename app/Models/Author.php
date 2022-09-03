@@ -33,4 +33,12 @@ class Author extends Model
     {
         return $this->hasMany(Blog::class);
     }
+
+    /**
+     * Get the destinations for the author.
+     */
+    public function destinations()
+    {
+        return $this->hasMany(Destination::class);
+    }
 }
