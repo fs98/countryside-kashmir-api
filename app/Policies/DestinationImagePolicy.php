@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Models\DestinationImage;
+use App\Models\Image as DestinationImage;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -25,7 +25,7 @@ class DestinationImagePolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\DestinationImage  $destinationImage
+     * @param  \App\Models\Image  $destinationImage
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(User $user, DestinationImage $destinationImage)
@@ -48,7 +48,7 @@ class DestinationImagePolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\DestinationImage  $destinationImage
+     * @param  \App\Models\Image  $destinationImage
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(User $user, DestinationImage $destinationImage)
@@ -60,7 +60,7 @@ class DestinationImagePolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\DestinationImage  $destinationImage
+     * @param  \App\Models\Image  $destinationImage
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(User $user, DestinationImage $destinationImage)
@@ -72,7 +72,7 @@ class DestinationImagePolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\DestinationImage  $destinationImage
+     * @param  \App\Models\Image  $destinationImage
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function restore(User $user, DestinationImage $destinationImage)
@@ -84,7 +84,7 @@ class DestinationImagePolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\DestinationImage  $destinationImage
+     * @param  \App\Models\Image  $destinationImage
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function forceDelete(User $user, DestinationImage $destinationImage)
