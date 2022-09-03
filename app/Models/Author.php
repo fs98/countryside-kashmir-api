@@ -25,4 +25,12 @@ class Author extends Model
     {
         return $this->hasMany(Activity::class);
     }
+
+    /**
+     * Get the blogs for the author.
+     */
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class);
+    }
 }
