@@ -19,7 +19,7 @@ class BlogFactory extends Factory
     public function definition()
     {
         return [
-            'title' => ucfirst(fake()->word()),
+            'title' => ucfirst(fake()->unique()->word()),
             'content' => json_encode(fake()->paragraphs(3, false)),
             'image' => fake()->imageUrl(),
             'image_alt' => fake()->sentence($nbWords = 3, $variableNbWords = true),
