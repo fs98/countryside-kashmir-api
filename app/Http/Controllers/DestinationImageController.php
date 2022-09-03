@@ -29,9 +29,7 @@ class DestinationImageController extends BaseController
      */
     public function index(Destination $destination)
     {
-        $destinationImages = $destination->destinationImages()
-            ->with('destination')
-            ->get();
+        $destinationImages = $destination->destinationImages()->get();
 
         return DestinationImageResource::collection($destinationImages);
     }
