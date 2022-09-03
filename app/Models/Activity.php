@@ -47,7 +47,7 @@ class Activity extends Model
     ];
 
     /**
-     * Get the user that created the destination.
+     * Get the user that created the activity.
      */
     public function user()
     {
@@ -55,7 +55,7 @@ class Activity extends Model
     }
 
     /**
-     * Get the author that owns the destination.
+     * Get the author that owns the activity.
      */
     public function author()
     {
@@ -63,11 +63,11 @@ class Activity extends Model
     }
 
     /**
-     * Get the images for the destination.
+     * Get the images for the activity.
      */
     public function activityImages()
     {
-        return $this->hasMany(ActivityImage::class);
+        return $this->morphMany('App\Models\Image', 'imageable');
     }
 
     /**
