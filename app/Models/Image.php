@@ -20,4 +20,14 @@ class Image extends Model
         'imageable_id',
         'user_id',
     ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'user_id',
+        'image'
+    ];
 }
