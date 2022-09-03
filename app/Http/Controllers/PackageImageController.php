@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreImageRequest;
 use App\Http\Requests\UpdateImageRequest;
-use App\Http\Resources\PackageImageResource;
+use App\Http\Resources\ImageResource;
 use App\Models\Package;
 use App\Models\Image as PackageImage;
 use Illuminate\Support\Facades\Storage;
@@ -33,7 +33,7 @@ class PackageImageController extends BaseController
             ->with('imageable')
             ->get();
 
-        return PackageImageResource::collection($packageImages);
+        return ImageResource::collection($packageImages);
     }
 
     /**
@@ -72,7 +72,7 @@ class PackageImageController extends BaseController
      */
     public function show(Package $package, PackageImage $image)
     {
-        return new PackageImageResource($image->load('imageable'));
+        return new ImageResource($image->load('imageable'));
     }
 
     /**
