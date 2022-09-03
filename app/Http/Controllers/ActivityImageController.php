@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateImageRequest;
 use App\Http\Resources\ImageResource;
 use App\Models\Activity;
 use App\Models\Image as ActivityImage;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Storage;
 
 class ActivityImageController extends BaseController
@@ -69,6 +70,10 @@ class ActivityImageController extends BaseController
      */
     public function show(Activity $activity, ActivityImage $image)
     {
+        if (!$image->imageable || $image->imageable_id !== $activity->id) {
+            throw new ModelNotFoundException();
+        }
+
         return new ImageResource($image->load('imageable'));
     }
 
