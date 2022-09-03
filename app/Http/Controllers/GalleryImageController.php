@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreGalleryImageRequest;
-use App\Http\Requests\UpdateGalleryImageRequest;
+use App\Http\Requests\StoreImageRequest;
+use App\Http\Requests\UpdateImageRequest;
 use App\Http\Resources\GalleryImageResource;
 use App\Models\GalleryImage;
 use Illuminate\Support\Facades\Storage;
@@ -52,10 +52,10 @@ class GalleryImageController extends BaseController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreGalleryImageRequest  $request
+     * @param  \App\Http\Requests\StoreImageRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreGalleryImageRequest $request)
+    public function store(StoreImageRequest $request)
     {
         $requestData = $this->uploadImage($request, 'gallery');
 
@@ -82,11 +82,11 @@ class GalleryImageController extends BaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateGalleryImageRequest  $request
+     * @param  \App\Http\Requests\UpdateImageRequest  $request
      * @param  \App\Models\GalleryImage  $galleryImage
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateGalleryImageRequest $request, GalleryImage $galleryImage)
+    public function update(UpdateImageRequest $request, GalleryImage $galleryImage)
     {
         $requestData = $this->uploadImage($request, 'gallery', $galleryImage->image);
 
