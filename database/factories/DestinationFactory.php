@@ -19,7 +19,7 @@ class DestinationFactory extends Factory
     public function definition()
     {
         return [
-            'name' => ucfirst(fake()->word()),
+            'name' => ucfirst(fake()->unique()->word()),
             'description' => json_encode(fake()->paragraphs(3, false)),
             'image' => fake()->imageUrl(),
             'image_alt' => fake()->sentence($nbWords = 3, $variableNbWords = true),
