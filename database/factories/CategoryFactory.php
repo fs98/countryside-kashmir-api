@@ -18,7 +18,7 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
-            'name' => Str::ucfirst(fake()->word()),
+            'name' => Str::ucfirst(fake()->unique()->word()),
         ];
     }
 }
