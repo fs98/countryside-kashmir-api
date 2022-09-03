@@ -6,7 +6,7 @@ use App\Http\Requests\StoreDestinationImageRequest;
 use App\Http\Requests\UpdateDestinationImageRequest;
 use App\Http\Resources\DestinationImageResource;
 use App\Models\Destination;
-use App\Models\DestinationImage;
+use App\Models\Image as DestinationImage;
 use Illuminate\Support\Facades\Storage;
 
 class DestinationImageController extends BaseController
@@ -45,13 +45,19 @@ class DestinationImageController extends BaseController
     {
         $requestData = $this->uploadImage($request, 'destinations/images');
 
-        $requestData['destination_id'] = $destination->id;
+        $requestData['user_id'] = auth()->user()->id;
 
-        $destinationImage = auth()->user()->destinationImages()->create($requestData);
+        /** 
+         * Define the type of requestData to avoid error
+         * @var array $requestData 
+         * */
+        $destinationImage = $destination->destinationImages()->create($requestData);
 
-        return $destinationImage
-            ? $this->sendResponse($destinationImage->load('destination'), 'Destination image successfully stored!')
-            : $this->sendError($destinationImage, 'There has been a mistake!', 503);
+        if ($destinationImage) {
+            $this->sendResponse($destinationImage->load('imageable'), 'Destination image successfully stored!');
+        }
+
+        return $this->sendError($destinationImage, 'There has been a mistake!', 503);
     }
 
     /**
@@ -63,7 +69,7 @@ class DestinationImageController extends BaseController
      */
     public function show(Destination $destination, DestinationImage $image)
     {
-        return new DestinationImageResource($image->load('destination'));
+        return new DestinationImageResource($image->load('imageable'));
     }
 
     /**
@@ -82,7 +88,6 @@ class DestinationImageController extends BaseController
          * Define the type of requestData to avoid error
          * @var array $requestData 
          * */
-
         if ($image->update($requestData)) {
             return $this->sendResponse($image, 'Destination image successfully updated!');
         }
