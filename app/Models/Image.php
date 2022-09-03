@@ -19,6 +19,7 @@ class Image extends Model
         'image',
         'image_alt',
         'imageable_id',
+        'imageable_type',
         'user_id',
     ];
 
@@ -46,7 +47,7 @@ class Image extends Model
      */
     public function imageable()
     {
-        return $this->morphTo();
+        return $this->morphTo('imageable');
     }
 
     /**
