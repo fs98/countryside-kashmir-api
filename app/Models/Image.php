@@ -42,6 +42,14 @@ class Image extends Model
     ];
 
     /**
+     * Get the owning imageable model.
+     */
+    public function imageable()
+    {
+        return $this->morphTo();
+    }
+
+    /**
      * Get the slide's image url.
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
