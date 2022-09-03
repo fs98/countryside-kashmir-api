@@ -94,7 +94,7 @@ class Package extends Model
     }
 
     /**
-     * Get the destinations's description.
+     * Get the packages's description.
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
@@ -106,7 +106,7 @@ class Package extends Model
     }
 
     /**
-     * Get the slide's image url.
+     * Get the packages' image url.
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
@@ -118,7 +118,7 @@ class Package extends Model
     }
 
     /**
-     * Interact with the blog's name and slug.
+     * Interact with the packages' name and slug.
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
