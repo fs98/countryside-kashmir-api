@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreImageRequest;
 use App\Http\Requests\UpdateImageRequest;
-use App\Http\Resources\ActivityImageResource;
+use App\Http\Resources\ImageResource;
 use App\Models\Activity;
 use App\Models\Image as ActivityImage;
 use Illuminate\Support\Facades\Storage;
@@ -33,7 +33,7 @@ class ActivityImageController extends BaseController
             ->with('imageable')
             ->get();
 
-        return ActivityImageResource::collection($activityImages);
+        return ImageResource::collection($activityImages);
     }
 
     /**
@@ -69,7 +69,7 @@ class ActivityImageController extends BaseController
      */
     public function show(Activity $activity, ActivityImage $image)
     {
-        return new ActivityImageResource($image->load('imageable'));
+        return new ImageResource($image->load('imageable'));
     }
 
     /**
