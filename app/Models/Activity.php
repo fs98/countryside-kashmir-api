@@ -63,11 +63,11 @@ class Activity extends Model
     }
 
     /**
-     * Get the images for the activity.
+     * Get all of the post's comments.
      */
     public function activityImages()
     {
-        return $this->morphMany('App\Models\Image', 'imageable');
+        return $this->morphMany(Image::class, 'imageable');
     }
 
     /**
