@@ -90,7 +90,7 @@ class Package extends Model
      */
     public function packageImages()
     {
-        return $this->morphMany('App\Models\Image', 'imageable');
+        return $this->morphMany(Image::class, 'imageable');
     }
 
     /**
