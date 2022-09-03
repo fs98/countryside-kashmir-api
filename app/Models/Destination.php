@@ -66,17 +66,9 @@ class Destination extends Model
     /**
      * Get the images for the destination.
      */
-    public function destinationImages()
-    {
-        return $this->hasMany(DestinationImage::class);
-    }
-
-    /**
-     * Get all of the post's comments.
-     */
     public function images()
     {
-        return $this->morphMany('App\Image', 'imageable');
+        return $this->morphMany('App\Models\Image', 'imageable');
     }
 
     /**
