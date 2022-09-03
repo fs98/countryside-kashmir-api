@@ -64,7 +64,7 @@ class ActivityImageController extends BaseController
      * Display the specified resource.
      * 
      * @param  \App\Models\Activity  $activity
-     * @param  \App\Models\ActivityImage  $image
+     * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
     public function show(Activity $activity, ActivityImage $image)
@@ -77,7 +77,7 @@ class ActivityImageController extends BaseController
      *
      * @param  \App\Http\Requests\UpdateActivityImageRequest  $request
      * @param  \App\Models\Activity  $activity
-     * @param  \App\Models\ActivityImage  $image
+     * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateActivityImageRequest $request, Activity $activity, ActivityImage $image)
@@ -98,7 +98,7 @@ class ActivityImageController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ActivityImage  $image
+     * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
     public function destroy(Activity $activity, ActivityImage $image)
