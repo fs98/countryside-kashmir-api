@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreActivityImageRequest;
-use App\Http\Requests\UpdateActivityImageRequest;
+use App\Http\Requests\StoreImageRequest;
+use App\Http\Requests\UpdateImageRequest;
 use App\Http\Resources\ActivityImageResource;
 use App\Models\Activity;
 use App\Models\Image as ActivityImage;
@@ -39,11 +39,11 @@ class ActivityImageController extends BaseController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreActivityImageRequest  $request
+     * @param  \App\Http\Requests\StoreImageRequest  $request
      * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreActivityImageRequest $request, Activity $activity)
+    public function store(StoreImageRequest $request, Activity $activity)
     {
         $requestData = $this->uploadImage($request, 'activities/images');
 
@@ -75,12 +75,12 @@ class ActivityImageController extends BaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateActivityImageRequest  $request
+     * @param  \App\Http\Requests\UpdateImageRequest  $request
      * @param  \App\Models\Activity  $activity
      * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateActivityImageRequest $request, Activity $activity, ActivityImage $image)
+    public function update(UpdateImageRequest $request, Activity $activity, ActivityImage $image)
     {
         $requestData = $this->uploadImage($request, 'activities/images', $image->image);
 
