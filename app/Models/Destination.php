@@ -72,6 +72,14 @@ class Destination extends Model
     }
 
     /**
+     * Get all of the post's comments.
+     */
+    public function images()
+    {
+        return $this->morphMany('App\Image', 'imageable');
+    }
+
+    /**
      * The packages that belong to the destination.
      */
     public function packages()
