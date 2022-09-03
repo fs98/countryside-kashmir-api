@@ -41,4 +41,12 @@ class Author extends Model
     {
         return $this->hasMany(Destination::class);
     }
+
+    /**
+     * Get the packages for the author.
+     */
+    public function packages()
+    {
+        return $this->hasMany(Package::class);
+    }
 }
