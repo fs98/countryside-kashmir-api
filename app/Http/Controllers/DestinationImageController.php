@@ -75,12 +75,12 @@ class DestinationImageController extends BaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateDestinationImageRequest  $request
+     * @param  \App\Http\Requests\UpdateImageRequest  $request
      * @param  \App\Models\Destination  $destination
      * @param  \App\Models\Image  $destinationImage
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateDestinationImageRequest $request, Destination $destination, DestinationImage $image)
+    public function update(UpdateImageRequest $request, Destination $destination, DestinationImage $image)
     {
         $requestData = $this->uploadImage($request, 'destinations/images', $image->image);
 
