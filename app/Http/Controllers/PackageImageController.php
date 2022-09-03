@@ -67,7 +67,7 @@ class PackageImageController extends BaseController
      * Display the specified resource.
      * 
      * @param  \App\Models\Package  $package
-     * @param  \App\Models\PackageImage  $packageImage
+     * @param  \App\Models\Image  $packageImage
      * @return \Illuminate\Http\Response
      */
     public function show(Package $package, PackageImage $image)
@@ -80,7 +80,7 @@ class PackageImageController extends BaseController
      *
      * @param  \App\Http\Requests\UpdatePackageImageRequest  $request
      * @param  \App\Models\Package  $package
-     * @param  \App\Models\PackageImage  $image
+     * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
     public function update(UpdatePackageImageRequest $request, Package $package, PackageImage $image)
@@ -102,7 +102,7 @@ class PackageImageController extends BaseController
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Package  $package
-     * @param  \App\Models\PackageImage  $image
+     * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
     public function destroy(Package $package, PackageImage $image)
