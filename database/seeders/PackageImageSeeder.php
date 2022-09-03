@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\PackageImage;
+use App\Models\Image as PackageImage;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
