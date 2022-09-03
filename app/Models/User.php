@@ -60,6 +60,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the images for the user.
+     */
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
+
+    /**
      * Get the destinations for the user.
      */
     public function destinations()
