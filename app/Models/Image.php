@@ -50,6 +50,14 @@ class Image extends Model
     }
 
     /**
+     * Get the user that owns the image.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
      * Get the images's image url.
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
