@@ -47,7 +47,7 @@ class GalleryImage extends Model
     }
 
     /**
-     * Get the slide's image url.
+     * Get the gallery images's image url.
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
