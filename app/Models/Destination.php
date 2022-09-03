@@ -92,7 +92,7 @@ class Destination extends Model
     }
 
     /**
-     * Get the slide's image url.
+     * Get the destination's image url.
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
@@ -104,7 +104,7 @@ class Destination extends Model
     }
 
     /**
-     * Interact with the blog's name and slug.
+     * Interact with the destinations's name and slug.
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
