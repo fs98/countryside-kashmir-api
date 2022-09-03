@@ -64,7 +64,7 @@ class Blog extends Model
     }
 
     /**
-     * Get the destinations's content.
+     * Get the blogs's content.
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
@@ -76,7 +76,7 @@ class Blog extends Model
     }
 
     /**
-     * Get the slide's image url.
+     * Get the blogs's image url.
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
