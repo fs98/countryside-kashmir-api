@@ -32,7 +32,7 @@ class Booking extends Model
     ];
 
     /**
-     * Get the package that is the booking for.
+     * Get the package that the booking is for.
      */
     public function package()
     {
