@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Activity;
 use App\Models\Destination;
+use App\Models\Package;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -32,7 +34,9 @@ class ImageFactory extends Factory
     public function commentable()
     {
         return $this->faker->randomElement([
+            Activity::class,
             Destination::class,
+            Package::class
         ]);
     }
 }
