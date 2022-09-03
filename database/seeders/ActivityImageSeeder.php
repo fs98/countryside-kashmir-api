@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\ActivityImage;
+use App\Models\Image as ActivityImage;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
