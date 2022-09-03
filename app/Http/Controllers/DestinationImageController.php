@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreImageRequest;
 use App\Http\Requests\UpdateImageRequest;
-use App\Http\Resources\DestinationImageResource;
+use App\Http\Resources\ImageResource;
 use App\Models\Destination;
 use App\Models\Image as DestinationImage;
 use Illuminate\Support\Facades\Storage;
@@ -31,7 +31,7 @@ class DestinationImageController extends BaseController
     {
         $destinationImages = $destination->destinationImages()->get();
 
-        return DestinationImageResource::collection($destinationImages);
+        return ImageResource::collection($destinationImages);
     }
 
     /**
@@ -69,7 +69,7 @@ class DestinationImageController extends BaseController
      */
     public function show(Destination $destination, DestinationImage $image)
     {
-        return new DestinationImageResource($image->load('imageable'));
+        return new ImageResource($image->load('imageable'));
     }
 
     /**
