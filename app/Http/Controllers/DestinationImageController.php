@@ -64,7 +64,7 @@ class DestinationImageController extends BaseController
      * Display the specified resource.
      *
      * @param  \App\Models\Destination  $destination
-     * @param  \App\Models\DestinationImage  $destinationImage
+     * @param  \App\Models\Image  $destinationImage
      * @return \Illuminate\Http\Response
      */
     public function show(Destination $destination, DestinationImage $image)
@@ -77,7 +77,7 @@ class DestinationImageController extends BaseController
      *
      * @param  \App\Http\Requests\UpdateDestinationImageRequest  $request
      * @param  \App\Models\Destination  $destination
-     * @param  \App\Models\DestinationImage  $destinationImage
+     * @param  \App\Models\Image  $destinationImage
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateDestinationImageRequest $request, Destination $destination, DestinationImage $image)
@@ -99,7 +99,7 @@ class DestinationImageController extends BaseController
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Destination  $destination
-     * @param  \App\Models\DestinationImage  $destinationImage
+     * @param  \App\Models\Image  $destinationImage
      * @return \Illuminate\Http\Response
      */
     public function destroy(Destination $destination, DestinationImage $image)
