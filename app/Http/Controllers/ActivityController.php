@@ -64,7 +64,8 @@ class ActivityController extends BaseController
     {
         return new ActivityResource($activity->load([
             'user',
-            'author'
+            'author',
+            'activityImages',
         ]));
     }
 
