@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreDestinationImageRequest;
-use App\Http\Requests\UpdateDestinationImageRequest;
+use App\Http\Requests\StoreImageRequest;
+use App\Http\Requests\UpdateImageRequest;
 use App\Http\Resources\DestinationImageResource;
 use App\Models\Destination;
 use App\Models\Image as DestinationImage;
@@ -37,11 +37,11 @@ class DestinationImageController extends BaseController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreDestinationImageRequest  $request
+     * @param  \App\Http\Requests\StoreImageRequest  $request
      * @param  \App\Models\Destination  $destination
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreDestinationImageRequest $request, Destination $destination)
+    public function store(StoreImageRequest $request, Destination $destination)
     {
         $requestData = $this->uploadImage($request, 'destinations/images');
 
