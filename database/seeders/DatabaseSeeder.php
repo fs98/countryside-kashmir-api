@@ -24,11 +24,9 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             BlogSeeder::class,
             DestinationSeeder::class,
-            DestinationImageSeeder::class,
             PackageSeeder::class,
-            PackageImageSeeder::class,
             ActivitySeeder::class,
-            ActivityImageSeeder::class,
+            ImageSeeder::class,
             BookingSeeder::class,
         ]);
     }
