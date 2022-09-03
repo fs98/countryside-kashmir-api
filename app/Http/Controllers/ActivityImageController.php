@@ -56,9 +56,11 @@ class ActivityImageController extends BaseController
          * */
         $activityImage = $activity->activityImages()->create($requestData);
 
-        return $activityImage
-            ? $this->sendResponse($activityImage->load('imageable'), 'Activity image successfully stored!')
-            : $this->sendError($activityImage, 'There has been a mistake!', 503);
+        if ($activityImage) {
+            $this->sendResponse($activityImage->load('imageable'), 'Activity image successfully stored!');
+        }
+
+        return $this->sendError($activityImage, 'There has been a mistake!', 503);
     }
 
     /**
