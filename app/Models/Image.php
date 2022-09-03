@@ -30,4 +30,13 @@ class Image extends Model
         'user_id',
         'image'
     ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array<int, string>
+     */
+    protected $appends = [
+        'image_url',
+    ];
 }
