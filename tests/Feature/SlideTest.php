@@ -6,11 +6,14 @@ use App\Models\Slide;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\UploadedFile;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
 class SlideTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * Test index function.
      *
@@ -74,5 +77,54 @@ class SlideTest extends TestCase
 
                 ]
             );
+    }
+
+    /**
+     * Test store function.
+     *
+     * @return void
+     */
+    public function test_new_slide_can_be_added()
+    {
+        $role = Role::create(['name' => 'Admin']);
+
+        // Create admin user
+        $user = User::factory()
+            ->hasAttached($role)
+            ->create();
+
+        /**
+         * 
+         * @var User $user
+         */
+        $response = $this->actingAs($user)
+            ->post('/api/slides', [
+                'image' => UploadedFile::fake()->image('file.jpg', 600, 600),
+                'image_alt' => fake()->realText(20),
+                'order' => fake()->numberBetween(1, 5),
+                'title' => 'Test slide',
+                'subtitle' => fake()->words(3, true),
+            ]);
+
+        $response->assertStatus(200)->assertJsonStructure(
+            [
+                'success',
+                'data' => [
+                    'image_alt',
+                    'order',
+                    'title',
+                    'subtitle',
+                    'updated_at',
+                    'created_at',
+                    'id',
+                    'image_url'
+                ],
+                'message'
+            ]
+        );
+
+        $this->assertDatabaseHas('slides', [
+            'title' => 'Test slide',
+        ]);
     }
 }
