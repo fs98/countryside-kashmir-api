@@ -55,11 +55,24 @@ class AuthorTest extends TestCase
      *
      * @return void
      */
-    public function test_new_user_can_be_added()
+    public function test_new_author_can_be_added()
     {
-        $response = $this->post('/api/authors', [
-            'name' => 'Aubrey Farrell'
-        ]);
+        $role = Role::create(['name' => 'Admin']);
+
+        // Create admin user
+        $user = User::factory()
+            ->hasAttached($role)
+            ->create();
+
+        /**
+         * 
+         * @var User $user
+         */
+        $response = $this
+            ->actingAs($user)
+            ->post('/api/authors', [
+                'name' => 'Aubrey Farrell'
+            ]);
 
         $response->assertStatus(200)->assertJsonStructure(
             [
@@ -108,7 +121,7 @@ class AuthorTest extends TestCase
      *
      * @return void
      */
-    public function test_user_can_be_updated()
+    public function test_author_can_be_updated()
     {
         $author = Author::factory()->create([
             'name' => 'Aubrey'
@@ -143,7 +156,7 @@ class AuthorTest extends TestCase
      *
      * @return void
      */
-    public function test_user_can_be_deleted()
+    public function test_author_can_be_deleted()
     {
         $author = Author::factory()->create([
             'name' => 'Aubrey'
