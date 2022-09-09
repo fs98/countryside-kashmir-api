@@ -33,7 +33,8 @@ class AuthorTest extends TestCase
          * 
          * @var User $user
          */
-        $response = $this->actingAs($user)->get('/api/authors');
+        $response = $this->actingAs($user)
+            ->get('/api/authors');
 
         $response->assertStatus(200)
             ->assertJsonStructure(
@@ -68,8 +69,7 @@ class AuthorTest extends TestCase
          * 
          * @var User $user
          */
-        $response = $this
-            ->actingAs($user)
+        $response = $this->actingAs($user)
             ->post('/api/authors', [
                 'name' => 'Aubrey Farrell'
             ]);
@@ -112,8 +112,7 @@ class AuthorTest extends TestCase
          * 
          * @var User $user
          */
-        $response = $this
-            ->actingAs($user)
+        $response = $this->actingAs($user)
             ->get('/api/authors/' . $author->id);
 
         $response->assertStatus(200)
@@ -136,13 +135,25 @@ class AuthorTest extends TestCase
      */
     public function test_author_can_be_updated()
     {
+        $role = Role::create(['name' => 'Admin']);
+
+        // Create admin user
+        $user = User::factory()
+            ->hasAttached($role)
+            ->create();
+
         $author = Author::factory()->create([
             'name' => 'Aubrey'
         ]);
 
-        $response = $this->put('/api/authors/' . $author->id, [
-            'name' => 'Aubrey Farrell'
-        ]);
+        /**
+         * 
+         * @var User $user
+         */
+        $response = $this->actingAs($user)
+            ->put('/api/authors/' . $author->id, [
+                'name' => 'Aubrey Farrell'
+            ]);
 
         $response->assertStatus(200)->assertJsonStructure(
             [
