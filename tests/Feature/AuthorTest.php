@@ -247,9 +247,9 @@ class AuthorTest extends TestCase
 
         $response->assertStatus(422)
             ->assertJsonStructure([
-                "success",
-                "message",
-                "errors" => [
+                'success',
+                'message',
+                'errors' => [
                     'name'
                 ]
             ]);
@@ -262,17 +262,33 @@ class AuthorTest extends TestCase
      */
     public function test_author_with_the_same_name_cannot_be_added()
     {
+        $role = Role::create(['name' => 'Admin']);
+
+        // Create admin user
+        $user = User::factory()
+            ->hasAttached($role)
+            ->create();
+
         Author::factory()->create([
             'name' => 'Aubrey Farrell'
         ]);
 
-        $response = $this->post('/api/authors', [
-            'name' => 'Aubrey Farrell'
-        ]);
+        /**
+         * 
+         * @var User $user
+         */
+        $response = $this->actingAs($user)
+            ->post('/api/authors', [
+                'name' => 'Aubrey Farrell'
+            ]);
 
-        $response->assertStatus(302)
-            ->assertSessionHasErrors([
-                'name'
+        $response->assertStatus(422)
+            ->assertJsonStructure([
+                'success',
+                'message',
+                'errors' => [
+                    'name'
+                ]
             ]);
     }
 }
