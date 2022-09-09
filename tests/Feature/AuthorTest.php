@@ -229,13 +229,29 @@ class AuthorTest extends TestCase
      */
     public function test_new_author_data_is_validated()
     {
-        $response = $this->post('/api/authors', [
-            'name' => ''
-        ]);
+        $role = Role::create(['name' => 'Admin']);
 
-        $response->assertStatus(302)
-            ->assertSessionHasErrors([
-                'name'
+        // Create admin user
+        $user = User::factory()
+            ->hasAttached($role)
+            ->create();
+
+        /**
+         * 
+         * @var User $user
+         */
+        $response = $this->actingAs($user)
+            ->post('/api/authors', [
+                'name' => ''
+            ]);
+
+        $response->assertStatus(422)
+            ->assertJsonStructure([
+                "success",
+                "message",
+                "errors" => [
+                    'name'
+                ]
             ]);
     }
 
