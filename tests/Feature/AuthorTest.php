@@ -99,9 +99,22 @@ class AuthorTest extends TestCase
      */
     public function test_author_can_be_retrieved_by_id()
     {
+        $role = Role::create(['name' => 'Admin']);
+
+        // Create admin user
+        $user = User::factory()
+            ->hasAttached($role)
+            ->create();
+
         $author = Author::factory()->create();
 
-        $response = $this->get('/api/authors/' . $author->id);
+        /**
+         * 
+         * @var User $user
+         */
+        $response = $this
+            ->actingAs($user)
+            ->get('/api/authors/' . $author->id);
 
         $response->assertStatus(200)
             ->assertJsonStructure(
