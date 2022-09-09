@@ -182,6 +182,13 @@ class AuthorTest extends TestCase
      */
     public function test_author_can_be_deleted()
     {
+        $role = Role::create(['name' => 'Admin']);
+
+        // Create admin user
+        $user = User::factory()
+            ->hasAttached($role)
+            ->create();
+
         $author = Author::factory()->create([
             'name' => 'Aubrey'
         ]);
@@ -190,7 +197,12 @@ class AuthorTest extends TestCase
             'name' => 'Aubrey',
         ]);
 
-        $response = $this->delete('/api/authors/' . $author->id);
+        /**
+         * 
+         * @var User $user
+         */
+        $response = $this->actingAs($user)
+            ->delete('/api/authors/' . $author->id);
 
         $response->assertStatus(200)->assertJsonStructure(
             [
