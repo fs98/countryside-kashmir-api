@@ -3,8 +3,10 @@
 namespace Tests\Feature;
 
 use App\Models\Author;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
 class AuthorTest extends TestCase
@@ -18,9 +20,20 @@ class AuthorTest extends TestCase
      */
     public function test_authors_can_be_retrieved()
     {
+        $role = Role::create(['name' => 'Admin']);
+
+        // Create admin user
+        $user = User::factory()
+            ->hasAttached($role)
+            ->create();
+
         Author::factory(5)->create();
 
-        $response = $this->get('/api/authors');
+        /**
+         * 
+         * @var User $user
+         */
+        $response = $this->actingAs($user)->get('/api/authors');
 
         $response->assertStatus(200)
             ->assertJsonStructure(
