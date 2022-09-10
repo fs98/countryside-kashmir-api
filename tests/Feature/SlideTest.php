@@ -127,4 +127,44 @@ class SlideTest extends TestCase
             'title' => 'Test slide',
         ]);
     }
+
+    /**
+     * Test show function.
+     *
+     * @return void
+     */
+    public function test_slide_can_be_retrieved_by_id()
+    {
+        $role = Role::create(['name' => 'Admin']);
+
+        // Create admin user
+        $user = User::factory()
+            ->hasAttached($role)
+            ->create();
+
+        $slide = Slide::factory()->create();
+
+        /**
+         * 
+         * @var User $user
+         */
+        $response = $this->actingAs($user)
+            ->get('/api/slides/' . $slide->id);
+
+        $response->assertStatus(200)
+            ->assertJsonStructure(
+                [
+                    'data' => [
+                        'id',
+                        'image_alt',
+                        'order',
+                        'title',
+                        'subtitle',
+                        'created_at',
+                        'updated_at',
+                        'image_url'
+                    ]
+                ]
+            );
+    }
 }
