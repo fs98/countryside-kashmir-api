@@ -269,4 +269,37 @@ class SlideTest extends TestCase
             'title' => 'Test Slide',
         ]);
     }
+
+    /**
+     * Test data is validated.
+     *
+     * @return void
+     */
+    public function test_new_slide_data_is_validated()
+    {
+        $role = Role::create(['name' => 'Admin']);
+
+        // Create admin user
+        $user = User::factory()
+            ->hasAttached($role)
+            ->create();
+
+        /**
+         * 
+         * @var User $user
+         */
+        $response = $this->actingAs($user)
+            ->post('/api/slides', [
+                'image' => null
+            ]);
+
+        $response->assertStatus(422)
+            ->assertJsonStructure([
+                'success',
+                'message',
+                'errors' => [
+                    'image'
+                ]
+            ]);
+    }
 }
