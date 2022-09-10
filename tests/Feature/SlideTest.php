@@ -218,4 +218,55 @@ class SlideTest extends TestCase
             'title' => 'Test Slide',
         ]);
     }
+
+    /**
+     * Test destroy function.
+     *
+     * @return void
+     */
+    public function test_slide_can_be_deleted()
+    {
+        $role = Role::create(['name' => 'Admin']);
+
+        // Create admin user
+        $user = User::factory()
+            ->hasAttached($role)
+            ->create();
+
+        $slide = Slide::factory()->create([
+            'title' => 'Test Slide'
+        ]);
+
+        $this->assertDatabaseHas('slides', [
+            'title' => 'Test Slide',
+        ]);
+
+        /**
+         * 
+         * @var User $user
+         */
+        $response = $this->actingAs($user)
+            ->delete('/api/slides/' . $slide->id);
+
+        $response->assertStatus(200)->assertJsonStructure(
+            [
+                'success',
+                'data' => [
+                    'id',
+                    'image_alt',
+                    'order',
+                    'title',
+                    'subtitle',
+                    'created_at',
+                    'updated_at',
+                    'image_url'
+                ],
+                'message'
+            ]
+        );
+
+        $this->assertDatabaseMissing('slides', [
+            'title' => 'Test Slide',
+        ]);
+    }
 }
