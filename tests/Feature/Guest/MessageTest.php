@@ -40,4 +40,27 @@ class MessageTest extends TestCase
                 'message',
             ]);
     }
+
+    /**
+     * Test data is validated.
+     *
+     * @return void
+     */
+    public function test_new_message_data_is_validated()
+    {
+        $response = $this->post('/api/guest/messages', [
+            'first_name' => fake()->firstName(),
+            'last_name' => fake()->lastName(),
+            'email' => fake()->email(),
+            'content' => fake()->text(100),
+        ]);
+        $response->assertStatus(422)
+            ->assertJsonStructure([
+                'success',
+                'message',
+                'errors' => [
+                    'phone_number'
+                ]
+            ]);
+    }
 }
