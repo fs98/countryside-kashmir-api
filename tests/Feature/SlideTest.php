@@ -2,14 +2,15 @@
 
 namespace Tests\Feature;
 
-use App\Models\Author;
+use App\Models\Slide;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\UploadedFile;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
-class AuthorTest extends TestCase
+class SlideTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -18,7 +19,7 @@ class AuthorTest extends TestCase
      *
      * @return void
      */
-    public function test_authors_can_be_retrieved()
+    public function test_slides_can_be_retrieved()
     {
         $role = Role::create(['name' => 'Admin']);
 
@@ -27,14 +28,14 @@ class AuthorTest extends TestCase
             ->hasAttached($role)
             ->create();
 
-        Author::factory(5)->create();
+        Slide::factory(5)->create();
 
         /**
          * 
          * @var User $user
          */
         $response = $this->actingAs($user)
-            ->get('/api/authors');
+            ->get('/api/slides');
 
         $response->assertStatus(200)
             ->assertJsonStructure(
@@ -42,11 +43,38 @@ class AuthorTest extends TestCase
                     'data' => [
                         [
                             'id',
-                            'name',
+                            'image_alt',
+                            'order',
+                            'title',
+                            'subtitle',
                             'created_at',
-                            'updated_at'
+                            'updated_at',
+                            'image_url'
                         ]
+                    ],
+                    'links' => [
+                        'first',
+                        'last',
+                        'prev',
+                        'next'
+                    ],
+                    'meta' => [
+                        'current_page',
+                        'from',
+                        'last_page',
+                        'links' => [
+                            [
+                                'url',
+                                'label',
+                                'active'
+                            ]
+                        ],
+                        'path',
+                        'per_page',
+                        'to',
+                        'total'
                     ]
+
                 ]
             );
     }
@@ -56,7 +84,7 @@ class AuthorTest extends TestCase
      *
      * @return void
      */
-    public function test_new_author_can_be_added()
+    public function test_new_slide_can_be_added()
     {
         $role = Role::create(['name' => 'Admin']);
 
@@ -70,25 +98,33 @@ class AuthorTest extends TestCase
          * @var User $user
          */
         $response = $this->actingAs($user)
-            ->post('/api/authors', [
-                'name' => 'Aubrey Farrell'
+            ->post('/api/slides', [
+                'image' => UploadedFile::fake()->image('file.jpg', 600, 600),
+                'image_alt' => fake()->realText(20),
+                'order' => fake()->numberBetween(1, 5),
+                'title' => 'Test slide',
+                'subtitle' => fake()->words(3, true),
             ]);
 
         $response->assertStatus(200)->assertJsonStructure(
             [
                 'success',
                 'data' => [
-                    'name',
+                    'image_alt',
+                    'order',
+                    'title',
+                    'subtitle',
                     'updated_at',
                     'created_at',
-                    'id'
+                    'id',
+                    'image_url'
                 ],
                 'message'
             ]
         );
 
-        $this->assertDatabaseHas('authors', [
-            'name' => 'Aubrey Farrell',
+        $this->assertDatabaseHas('slides', [
+            'title' => 'Test slide',
         ]);
     }
 
@@ -97,7 +133,7 @@ class AuthorTest extends TestCase
      *
      * @return void
      */
-    public function test_author_can_be_retrieved_by_id()
+    public function test_slide_can_be_retrieved_by_id()
     {
         $role = Role::create(['name' => 'Admin']);
 
@@ -106,23 +142,27 @@ class AuthorTest extends TestCase
             ->hasAttached($role)
             ->create();
 
-        $author = Author::factory()->create();
+        $slide = Slide::factory()->create();
 
         /**
          * 
          * @var User $user
          */
         $response = $this->actingAs($user)
-            ->get('/api/authors/' . $author->id);
+            ->get('/api/slides/' . $slide->id);
 
         $response->assertStatus(200)
             ->assertJsonStructure(
                 [
                     'data' => [
                         'id',
-                        'name',
+                        'image_alt',
+                        'order',
+                        'title',
+                        'subtitle',
                         'created_at',
-                        'updated_at'
+                        'updated_at',
+                        'image_url'
                     ]
                 ]
             );
@@ -133,7 +173,7 @@ class AuthorTest extends TestCase
      *
      * @return void
      */
-    public function test_author_can_be_updated()
+    public function test_slide_can_be_updated()
     {
         $role = Role::create(['name' => 'Admin']);
 
@@ -142,8 +182,8 @@ class AuthorTest extends TestCase
             ->hasAttached($role)
             ->create();
 
-        $author = Author::factory()->create([
-            'name' => 'Aubrey'
+        $slide = Slide::factory()->create([
+            'title' => 'Test Slide'
         ]);
 
         /**
@@ -151,27 +191,31 @@ class AuthorTest extends TestCase
          * @var User $user
          */
         $response = $this->actingAs($user)
-            ->put('/api/authors/' . $author->id, [
-                'name' => 'Aubrey Farrell'
+            ->put('/api/slides/' . $slide->id, [
+                'title' => 'Test Slide Updated'
             ]);
 
         $response->assertStatus(200)->assertJsonStructure(
             [
                 'success',
                 'data' => [
-                    'name',
-                    'updated_at',
+                    'id',
+                    'image_alt',
+                    'order',
+                    'title',
+                    'subtitle',
                     'created_at',
-                    'id'
+                    'updated_at',
+                    'image_url'
                 ],
                 'message'
             ]
         );
 
-        $this->assertDatabaseHas('authors', [
-            'name' => 'Aubrey Farrell',
-        ])->assertDatabaseMissing('authors', [
-            'name' => 'Aubrey',
+        $this->assertDatabaseHas('slides', [
+            'title' => 'Test Slide Updated',
+        ])->assertDatabaseMissing('slides', [
+            'title' => 'Test Slide',
         ]);
     }
 
@@ -180,7 +224,7 @@ class AuthorTest extends TestCase
      *
      * @return void
      */
-    public function test_author_can_be_deleted()
+    public function test_slide_can_be_deleted()
     {
         $role = Role::create(['name' => 'Admin']);
 
@@ -189,12 +233,12 @@ class AuthorTest extends TestCase
             ->hasAttached($role)
             ->create();
 
-        $author = Author::factory()->create([
-            'name' => 'Aubrey'
+        $slide = Slide::factory()->create([
+            'title' => 'Test Slide'
         ]);
 
-        $this->assertDatabaseHas('authors', [
-            'name' => 'Aubrey',
+        $this->assertDatabaseHas('slides', [
+            'title' => 'Test Slide',
         ]);
 
         /**
@@ -202,23 +246,27 @@ class AuthorTest extends TestCase
          * @var User $user
          */
         $response = $this->actingAs($user)
-            ->delete('/api/authors/' . $author->id);
+            ->delete('/api/slides/' . $slide->id);
 
         $response->assertStatus(200)->assertJsonStructure(
             [
                 'success',
                 'data' => [
                     'id',
-                    'name',
+                    'image_alt',
+                    'order',
+                    'title',
+                    'subtitle',
+                    'created_at',
                     'updated_at',
-                    'created_at'
+                    'image_url'
                 ],
                 'message'
             ]
         );
 
-        $this->assertDatabaseMissing('authors', [
-            'name' => 'Aubrey',
+        $this->assertDatabaseMissing('slides', [
+            'title' => 'Test Slide',
         ]);
     }
 
@@ -227,7 +275,7 @@ class AuthorTest extends TestCase
      *
      * @return void
      */
-    public function test_new_author_data_is_validated()
+    public function test_new_slide_data_is_validated()
     {
         $role = Role::create(['name' => 'Admin']);
 
@@ -241,8 +289,8 @@ class AuthorTest extends TestCase
          * @var User $user
          */
         $response = $this->actingAs($user)
-            ->post('/api/authors', [
-                'name' => ''
+            ->post('/api/slides', [
+                'image' => null
             ]);
 
         $response->assertStatus(422)
@@ -250,44 +298,7 @@ class AuthorTest extends TestCase
                 'success',
                 'message',
                 'errors' => [
-                    'name'
-                ]
-            ]);
-    }
-
-    /**
-     * Test data is validated for unique author name.
-     *
-     * @return void
-     */
-    public function test_author_with_the_same_name_cannot_be_added()
-    {
-        $role = Role::create(['name' => 'Admin']);
-
-        // Create admin user
-        $user = User::factory()
-            ->hasAttached($role)
-            ->create();
-
-        Author::factory()->create([
-            'name' => 'Aubrey Farrell'
-        ]);
-
-        /**
-         * 
-         * @var User $user
-         */
-        $response = $this->actingAs($user)
-            ->post('/api/authors', [
-                'name' => 'Aubrey Farrell'
-            ]);
-
-        $response->assertStatus(422)
-            ->assertJsonStructure([
-                'success',
-                'message',
-                'errors' => [
-                    'name'
+                    'image'
                 ]
             ]);
     }
