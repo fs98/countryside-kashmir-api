@@ -16,12 +16,7 @@ class PackageController extends Controller
      */
     public function index()
     {
-        $packages = Package::with([
-            'category',
-            'destinations',
-        ])->get();
-
-        return PackageResource::collection($packages);
+        //
     }
 
     /**
