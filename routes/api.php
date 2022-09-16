@@ -36,7 +36,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+/**
+ * 
+ * Protected Routes
+ */
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
@@ -66,6 +69,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
 });
 
 
+/**
+ * 
+ * Public Routes
+ */
 Route::prefix('guest')->group(function () {
     Route::apiResource('messages', GuestMessageController::class)->only([
         'store'
@@ -77,7 +84,7 @@ Route::prefix('guest')->group(function () {
         'index', 'show'
     ]);
     Route::apiResource('packages', GuestPackageController::class)->only([
-        'index', 'show'
+        'show'
     ]);
     Route::apiResource('categories', GuestCategoryController::class)->only([
         'index', 'show'
@@ -89,6 +96,6 @@ Route::prefix('guest')->group(function () {
         'index', 'show'
     ]);
     Route::apiResource('gallery-images', GuestGalleryImageController::class)->only([
-        'index', 'show'
+        'index'
     ]);
 });

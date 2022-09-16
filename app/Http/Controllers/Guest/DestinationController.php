@@ -16,7 +16,9 @@ class DestinationController extends Controller
      */
     public function index()
     {
-        $destinations = Destination::all();
+        $destinations = Destination::select([
+            'name', 'slug', 'image_alt'
+        ])->get();
         return DestinationResource::collection($destinations);
     }
 
@@ -39,9 +41,13 @@ class DestinationController extends Controller
      */
     public function show(Destination $destination)
     {
-        return new DestinationResource($destination->load([
-            'destinationImages'
-        ]));
+        $destination->makeHidden([
+            'id', 'created_at', 'updated_at'
+        ])->load([
+            'destinationImages:id,image_alt,destination_id'
+        ])->destinationImages->makeHidden('id');
+
+        return new DestinationResource($destination);
     }
 
     /**

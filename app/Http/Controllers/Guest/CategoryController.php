@@ -16,7 +16,23 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::select([
+            'id', 'name', 'slug'
+        ])
+            ->with([
+                'packages:id,name,slug,days,nights,persons,price,image_alt,category_id',
+                'packages.destinations:name'
+            ])
+            ->get();
+
+        $categories->each(function ($category) {
+            $category->makeHidden('id'); // Hide category_id
+            $category->packages->each(function ($package) {
+                $package->makeHidden('id'); // Hide package_id
+                $package->destinations->makeHidden('image_url'); // Hide destinations image_url
+            });
+        });
+
         return CategoryResource::collection($categories);
     }
 
@@ -39,6 +55,19 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
+        $category->load([
+            'packages:id,name,slug,days,nights,persons,price,image_alt,category_id',
+            'packages.destinations:name'
+        ]);
+
+        // Hide Fields
+        $category->makeHidden('id');
+        $category->packages->makeHidden('id'); // Hide package_id
+
+        foreach ($category->packages as $package) {
+            $package->destinations->makeHidden('image_url');
+        }
+
         return new CategoryResource($category);
     }
 

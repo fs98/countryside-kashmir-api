@@ -16,7 +16,7 @@ class SlideController extends Controller
      */
     public function index()
     {
-        $slides = Slide::all();
+        $slides = Slide::select('image', 'image_alt', 'title', 'subtitle')->orderBy('order')->get();
         return SlideResource::collection($slides);
     }
 
