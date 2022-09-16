@@ -22,6 +22,14 @@ class Category extends Model
     ];
 
     /**
+     * Get the packages for the category.
+     */
+    public function packages()
+    {
+        return $this->hasMany(Package::class);
+    }
+
+    /**
      * Interact with the category's name and slug.
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
