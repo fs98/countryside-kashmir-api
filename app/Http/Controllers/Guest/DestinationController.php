@@ -16,7 +16,9 @@ class DestinationController extends Controller
      */
     public function index()
     {
-        $destinations = Destination::all();
+        $destinations = Destination::select([
+            'name', 'slug', 'image_alt'
+        ])->get();
         return DestinationResource::collection($destinations);
     }
 
