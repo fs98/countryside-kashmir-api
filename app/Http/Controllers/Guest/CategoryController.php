@@ -55,6 +55,19 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
+        $category->load([
+            'packages:id,name,slug,days,nights,persons,price,image_alt,category_id',
+            'packages.destinations:name'
+        ]);
+
+        // Hide Fields
+        $category->makeHidden('id');
+        $category->packages->makeHidden('id'); // Hide package_id
+
+        foreach ($category->packages as $package) {
+            $package->destinations->makeHidden('image_url');
+        }
+
         return new CategoryResource($category);
     }
 
