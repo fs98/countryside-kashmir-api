@@ -41,9 +41,13 @@ class ActivityController extends Controller
      */
     public function show(Activity $activity)
     {
-        return new ActivityResource($activity->load([
-            'activityImages'
-        ]));
+        $activity->makeHidden([
+            'id', 'user_id', 'author_id', 'created_at', 'updated_at'
+        ])->load([
+            'activityImages:id,image_alt,activity_id'
+        ])->activityImages->makeHidden(['id']);
+
+        return new ActivityResource($activity);
     }
 
     /**
