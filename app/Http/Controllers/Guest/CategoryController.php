@@ -20,7 +20,7 @@ class CategoryController extends Controller
             'id', 'name', 'slug'
         ])
             ->with([
-                'packages:id, name, slug, days, nights, persons, price, image_alt, category_id',
+                'packages:id,name,slug,days,nights,persons,price,image_alt,category_id',
                 'packages.destinations:name'
             ])
             ->get();
