@@ -41,6 +41,10 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
+        $blog->makeHidden([
+            'id', 'created_at', 'updated_at'
+        ]);
+
         return new BlogResource($blog);
     }
 
