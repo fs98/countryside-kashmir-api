@@ -38,11 +38,22 @@ class PackageController extends Controller
      */
     public function show(Package $package)
     {
-        return new PackageResource($package->load([
-            'category',
-            'destinations',
-            'packageImages'
-        ]));
+
+        $package->load([
+            'category:id,name,slug',
+            'destinations:id,name,slug,image_alt',
+            'packageImages:id,image_alt,package_id'
+        ]);
+
+        // Hide fields
+        $package->makeHidden([
+            'id', 'created_at', 'updated_at'
+        ]);
+        $package->category->makeHidden('id');
+        $package->destinations->makeHidden('id');
+        $package->packageImages->makeHidden('id');
+
+        return new PackageResource($package);
     }
 
     /**
