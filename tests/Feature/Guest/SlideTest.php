@@ -25,13 +25,9 @@ class SlideTest extends TestCase
                 [
                     'data' => [
                         [
-                            'id',
                             'image_alt',
-                            'order',
                             'title',
                             'subtitle',
-                            'created_at',
-                            'updated_at',
                             'image_url'
                         ]
                     ]
