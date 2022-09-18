@@ -9,6 +9,8 @@ use Tests\TestCase;
 
 class SlideTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * Test index function.
      *
