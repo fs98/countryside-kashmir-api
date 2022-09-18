@@ -47,7 +47,7 @@ class DestinationTest extends TestCase
     }
 
     /**
-     * Test index function.
+     * Test show function.
      *
      * @return void
      */
