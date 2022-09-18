@@ -9,6 +9,7 @@ use Tests\TestCase;
 
 class MessageTest extends TestCase
 {
+    use RefreshDatabase;
     /**
      * Unauthenticated user can send a message.
      *

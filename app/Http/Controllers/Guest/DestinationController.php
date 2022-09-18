@@ -19,6 +19,7 @@ class DestinationController extends Controller
         $destinations = Destination::select([
             'name', 'slug', 'image_alt'
         ])->get();
+
         return DestinationResource::collection($destinations);
     }
 

@@ -9,6 +9,8 @@ use Tests\TestCase;
 
 class SlideTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * Test index function.
      *
@@ -25,13 +27,9 @@ class SlideTest extends TestCase
                 [
                     'data' => [
                         [
-                            'id',
                             'image_alt',
-                            'order',
                             'title',
                             'subtitle',
-                            'created_at',
-                            'updated_at',
                             'image_url'
                         ]
                     ]
