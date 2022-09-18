@@ -45,4 +45,41 @@ class DestinationTest extends TestCase
                 ]
             );
     }
+
+    /**
+     * Test index function.
+     *
+     * @return void
+     */
+    public function test_destinations_can_be_retrieved_by_id_for_guest_user()
+    {
+        $admin = Role::create(['name' => 'Admin']);
+        $superAdmin = Role::create(['name' => 'Super Admin']);
+
+        $destination = Destination::factory()
+            ->for(User::factory()->hasAttached($superAdmin)->create())
+            ->for(Author::factory()->create())
+            ->create();
+
+        $this->assertDatabaseHas('destinations', [
+            'id' => $destination->id,
+        ]);
+
+        $response = $this->get('/api/guest/destinations/' . $destination->id);
+
+        $response->assertStatus(200)
+            ->assertJsonStructure(
+                [
+                    'data' => [
+                        'name',
+                        'slug',
+                        'description',
+                        'image_alt',
+                        'keywords',
+                        'image_url',
+                        'destination_images'
+                    ]
+                ]
+            );
+    }
 }
