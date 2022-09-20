@@ -46,4 +46,39 @@ class BlogTest extends TestCase
                 ]
             );
     }
+
+    /**
+     * Test show function.
+     *
+     * @return void
+     */
+    public function test_blogs_can_be_retrieved_by_id_for_guest_user()
+    {
+        $admin = Role::create(['name' => 'Admin']);
+        $superAdmin = Role::create(['name' => 'Super Admin']);
+
+        $blog = Blog::factory()
+            ->for(User::factory()->hasAttached($superAdmin)->create())
+            ->for(Author::factory()->create())
+            ->create();
+
+        $this->assertDatabaseHas('blogs', [
+            'id' => $blog->id,
+        ]);
+
+        $response = $this->get('/api/guest/blogs/' . $blog->id);
+
+        $response->assertStatus(200)
+            ->assertJsonStructure(
+                [
+                    'data' => [
+                        'title',
+                        'slug',
+                        'image_alt',
+                        'content',
+                        'image_url'
+                    ]
+                ]
+            );
+    }
 }
