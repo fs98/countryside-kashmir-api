@@ -45,4 +45,38 @@ class ActivityTest extends TestCase
                 ]
             );
     }
+
+    /**
+     * Test show function.
+     *
+     * @return void
+     */
+    public function test_activities_can_be_retrieved_by_id_for_guest_user()
+    {
+        $admin = Role::create(['name' => 'Admin']);
+        $superAdmin = Role::create(['name' => 'Super Admin']);
+
+        $activity = Activity::factory()
+            ->for(User::factory()->hasAttached($superAdmin)->create())
+            ->for(Author::factory()->create())
+            ->create();
+
+        $this->assertDatabaseHas('activities', [
+            'id' => $activity->id,
+        ]);
+
+        $response = $this->get('/api/guest/activities/' . $activity->id);
+
+        $response->assertStatus(200)
+            ->assertJsonStructure(
+                [
+                    'data' => [
+                        'name',
+                        'slug',
+                        'image_alt',
+                        'image_url'
+                    ]
+                ]
+            );
+    }
 }
