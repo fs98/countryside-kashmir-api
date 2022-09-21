@@ -39,8 +39,10 @@ class BlogController extends Controller
      * @param  \App\Models\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function show(Blog $blog)
+    public function show(string $slug)
     {
+        $blog = Blog::where('slug', $slug)->first();
+
         $blog->makeHidden([
             'id', 'created_at', 'updated_at'
         ]);
