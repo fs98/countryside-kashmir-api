@@ -88,7 +88,10 @@ Route::prefix('guest')->group(function () {
     ]);
     Route::apiResource('categories', GuestCategoryController::class)->only([
         'index', 'show'
+    ])->parameters([
+        'categories' => 'slug'
     ]);
+
     Route::apiResource('blogs', GuestBlogController::class)->only([
         'index', 'show'
     ]);
