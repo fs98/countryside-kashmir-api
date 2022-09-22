@@ -66,7 +66,10 @@ class PackageImage extends Model
     protected function imageUrl(): Attribute
     {
         return Attribute::make(
-            get: fn () => asset('storage/' . $this->image),
+            get: fn () => (str_starts_with($this->image, 'https')
+                ? $this->image
+                : asset('storage/' . $this->image)
+            ),
         );
     }
 }

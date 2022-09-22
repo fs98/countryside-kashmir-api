@@ -78,7 +78,10 @@ class Activity extends Model
     protected function description(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => json_decode($value),
+            get: fn () => (str_starts_with($this->image, 'https')
+                ? $this->image
+                : asset('storage/' . $this->image)
+            ),
         );
     }
 
