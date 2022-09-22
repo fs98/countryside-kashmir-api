@@ -20,7 +20,7 @@ class CategoryController extends Controller
             'id', 'name', 'slug'
         ])
             ->with([
-                'packages:id,name,slug,days,nights,persons,price,image_alt,category_id',
+                'packages:id,image,name,slug,days,nights,persons,price,image_alt,category_id',
                 'packages.destinations:name'
             ])
             ->get();
@@ -58,7 +58,7 @@ class CategoryController extends Controller
         $category = Category::where('slug', $slug)->firstOrFail();
 
         $category->load([
-            'packages:id,name,slug,days,nights,persons,price,image_alt,category_id',
+            'packages:id,image,name,slug,days,nights,persons,price,image_alt,category_id',
             'packages.destinations:name'
         ]);
 
