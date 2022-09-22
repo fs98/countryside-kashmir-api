@@ -77,28 +77,37 @@ Route::prefix('guest')->group(function () {
     Route::apiResource('messages', GuestMessageController::class)->only([
         'store'
     ]);
+
     Route::apiResource('slides', GuestSlideController::class)->only([
         'index'
     ]);
+
     Route::apiResource('destinations', GuestDestinationController::class)->only([
         'index', 'show'
     ]);
+
     Route::apiResource('packages', GuestPackageController::class)->only([
         'show'
     ]);
+
     Route::apiResource('categories', GuestCategoryController::class)->only([
         'index', 'show'
     ])->parameters([
         'categories' => 'slug'
     ]);
+
     Route::apiResource('blogs', GuestBlogController::class)->only([
         'index', 'show'
+    ])->parameters([
+        'activities' => 'slug'
     ]);
+
     Route::apiResource('activities', GuestActivityController::class)->only([
         'index', 'show'
     ])->parameters([
         'activities' => 'slug'
-    ]);;
+    ]);
+
     Route::apiResource('gallery-images', GuestGalleryImageController::class)->only([
         'index'
     ]);
