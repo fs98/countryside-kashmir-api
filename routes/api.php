@@ -84,7 +84,9 @@ Route::prefix('guest')->group(function () {
 
     Route::apiResource('destinations', GuestDestinationController::class)->only([
         'index', 'show'
-    ]);
+    ])->parameters([
+        'destinations' => 'slug'
+    ]);;
 
     Route::apiResource('packages', GuestPackageController::class)->only([
         'show'
@@ -99,7 +101,7 @@ Route::prefix('guest')->group(function () {
     Route::apiResource('blogs', GuestBlogController::class)->only([
         'index', 'show'
     ])->parameters([
-        'activities' => 'slug'
+        'blogs' => 'slug'
     ]);
 
     Route::apiResource('activities', GuestActivityController::class)->only([
