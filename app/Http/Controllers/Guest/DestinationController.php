@@ -47,7 +47,7 @@ class DestinationController extends Controller
         $destination->makeHidden([
             'id', 'created_at', 'updated_at'
         ])->load([
-            'destinationImages:id,image_alt,destination_id'
+            'destinationImages:id,image,image_alt,destination_id'
         ])->destinationImages->makeHidden('id');
 
         return new DestinationResource($destination);
