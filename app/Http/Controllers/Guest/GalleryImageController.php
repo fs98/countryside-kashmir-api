@@ -17,7 +17,7 @@ class GalleryImageController extends Controller
     public function index()
     {
         $galleryImages = GalleryImage::select([
-            'image_alt'
+            'image', 'image_alt'
         ])->get();
         return GalleryImageResource::collection($galleryImages);
     }
