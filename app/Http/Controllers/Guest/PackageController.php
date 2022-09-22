@@ -42,8 +42,8 @@ class PackageController extends Controller
 
         $package->load([
             'category:id,name,slug',
-            'destinations:id,name,slug,image_alt',
-            'packageImages:id,image_alt,package_id'
+            'destinations:id,name,slug,image,image_alt',
+            'packageImages:id,image,image_alt,package_id'
         ]);
 
         // Hide fields
