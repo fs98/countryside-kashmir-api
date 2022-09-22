@@ -41,7 +41,7 @@ class BlogController extends Controller
      */
     public function show(string $slug)
     {
-        $blog = Blog::where('slug', $slug)->first();
+        $blog = Blog::where('slug', $slug)->firstOrFail();
 
         $blog->makeHidden([
             'id', 'created_at', 'updated_at'
