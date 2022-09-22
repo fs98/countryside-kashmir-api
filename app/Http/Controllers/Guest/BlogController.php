@@ -17,7 +17,7 @@ class BlogController extends Controller
     public function index()
     {
         $blogs = Blog::select([
-            'title', 'slug', 'image_alt', 'content'
+            'title', 'slug', 'image', 'image_alt', 'content'
         ])->get();
         return BlogResource::collection($blogs);
     }
