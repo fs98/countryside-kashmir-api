@@ -17,7 +17,7 @@ class ActivityController extends Controller
     public function index()
     {
         $activities = Activity::select([
-            'name', 'slug', 'image_alt'
+            'name', 'slug', 'image', 'image_alt'
         ])->get();
         return ActivityResource::collection($activities);
     }
