@@ -36,8 +36,9 @@ class PackageController extends Controller
      * @param  \App\Models\Package  $package
      * @return \Illuminate\Http\Response
      */
-    public function show(Package $package)
+    public function show(string $slug)
     {
+        $package = Package::where('slug', $slug)->firstOrFail();
 
         $package->load([
             'category:id,name,slug',
