@@ -46,7 +46,7 @@ class ActivityController extends Controller
         $activity->makeHidden([
             'id', 'created_at', 'updated_at'
         ])->load([
-            'activityImages:id,image_alt,activity_id'
+            'activityImages:id,image,image_alt,activity_id'
         ])->activityImages->makeHidden('id');
 
         return new ActivityResource($activity);
