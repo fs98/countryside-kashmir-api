@@ -40,8 +40,10 @@ class DestinationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Destination $destination)
+    public function show(string $slug)
     {
+        $destination = Destination::where('slug', $slug)->firstOrFail();
+
         $destination->makeHidden([
             'id', 'created_at', 'updated_at'
         ])->load([
