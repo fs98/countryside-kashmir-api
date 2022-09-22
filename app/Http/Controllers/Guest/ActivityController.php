@@ -39,8 +39,10 @@ class ActivityController extends Controller
      * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function show(Activity $activity)
+    public function show(string $slug)
     {
+        $activity = Activity::where('slug', $slug)->firstOrFail();
+
         $activity->makeHidden([
             'id', 'created_at', 'updated_at'
         ])->load([
