@@ -91,13 +91,14 @@ Route::prefix('guest')->group(function () {
     ])->parameters([
         'categories' => 'slug'
     ]);
-
     Route::apiResource('blogs', GuestBlogController::class)->only([
         'index', 'show'
     ]);
     Route::apiResource('activities', GuestActivityController::class)->only([
         'index', 'show'
-    ]);
+    ])->parameters([
+        'activities' => 'slug'
+    ]);;
     Route::apiResource('gallery-images', GuestGalleryImageController::class)->only([
         'index'
     ]);
