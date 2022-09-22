@@ -17,7 +17,7 @@ class BlogController extends Controller
     public function index()
     {
         $blogs = Blog::select([
-            'title', 'slug', 'image_alt', 'content'
+            'title', 'slug', 'image', 'image_alt', 'content'
         ])->get();
         return BlogResource::collection($blogs);
     }
@@ -39,8 +39,10 @@ class BlogController extends Controller
      * @param  \App\Models\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function show(Blog $blog)
+    public function show(string $slug)
     {
+        $blog = Blog::where('slug', $slug)->firstOrFail();
+
         $blog->makeHidden([
             'id', 'created_at', 'updated_at'
         ]);

@@ -17,7 +17,7 @@ class ActivityController extends Controller
     public function index()
     {
         $activities = Activity::select([
-            'name', 'slug', 'image_alt'
+            'name', 'slug', 'image', 'image_alt'
         ])->get();
         return ActivityResource::collection($activities);
     }
@@ -39,12 +39,14 @@ class ActivityController extends Controller
      * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function show(Activity $activity)
+    public function show(string $slug)
     {
+        $activity = Activity::where('slug', $slug)->firstOrFail();
+
         $activity->makeHidden([
             'id', 'created_at', 'updated_at'
         ])->load([
-            'activityImages:id,image_alt,activity_id'
+            'activityImages:id,image,image_alt,activity_id'
         ])->activityImages->makeHidden('id');
 
         return new ActivityResource($activity);

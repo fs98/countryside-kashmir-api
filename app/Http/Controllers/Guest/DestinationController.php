@@ -17,7 +17,7 @@ class DestinationController extends Controller
     public function index()
     {
         $destinations = Destination::select([
-            'name', 'slug', 'image_alt'
+            'image', 'name', 'slug', 'image_alt'
         ])->get();
 
         return DestinationResource::collection($destinations);
@@ -40,12 +40,14 @@ class DestinationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Destination $destination)
+    public function show(string $slug)
     {
+        $destination = Destination::where('slug', $slug)->firstOrFail();
+
         $destination->makeHidden([
             'id', 'created_at', 'updated_at'
         ])->load([
-            'destinationImages:id,image_alt,destination_id'
+            'destinationImages:id,image,image_alt,destination_id'
         ])->destinationImages->makeHidden('id');
 
         return new DestinationResource($destination);
