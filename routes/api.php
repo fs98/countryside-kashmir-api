@@ -90,6 +90,8 @@ Route::prefix('guest')->group(function () {
 
     Route::apiResource('packages', GuestPackageController::class)->only([
         'show'
+    ])->parameters([
+        'packages' => 'slug'
     ]);
 
     Route::apiResource('categories', GuestCategoryController::class)->only([
