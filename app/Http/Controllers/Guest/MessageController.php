@@ -37,7 +37,7 @@ class MessageController extends BaseController
         }
 
         return $message ? $this->sendResponse($message, 'Message successfully stored!')
-            : $this->sendError($message, 'There has been a mistake!', 503);
+            : $this->sendError('There has been a mistake!', null, 503);
     }
 
     /**
