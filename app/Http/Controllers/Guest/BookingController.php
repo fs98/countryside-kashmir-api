@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Guest;
 
+use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class BookingController extends Controller
+class BookingController extends BaseController
 {
     /**
      * Display a listing of the resource.
