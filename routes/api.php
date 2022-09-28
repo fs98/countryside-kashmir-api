@@ -11,6 +11,7 @@ use App\Http\Controllers\DestinationImageController;
 use App\Http\Controllers\GalleryImageController;
 use App\Http\Controllers\Guest\ActivityController as GuestActivityController;
 use App\Http\Controllers\Guest\BlogController as GuestBlogController;
+use App\Http\Controllers\Guest\BookingController as GuestBookingController;
 use App\Http\Controllers\Guest\CategoryController as GuestCategoryController;
 use App\Http\Controllers\Guest\DestinationController as GuestDestinationController;
 use App\Http\Controllers\Guest\GalleryImageController as GuestGalleryImageController;
@@ -75,6 +76,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
  */
 Route::prefix('guest')->group(function () {
     Route::apiResource('messages', GuestMessageController::class)->only([
+        'store'
+    ]);
+
+    Route::apiResource('bookings', GuestBookingController::class)->only([
         'store'
     ]);
 
