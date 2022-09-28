@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
+use App\Models\Booking;
 use Illuminate\Http\Request;
 
 class BookingController extends BaseController
@@ -26,7 +27,10 @@ class BookingController extends BaseController
      */
     public function store(Request $request)
     {
-        //
+        $booking = Booking::create($request->all());
+
+        return $booking ? $this->sendResponse($booking, 'Booking successfully stored!')
+            : $this->sendError('There has been a mistake!', null, 503);
     }
 
     /**
