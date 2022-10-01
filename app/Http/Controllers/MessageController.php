@@ -29,9 +29,9 @@ class MessageController extends BaseController
         $user = auth()->user();
 
         if ($user->hasRole('Client')) {
-            $messages = $user->messages()->paginate(10);
+            $messages = $user->messages()->get();
         } else {
-            $messages = Message::with('user')->paginate(10);
+            $messages = Message::with('user')->get();
         }
 
         return MessageResource::collection($messages);
