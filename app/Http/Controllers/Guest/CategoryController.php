@@ -66,9 +66,9 @@ class CategoryController extends Controller
         $category->makeHidden('id');
         $category->packages->makeHidden('id');
 
-        foreach ($category->packages as $package) {
+        $category->packages->each(function ($package) {
             $package->destinations->makeHidden('image_url');
-        }
+        });
 
         return new CategoryResource($category);
     }
