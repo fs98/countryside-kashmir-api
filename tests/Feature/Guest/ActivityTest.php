@@ -6,7 +6,6 @@ use App\Models\Activity;
 use App\Models\Author;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
@@ -51,7 +50,7 @@ class ActivityTest extends TestCase
      *
      * @return void
      */
-    public function test_activities_can_be_retrieved_by_id_for_guest_user()
+    public function test_activities_can_be_retrieved_by_slug_for_guest_user()
     {
         $admin = Role::create(['name' => 'Admin']);
         $superAdmin = Role::create(['name' => 'Super Admin']);
@@ -61,11 +60,12 @@ class ActivityTest extends TestCase
             ->for(Author::factory()->create())
             ->create();
 
+
         $this->assertDatabaseHas('activities', [
             'id' => $activity->id,
         ]);
 
-        $response = $this->get('/api/guest/activities/' . $activity->id);
+        $response = $this->get('/api/guest/activities/' . $activity->slug);
 
         $response->assertStatus(200)
             ->assertJsonStructure(
