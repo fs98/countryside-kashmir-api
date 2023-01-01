@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Models\Slide;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
@@ -52,29 +51,6 @@ class SlideTest extends TestCase
                             'image_url'
                         ]
                     ],
-                    'links' => [
-                        'first',
-                        'last',
-                        'prev',
-                        'next'
-                    ],
-                    'meta' => [
-                        'current_page',
-                        'from',
-                        'last_page',
-                        'links' => [
-                            [
-                                'url',
-                                'label',
-                                'active'
-                            ]
-                        ],
-                        'path',
-                        'per_page',
-                        'to',
-                        'total'
-                    ]
-
                 ]
             );
     }

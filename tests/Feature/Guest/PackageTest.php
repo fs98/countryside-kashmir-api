@@ -20,7 +20,7 @@ class PackageTest extends TestCase
      *
      * @return void
      */
-    public function test_packages_can_be_retrieved_by_id_for_guest_user()
+    public function test_packages_can_be_retrieved_by_slug_for_guest_user()
     {
         $admin = Role::create(['name' => 'Admin']);
         $superAdmin = Role::create(['name' => 'Super Admin']);
@@ -35,7 +35,7 @@ class PackageTest extends TestCase
             'id' => $package->id,
         ]);
 
-        $response = $this->get('/api/guest/packages/' . $package->id);
+        $response = $this->get('/api/guest/packages/' . $package->slug);
 
         $response->assertStatus(200)
             ->assertJsonStructure(

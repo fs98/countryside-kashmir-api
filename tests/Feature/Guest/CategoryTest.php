@@ -57,7 +57,7 @@ class CategoryTest extends TestCase
      *
      * @return void
      */
-    public function test_categories_can_be_retrieved_by_id_for_guest_user()
+    public function test_categories_can_be_retrieved_by_slug_for_guest_user()
     {
         $admin = Role::create(['name' => 'Admin']);
         $superAdmin = Role::create(['name' => 'Super Admin']);
@@ -76,7 +76,7 @@ class CategoryTest extends TestCase
             'id' => $category->id,
         ]);
 
-        $response = $this->get('/api/guest/categories/' . $category->id);
+        $response = $this->get('/api/guest/categories/' . $category->slug);
 
         $response->assertStatus(200)
             ->assertJsonStructure(

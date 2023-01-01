@@ -52,7 +52,7 @@ class BlogTest extends TestCase
      *
      * @return void
      */
-    public function test_blogs_can_be_retrieved_by_id_for_guest_user()
+    public function test_blogs_can_be_retrieved_by_slug_for_guest_user()
     {
         $admin = Role::create(['name' => 'Admin']);
         $superAdmin = Role::create(['name' => 'Super Admin']);
@@ -66,7 +66,7 @@ class BlogTest extends TestCase
             'id' => $blog->id,
         ]);
 
-        $response = $this->get('/api/guest/blogs/' . $blog->id);
+        $response = $this->get('/api/guest/blogs/' . $blog->slug);
 
         $response->assertStatus(200)
             ->assertJsonStructure(
