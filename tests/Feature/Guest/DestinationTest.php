@@ -51,7 +51,7 @@ class DestinationTest extends TestCase
      *
      * @return void
      */
-    public function test_destinations_can_be_retrieved_by_id_for_guest_user()
+    public function test_destinations_can_be_retrieved_by_slug_for_guest_user()
     {
         $admin = Role::create(['name' => 'Admin']);
         $superAdmin = Role::create(['name' => 'Super Admin']);
@@ -65,7 +65,7 @@ class DestinationTest extends TestCase
             'id' => $destination->id,
         ]);
 
-        $response = $this->get('/api/guest/destinations/' . $destination->id);
+        $response = $this->get('/api/guest/destinations/' . $destination->slug);
 
         $response->assertStatus(200)
             ->assertJsonStructure(
