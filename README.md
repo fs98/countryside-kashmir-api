@@ -12,6 +12,8 @@ Countryside Kashmir is registered with the Department of Tourism, Govt. of Jammu
 
 Every push to master will deploy a new version of this app. Deploys happen automatically, and you can find it on <a href="https://countryside-kashmir.herokuapp.com/" target="_blank">this</a> link.
 
+**UPDATE:** Since database hosting is no longer free on heroku, app will be temporarily unavailable through the link above.
+
 ## List of commits
 
 https://github.com/fs98/countryside-kashmir-api/commits/master
