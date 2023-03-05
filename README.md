@@ -6,7 +6,7 @@ Countryside Kashmir is registered with the Department of Tourism, Govt. of Jammu
 
 ## Introduction
 
-This repository is a Laravel Rest API for Countryside Kashmir Website. You can find the documentation <a href="https://documenter.getpostman.com/view/16469909/VUjTm4FU" target="_blank">here</a>.
+This repository is a Laravel 10 Rest API for Countryside Kashmir Website. You can find the documentation <a href="https://documenter.getpostman.com/view/16469909/VUjTm4FU" target="_blank">here</a>.
 
 ## Heroku
 
