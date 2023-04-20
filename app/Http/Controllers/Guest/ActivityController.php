@@ -6,15 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ActivityResource;
 use App\Models\Activity;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class ActivityController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\JsonResource
      */
-    public function index()
+    public function index(): JsonResource
     {
         $activities = Activity::select([
             'name', 'slug', 'image', 'image_alt'
@@ -37,9 +38,9 @@ class ActivityController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Activity  $activity
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\JsonResource
      */
-    public function show(string $slug)
+    public function show(string $slug): JsonResource
     {
         $activity = Activity::where('slug', $slug)->firstOrFail();
 
