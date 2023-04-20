@@ -6,15 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\BlogResource;
 use App\Models\Blog;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class BlogController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\JsonResource
      */
-    public function index()
+    public function index(): JsonResource
     {
         $blogs = Blog::select([
             'title', 'slug', 'image', 'image_alt', 'content'
@@ -37,9 +38,9 @@ class BlogController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Blog  $blog
-     * @return \Illuminate\Http\Response
+     * @return Illuminate\Http\Resources\Json\JsonResource
      */
-    public function show(string $slug)
+    public function show(string $slug): JsonResource
     {
         $blog = Blog::where('slug', $slug)->firstOrFail();
 
