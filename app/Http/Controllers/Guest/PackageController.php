@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\PackageResource;
 use App\Models\Package;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class PackageController extends Controller
 {
@@ -34,9 +35,9 @@ class PackageController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Package  $package
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\JsonResource
      */
-    public function show(string $slug)
+    public function show(string $slug): JsonResource
     {
         $package = Package::where('slug', $slug)->firstOrFail();
 

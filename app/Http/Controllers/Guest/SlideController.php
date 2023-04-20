@@ -6,15 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\SlideResource;
 use App\Models\Slide;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class SlideController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\JsonResource
      */
-    public function index()
+    public function index(): JsonResource
     {
         $slides = Slide::select('image', 'image_alt', 'title', 'subtitle')->orderBy('order')->get();
         return SlideResource::collection($slides);

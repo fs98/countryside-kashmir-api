@@ -6,15 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\DestinationResource;
 use App\Models\Destination;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class DestinationController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\JsonResource
      */
-    public function index()
+    public function index(): JsonResource
     {
         $destinations = Destination::select([
             'image', 'name', 'slug', 'image_alt'
@@ -38,9 +39,9 @@ class DestinationController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\JsonResource
      */
-    public function show(string $slug)
+    public function show(string $slug): JsonResource
     {
         $destination = Destination::where('slug', $slug)->firstOrFail();
 

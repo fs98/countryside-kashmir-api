@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMessageRequest;
 use App\Models\Message;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class MessageController extends BaseController
 {
@@ -26,7 +27,7 @@ class MessageController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMessageRequest $request)
+    public function store(StoreMessageRequest $request): Response
     {
         $user = auth()->user();
 
