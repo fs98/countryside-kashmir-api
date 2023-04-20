@@ -6,6 +6,8 @@ use App\Http\Controllers\BaseController;
 use App\Http\Requests\StoreBookingRequest;
 use App\Models\Booking;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Response;
 
 class BookingController extends BaseController
 {
@@ -25,7 +27,7 @@ class BookingController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreBookingRequest $request)
+    public function store(StoreBookingRequest $request): Response
     {
         $booking = Booking::create($request->all());
 
