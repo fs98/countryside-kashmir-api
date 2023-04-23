@@ -24,7 +24,6 @@ class BaseController extends Controller
         return response()->json($response, 200);
     }
 
-
     /**
      * Return error response.
      *
@@ -47,24 +46,20 @@ class BaseController extends Controller
     /**
      * Upload new image.
      *
-     * @return \Illuminate\Http\Response
+     * @return array
      */
-    public function uploadImage(Request $request, string $destination, string $currentImage = null)
+    public function uploadImage(Request $request, string $destination, string $currentImage = null): array
     {
         $requestData = $request->all();
 
         // If request has image then store it and include image in request
         if ($request->hasFile('image')) {
-
             // Store image
             $path = Storage::disk('public')->putFile($destination, $request->file('image'));
-
             // Override image value
             $requestData['image'] = $path;
-
             // Delete old image if we are updating
             if ($request->isMethod('PUT')) {
-
                 Storage::disk('public')->delete($currentImage);
             }
         }
