@@ -10,10 +10,8 @@ This repository is a Laravel 10 Rest API for Countryside Kashmir Website. You ca
 
 ## Heroku
 
-Every push to master will deploy a new version of this app. Deploys happen automatically, and you can find it on <a href="https://countryside-kashmir.herokuapp.com/" target="_blank">this</a> link.
-
-**UPDATE:** Since database hosting is no longer free on heroku, app will be temporarily unavailable through the link above.
+Each push to the master branch deploys a new version of the <a href="https://countryside-kashmir.herokuapp.com/" target="_blank">app</a> on Heroku. However, due to the termination of free database hosting on Heroku, the app is temporarily unavailable through the link provided above.
 
 ## List of commits
 
-https://github.com/fs98/countryside-kashmir-api/commits/master
+You can find a list of commits for this repository <a href="https://github.com/fs98/countryside-kashmir-api/commits/master" target="_blank">here</a>.
