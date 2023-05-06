@@ -7,8 +7,10 @@ use App\Http\Requests\UpdateGalleryImageRequest;
 use App\Http\Resources\GalleryImageResource;
 use App\Models\GalleryImage;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 
@@ -27,9 +29,9 @@ class GalleryImageController extends BaseController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\JsonResource;
      */
-    public function index(Request $request)
+    public function index(Request $request): JsonResource
     {
         // First get scope from url
         $scope = $request->query('scope', null);
@@ -54,9 +56,9 @@ class GalleryImageController extends BaseController
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreGalleryImageRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(StoreGalleryImageRequest $request)
+    public function store(StoreGalleryImageRequest $request): JsonResponse
     {
         $requestData = $this->uploadImage($request, 'gallery');
 
@@ -73,9 +75,9 @@ class GalleryImageController extends BaseController
      * Display the specified resource.
      *
      * @param  \App\Models\GalleryImage  $galleryImage
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\JsonResource;
      */
-    public function show(GalleryImage $galleryImage)
+    public function show(GalleryImage $galleryImage): JsonResource
     {
         return new GalleryImageResource($galleryImage);
     }
@@ -85,9 +87,9 @@ class GalleryImageController extends BaseController
      *
      * @param  \App\Http\Requests\UpdateGalleryImageRequest  $request
      * @param  \App\Models\GalleryImage  $galleryImage
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(UpdateGalleryImageRequest $request, GalleryImage $galleryImage)
+    public function update(UpdateGalleryImageRequest $request, GalleryImage $galleryImage): JsonResponse
     {
         $requestData = $this->uploadImage($request, 'gallery', $galleryImage->image);
 
@@ -106,9 +108,9 @@ class GalleryImageController extends BaseController
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\GalleryImage  $galleryImage
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(GalleryImage $galleryImage)
+    public function destroy(GalleryImage $galleryImage): JsonResponse
     {
         if ($galleryImage->delete()) {
             return $this->sendResponse($galleryImage, 'Image successfully deleted!');
@@ -121,9 +123,9 @@ class GalleryImageController extends BaseController
      * Restore the specified removed resource.
      *
      * @param  \App\Models\GalleryImage  $galleryImage
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function restore(GalleryImage $galleryImage)
+    public function restore(GalleryImage $galleryImage): JsonResponse
     {
         $this->authorize('restore');
 
@@ -138,9 +140,9 @@ class GalleryImageController extends BaseController
      * Force delete the specified removed resource.
      *
      * @param  \App\Models\GalleryImage  $galleryImage
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function forceDelete(GalleryImage $galleryImage)
+    public function forceDelete(GalleryImage $galleryImage): JsonResponse
     {
         $this->authorize('forceDelete');
 

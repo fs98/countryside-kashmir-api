@@ -6,6 +6,8 @@ use App\Http\Requests\StoreSlideRequest;
 use App\Http\Requests\UpdateSlideRequest;
 use App\Http\Resources\SlideResource;
 use App\Models\Slide;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
 
 class SlideController extends BaseController
@@ -23,9 +25,9 @@ class SlideController extends BaseController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\JsonResource;
      */
-    public function index()
+    public function index(): JsonResource
     {
         $slides = Slide::get();
         return SlideResource::collection($slides);
@@ -35,9 +37,9 @@ class SlideController extends BaseController
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreSlideRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(StoreSlideRequest $request)
+    public function store(StoreSlideRequest $request): JsonResponse
     {
         $requestData = $this->uploadImage($request, 'slides');
 
@@ -54,9 +56,9 @@ class SlideController extends BaseController
      * Display the specified resource.
      *
      * @param  \App\Models\Slide  $slide
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\JsonResource;
      */
-    public function show(Slide $slide)
+    public function show(Slide $slide): JsonResource
     {
         return new SlideResource($slide);
     }
@@ -66,9 +68,9 @@ class SlideController extends BaseController
      *
      * @param  \App\Http\Requests\UpdateSlideRequest  $request
      * @param  \App\Models\Slide  $slide
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(UpdateSlideRequest $request, Slide $slide)
+    public function update(UpdateSlideRequest $request, Slide $slide): JsonResponse
     {
         $requestData = $this->uploadImage($request, 'slides', $slide->image);
 
@@ -87,9 +89,9 @@ class SlideController extends BaseController
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Slide  $slide
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Slide $slide)
+    public function destroy(Slide $slide): JsonResponse
     {
         if ($slide->delete()) {
 

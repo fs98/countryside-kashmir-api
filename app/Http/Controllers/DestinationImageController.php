@@ -7,6 +7,8 @@ use App\Http\Requests\UpdateDestinationImageRequest;
 use App\Http\Resources\DestinationImageResource;
 use App\Models\Destination;
 use App\Models\DestinationImage;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
 
 class DestinationImageController extends BaseController
@@ -25,9 +27,9 @@ class DestinationImageController extends BaseController
      * Display a listing of the resource.
      *
      * @param  \App\Models\Destination  $destination
-     * @return \Illuminate\Http\Response
+     * @return \IIlluminate\Http\Resources\Json\JsonResource;
      */
-    public function index(Destination $destination)
+    public function index(Destination $destination): JsonResource
     {
         $destinationImages = $destination->destinationImages()
             ->with('destination')
@@ -41,9 +43,9 @@ class DestinationImageController extends BaseController
      *
      * @param  \App\Http\Requests\StoreDestinationImageRequest  $request
      * @param  \App\Models\Destination  $destination
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(StoreDestinationImageRequest $request, Destination $destination)
+    public function store(StoreDestinationImageRequest $request, Destination $destination): JsonResponse
     {
         $requestData = $this->uploadImage($request, 'destinations/images');
 
@@ -61,9 +63,9 @@ class DestinationImageController extends BaseController
      *
      * @param  \App\Models\Destination  $destination
      * @param  \App\Models\DestinationImage  $destinationImage
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\JsonResource;
      */
-    public function show(Destination $destination, DestinationImage $image)
+    public function show(Destination $destination, DestinationImage $image): JsonResource
     {
         return new DestinationImageResource($image->load('destination'));
     }
@@ -74,9 +76,9 @@ class DestinationImageController extends BaseController
      * @param  \App\Http\Requests\UpdateDestinationImageRequest  $request
      * @param  \App\Models\Destination  $destination
      * @param  \App\Models\DestinationImage  $destinationImage
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(UpdateDestinationImageRequest $request, Destination $destination, DestinationImage $image)
+    public function update(UpdateDestinationImageRequest $request, Destination $destination, DestinationImage $image): JsonResponse
     {
         $requestData = $this->uploadImage($request, 'destinations/images', $image->image);
 
@@ -97,9 +99,9 @@ class DestinationImageController extends BaseController
      *
      * @param  \App\Models\Destination  $destination
      * @param  \App\Models\DestinationImage  $destinationImage
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Destination $destination, DestinationImage $image)
+    public function destroy(Destination $destination, DestinationImage $image): JsonResponse
     {
         if ($image->delete()) {
 

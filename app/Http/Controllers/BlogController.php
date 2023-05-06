@@ -6,6 +6,8 @@ use App\Http\Requests\StoreBlogRequest;
 use App\Http\Requests\UpdateBlogRequest;
 use App\Http\Resources\BlogResource;
 use App\Models\Blog;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
 
 class BlogController extends BaseController
@@ -23,9 +25,9 @@ class BlogController extends BaseController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\JsonResource
      */
-    public function index()
+    public function index(): JsonResource
     {
         $blogs = Blog::with([
             'user',
@@ -39,9 +41,9 @@ class BlogController extends BaseController
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreBlogRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(StoreBlogRequest $request)
+    public function store(StoreBlogRequest $request): JsonResponse
     {
 
         $requestData = $this->uploadImage($request, 'blogs');
@@ -59,9 +61,9 @@ class BlogController extends BaseController
      * Display the specified resource.
      *
      * @param  \App\Models\Blog  $blog
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\JsonResource;
      */
-    public function show(Blog $blog)
+    public function show(Blog $blog): JsonResource
     {
         return new BlogResource($blog);
     }
@@ -71,9 +73,9 @@ class BlogController extends BaseController
      *
      * @param  \App\Http\Requests\UpdateBlogRequest  $request
      * @param  \App\Models\Blog  $blog
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(UpdateBlogRequest $request, Blog $blog)
+    public function update(UpdateBlogRequest $request, Blog $blog): JsonResponse
     {
         $requestData = $this->uploadImage($request, 'blogs', $blog->image);
 
@@ -92,9 +94,9 @@ class BlogController extends BaseController
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Blog  $blog
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Blog $blog)
+    public function destroy(Blog $blog): JsonResponse
     {
         if ($blog->delete()) {
 

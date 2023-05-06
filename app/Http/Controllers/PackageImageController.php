@@ -7,6 +7,8 @@ use App\Http\Requests\UpdatePackageImageRequest;
 use App\Http\Resources\PackageImageResource;
 use App\Models\Package;
 use App\Models\PackageImage;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
 
 class PackageImageController extends BaseController
@@ -25,9 +27,9 @@ class PackageImageController extends BaseController
      * Display a listing of the resource.
      *
      * @param  \App\Models\Package  $package
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\JsonResource;
      */
-    public function index(Package $package)
+    public function index(Package $package): JsonResource
     {
         $packageImages = $package->packageImages()
             ->with('package')
@@ -41,9 +43,9 @@ class PackageImageController extends BaseController
      *
      * @param  \App\Http\Requests\StorePackageImageRequest  $request
      * @param  \App\Models\Package  $package
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(StorePackageImageRequest $request, Package $package)
+    public function store(StorePackageImageRequest $request, Package $package): JsonResponse
     {
         $requestData = $this->uploadImage($request, 'packages/images');
 
@@ -62,9 +64,9 @@ class PackageImageController extends BaseController
      * 
      * @param  \App\Models\Package  $package
      * @param  \App\Models\PackageImage  $packageImage
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\JsonResource;
      */
-    public function show(Package $package, PackageImage $image)
+    public function show(Package $package, PackageImage $image): JsonResource
     {
         return new PackageImageResource($image->load('package'));
     }
@@ -75,9 +77,9 @@ class PackageImageController extends BaseController
      * @param  \App\Http\Requests\UpdatePackageImageRequest  $request
      * @param  \App\Models\Package  $package
      * @param  \App\Models\PackageImage  $image
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(UpdatePackageImageRequest $request, Package $package, PackageImage $image)
+    public function update(UpdatePackageImageRequest $request, Package $package, PackageImage $image): JsonResponse
     {
         $requestData = $this->uploadImage($request, 'packages/images', $image->image);
 
@@ -98,9 +100,9 @@ class PackageImageController extends BaseController
      *
      * @param  \App\Models\Package  $package
      * @param  \App\Models\PackageImage  $image
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Package $package, PackageImage $image)
+    public function destroy(Package $package, PackageImage $image): JsonResponse
     {
         if ($image->delete()) {
 

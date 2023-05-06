@@ -6,6 +6,8 @@ use App\Http\Requests\StoreBookingRequest;
 use App\Http\Requests\UpdateBookingRequest;
 use App\Http\Resources\BookingResource;
 use App\Models\Booking;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class BookingController extends BaseController
 {
@@ -22,9 +24,9 @@ class BookingController extends BaseController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\JsonResource;
      */
-    public function index()
+    public function index(): JsonResource
     {
         $user = auth()->user();
 
@@ -41,9 +43,9 @@ class BookingController extends BaseController
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreBookingRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(StoreBookingRequest $request)
+    public function store(StoreBookingRequest $request): JsonResponse
     {
         $booking = auth()->user()->bookings()->create($request->all());
 
@@ -54,10 +56,10 @@ class BookingController extends BaseController
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Booking  $booking
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\Booking $booking
+     * @return \Illuminate\Http\Resources\Json\JsonResource;
      */
-    public function show(Booking $booking)
+    public function show(Booking $booking): JsonResource
     {
         return new BookingResource($booking->load('user'));
     }
@@ -66,10 +68,10 @@ class BookingController extends BaseController
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateBookingRequest  $request
-     * @param  \App\Models\Booking  $booking
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\Booking $booking
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(UpdateBookingRequest $request, Booking $booking)
+    public function update(UpdateBookingRequest $request, Booking $booking): JsonResponse
     {
         if ($booking->update($request->all())) {
             return $this->sendResponse($booking, 'Booking successfully updated!');
@@ -81,10 +83,10 @@ class BookingController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Booking  $booking
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\Booking $booking
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Booking $booking)
+    public function destroy(Booking $booking): JsonResponse
     {
         if ($booking->delete()) {
             return $this->sendResponse($booking, 'Booking successfully deleted!');

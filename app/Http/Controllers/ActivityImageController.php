@@ -7,6 +7,8 @@ use App\Http\Requests\UpdateActivityImageRequest;
 use App\Http\Resources\ActivityImageResource;
 use App\Models\Activity;
 use App\Models\ActivityImage;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
 
 class ActivityImageController extends BaseController
@@ -25,9 +27,9 @@ class ActivityImageController extends BaseController
      * Display a listing of the resource.
      *
      * @param  \App\Models\Activity  $activity
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\JsonResource
      */
-    public function index(Activity $activity)
+    public function index(Activity $activity): JsonResource
     {
         $activityImages = $activity->activityImages()
             ->with('activity')
@@ -41,9 +43,9 @@ class ActivityImageController extends BaseController
      *
      * @param  \App\Http\Requests\StoreActivityImageRequest  $request
      * @param  \App\Models\Activity  $activity
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(StoreActivityImageRequest $request, Activity $activity)
+    public function store(StoreActivityImageRequest $request, Activity $activity): JsonResponse
     {
         $requestData = $this->uploadImage($request, 'activities/images');
 
@@ -61,9 +63,9 @@ class ActivityImageController extends BaseController
      * 
      * @param  \App\Models\Activity  $activity
      * @param  \App\Models\ActivityImage  $image
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\JsonResource;
      */
-    public function show(Activity $activity, ActivityImage $image)
+    public function show(Activity $activity, ActivityImage $image): JsonResource
     {
         return new ActivityImageResource($image->load('activity'));
     }
@@ -74,9 +76,9 @@ class ActivityImageController extends BaseController
      * @param  \App\Http\Requests\UpdateActivityImageRequest  $request
      * @param  \App\Models\Activity  $activity
      * @param  \App\Models\ActivityImage  $image
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(UpdateActivityImageRequest $request, Activity $activity, ActivityImage $image)
+    public function update(UpdateActivityImageRequest $request, Activity $activity, ActivityImage $image): JsonResponse
     {
         $requestData = $this->uploadImage($request, 'activities/images', $image->image);
 
@@ -96,9 +98,9 @@ class ActivityImageController extends BaseController
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\ActivityImage  $image
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Activity $activity, ActivityImage $image)
+    public function destroy(Activity $activity, ActivityImage $image): JsonResponse
     {
         if ($image->delete()) {
 

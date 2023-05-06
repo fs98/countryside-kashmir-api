@@ -6,6 +6,8 @@ use App\Http\Requests\StoreMessageRequest;
 use App\Http\Requests\UpdateMessageRequest;
 use App\Http\Resources\MessageResource;
 use App\Models\Message;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class MessageController extends BaseController
 {
@@ -22,9 +24,9 @@ class MessageController extends BaseController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\JsonResource;
      */
-    public function index()
+    public function index(): JsonResource
     {
         $user = auth()->user();
 
@@ -41,9 +43,9 @@ class MessageController extends BaseController
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreMessageRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(StoreMessageRequest $request)
+    public function store(StoreMessageRequest $request): JsonResponse
     {
         $message = auth()->user()->messages()->create($request->all());
 
@@ -55,9 +57,9 @@ class MessageController extends BaseController
      * Display the specified resource.
      *
      * @param  \App\Models\Message  $message
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\JsonResource;
      */
-    public function show(Message $message)
+    public function show(Message $message): JsonResource
     {
         return new MessageResource($message->load('user'));
     }
@@ -67,9 +69,9 @@ class MessageController extends BaseController
      *
      * @param  \App\Http\Requests\UpdateMessageRequest  $request
      * @param  \App\Models\Message  $message
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(UpdateMessageRequest $request, Message $message)
+    public function update(UpdateMessageRequest $request, Message $message): JsonResponse
     {
         if ($message->update($request->all())) {
             return $this->sendResponse($message, 'Message successfully updated!');
@@ -82,9 +84,9 @@ class MessageController extends BaseController
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Message  $message
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Message $message)
+    public function destroy(Message $message): JsonResponse
     {
         if ($message->delete()) {
             return $this->sendResponse($message, 'Message successfully deleted!');
