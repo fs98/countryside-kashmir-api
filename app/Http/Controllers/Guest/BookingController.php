@@ -5,9 +5,8 @@ namespace App\Http\Controllers\Guest;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\StoreBookingRequest;
 use App\Models\Booking;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Http\Response;
 
 class BookingController extends BaseController
 {
@@ -25,9 +24,9 @@ class BookingController extends BaseController
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(StoreBookingRequest $request): Response
+    public function store(StoreBookingRequest $request): JsonResponse
     {
         $booking = Booking::create($request->all());
 
