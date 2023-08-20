@@ -8,10 +8,6 @@ Countryside Kashmir is registered with the Department of Tourism, Govt. of Jammu
 
 This repository is a Laravel 10 Rest API for Countryside Kashmir Website. You can find the documentation <a href="https://documenter.getpostman.com/view/16469909/VUjTm4FU" target="_blank">here</a>.
 
-## Heroku
-
-Each push to the master branch deploys a new version of the <a href="https://countryside-kashmir.herokuapp.com/" target="_blank">app</a> on Heroku. However, due to the termination of free database hosting on Heroku, the app is temporarily unavailable through the link provided above.
-
 ## List of commits
 
 You can find a list of commits for this repository <a href="https://github.com/fs98/countryside-kashmir-api/commits/master" target="_blank">here</a>.
